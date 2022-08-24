@@ -3,7 +3,7 @@
 
 ## Database Schema Design
 
-`<insert database schema design here>`
+![GitHub Logo](backend/images/bnb-clone-image.png)
 
 ## API Documentation
 
