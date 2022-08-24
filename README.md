@@ -3,7 +3,7 @@
 
 ## Database Schema Design
 
-![Database Schema Design](https://dbdiagram.io/d/63068d85f1a9b01b0fd92a53)
+![Database Schema Design](backend/images/bnb-clone-image.png)
 
 ## API Documentation
 
