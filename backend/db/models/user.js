@@ -1,4 +1,7 @@
 'use strict';
+
+const bcrypt = require('bcryptjs');
+
 const {
   Model
 } = require('sequelize');
@@ -9,8 +12,44 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    toSafeObject() {
+      const { id, username, email } = this; // context will be the User instance
+      return { id, username, email };
+    }
+    validatePassword(password){
+      return bcrypt.compareSync(password, this.hashedPassword.toString())
+    }
     static associate(models) {
       // define association here
+    }
+
+    static getCurrentUserById(id){
+      return User.scope("currentUser").findByPk(id)
+    }
+
+    static async login({credential, password}){
+      const {Op} = require('sequelize')
+      const user = await User.scope('allInfo').findOne({
+        where:{
+          [Op.or] : {
+            username: credential,
+            email: credential
+          }
+        }
+      })
+      if(user && User.validatePassword(password)){
+        return await User.scope('currentUser').findByPk(user.id)
+      }
+    }
+
+    static async signup({username, email,password}){
+      const hashedPassword = bcrypt.hashSync(password)
+      const newUser = await User.create({
+        email,
+        username,
+        hashedPassword
+      })
+      return await User.scope('currentUser').findByPk(newUser.id)
     }
   }
   User.init({
@@ -44,6 +83,21 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
+    defaultScope:{
+      attributes: {
+        exclude:['hashedPassword', 'updatedAt', 'email', 'createdAt']
+      }
+    },
+    scopes: {
+      currentUser : {
+        attributes : {
+          exclude: ['hashedPassword']
+        }
+      },
+      allInfo:{
+        attributes: {}
+      }
+    }
   });
   return User;
 };
