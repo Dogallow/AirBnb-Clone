@@ -2,7 +2,8 @@
 # `<name of application here>`
 
 ## Database Schema Design
-![bnb-clone-image](https://user-images.githubusercontent.com/95613961/186532001-29cea298-239f-4239-b4a4-35cf42e6d107.png)
+![bnb-clone-image](https://user-images.githubusercontent.com/95613961/186736342-207df3aa-6f41-4d72-b36b-1a048072d316.png)
+
 
 
 ## API Documentation
