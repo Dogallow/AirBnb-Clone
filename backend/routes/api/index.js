@@ -26,13 +26,13 @@ router.post('/test', (req, res) => {
 // );
 
 // // GET /api/require-auth
-// router.get(
-//     '/require-auth',
-//     requireAuth,
-//     (req, res) => {
-//         return res.json(req.user);
-//     }
-// );
+router.get(
+    '/require-auth',
+    requireAuth,
+    (req, res) => {
+        return res.json(req.user);
+    }
+);
 
 // // GET /api/set-token-cookie
 // const { setTokenCookie } = require('../../utils/auth.js');
