@@ -34,15 +34,15 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(
         models.Spot,
         {foreignKey: 'ownerId',
-      onDelete: 'CASCADE'
-      }
-      )
+         onDelete: 'CASCADE'
+        }
+        )
 
       User.hasMany(
         models.Review,
         {foreignKey: 'userId',
-      onDelete: 'CASCADE'
-      }
+        onDelete: 'CASCADE'
+        }
       )
     }
 
