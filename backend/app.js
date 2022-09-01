@@ -71,8 +71,18 @@ app.use((err, _req, _res, next) => {
     // check if error is a Sequelize error:
     if (err instanceof ValidationError) {
         err.errors = err.errors.map((e) => e.message);
+        
+        
+        if (err.message.includes("Validation error")){
+            err.status = 400
+        }
+        
+        if (err.errors[0].includes("User with that")){
+         err.status = 403
+        }
         err.title = 'Validation error';
     }
+    
     next(err);
 });
 
@@ -81,6 +91,8 @@ app.use((err, _req, _res, next) => {
 // ...
 // Error formatter
 app.use((err, _req, res, _next) => {
+    
+    
     res.status(err.status || 500);
     console.error(err);
     res.json({
@@ -90,5 +102,7 @@ app.use((err, _req, res, _next) => {
         stack: isProduction ? null : err.stack
     });
 });
+
+// app.listen(8000, ()=>{console.log('Server Running on port 8000')})
 
 module.exports = app;

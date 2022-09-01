@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Review.belongsTo(
-        models.User,
+        models.User, 
         {foreignKey: 'userId'}
       )
 
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       )
 
       Review.hasMany(
-        models.ReviewImages,
+        models.ReviewImage,
         {foreignKey: 'reviewId'}
       )
     }

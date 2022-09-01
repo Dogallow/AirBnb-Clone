@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     toSafeObject() {
-      const { id, username, email } = this; // context will be the User instance
-      return { id, username, email };
+      const { firstName, lastName, id, username, email } = this; // context will be the User instance
+      return { id,firstName, lastName, username, email };
     }
 
     validatePassword(password){
@@ -46,6 +46,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static async login({credential, password}){
       const {Op} = require('sequelize')
+      
       const user = await User.scope('allInfo').findOne({
         where:{
           [Op.or] : {
@@ -54,38 +55,95 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       })
+
+      
       if(user && user.validatePassword(password)){
-        return await User.scope('currentUser').findByPk(user.id)
+        const newUser = await User.scope('currentUser').findByPk(user.id)
+        console.log(newUser)
+        return newUser
       }
     }
 
-    static async signup({username, email,password}){
+    static async signup({firstName, lastName,username, email,password}){
       const hashedPassword = bcrypt.hashSync(password)
       const newUser = await User.create({
+        firstName,
+        lastName,
         email,
         username,
-        hashedPassword
+        hashedPassword,
       })
-      return await User.scope('currentUser').findByPk(newUser.id)
+
+      // if (!newUser) {
+      //   const err = new Error('User already exists')
+      //   err.status = 403
+      //   err.errors = {
+      //     email: "User with that email already exists"
+      //   }
+      //   next(err)
+      // }
+
+      
+
+      return await User.scope(['currentUser', 'noTimeStamp']).findByPk(newUser.id)
     }
   }
   User.init({
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'First Name is required'
+        },
+        isAlpha: true,
+        len: [2,30]
+      }
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Last Name is required'
+        },
+        isAlpha: true,
+        len: [2,30]
+      }
+    },
     username: {
       type:DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: {
+        args: true,
+        msg: 'User with that username already exists'
+      },
       validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Username is required'
+        },
         len:[4,30],
         isNotEmail(value){
           if (Validator.isEmail(value)) throw new Error('Should not be an E-mail')
-        }
+        },
+       
       }
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: {
+        args: true,
+        msg: "User with that email already exists"
+      },
       validate:{
+        notEmpty: {
+          args: true,
+          msg: 'Invalid email'
+        },
         len: [3,256],
         isEmail: true
       }
@@ -102,17 +160,22 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
     defaultScope:{
       attributes: {
-        exclude:['hashedPassword', 'updatedAt', 'email', 'createdAt']
+        exclude:['hashedPassword', 'updatedAt', 'email']
       }
     },
     scopes: {
       currentUser : {
         attributes : {
-          exclude: ['hashedPassword']
+          exclude: ['hashedPassword', 'createdAt']
         }
       },
       allInfo:{
         attributes: {}
+      },
+      noTimeStamp: {
+        attributes:{
+          exclude:['createdAt', 'updatedAt']
+        }
       }
     }
   });

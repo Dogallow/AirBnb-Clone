@@ -14,13 +14,31 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert('Users',[
+     await queryInterface.bulkInsert('Users',[
     {
+      firstName: 'Candy',
+      lastName: 'Crush',
       username: "candyCrush",
       email: "c4ndyCrush@gmail.com",
       hashedPassword: bcrypt.hashSync('password')
 
-    }
+    },
+    {
+      firstName: 'Demo',
+      lastName: '1',
+      username: "Demo1",
+      email: "demoMan1@gmail.com",
+      hashedPassword: bcrypt.hashSync('demo1password')
+
+    },
+    {
+      firstName: 'Demo',
+      lastName: '2',
+      username: "Demo2",
+      email: "demoMan2@gmail.com",
+      hashedPassword: bcrypt.hashSync('demo2password')
+
+    },
    ])
   },
 
@@ -31,13 +49,14 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    const Op = Sequelize.Op
-    await queryInterface.bulkDelete('Users', {
+    // const Op = Sequelize.Op
+    const { Op } = require("sequelize");
+      await queryInterface.bulkDelete('Users', {
       username: {
-        [Op.in]:['candyCrush']
+        [Op.in]:['candyCrush', 'Demo1', 'Demo2']
       },
       email:{
-        [Op.in]: ['c4ndyCrush@gmail.com']
+        [Op.in]: ['c4ndyCrush@gmail.com', 'demoMan1@gmail.com', 'demoMan2@gmail.com']
       }
     })
   }
