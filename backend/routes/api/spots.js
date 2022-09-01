@@ -82,13 +82,11 @@ console.log(result)
 
     let newSpot = []
     let listOfReviews = []
-    for (let review of reviews){
-        listOfReviews.push(review.toJSON())
-    }
+   
     
     
     // let index = 0
-    for (let spot of newArr) {
+    for (let spot of result) {
             // let spots = spot.toJSON()
             // console.log(listOfReviews[index])
             // spots.avgRating = 
