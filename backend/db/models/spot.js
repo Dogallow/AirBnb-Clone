@@ -13,10 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Spot.hasMany(
         models.Review, 
-        
         {foreignKey: 'spotId',
-      onDelete: 'CASCADE'
-      }
+        onDelete: 'CASCADE'
+        }
       )
 
       Spot.belongsTo(
@@ -29,8 +28,8 @@ module.exports = (sequelize, DataTypes) => {
         {
           foreignKey: 'spotId',
           onDelete: 'CASCADE'
-}
-      )
+        }       
+        )
 
       
     }
