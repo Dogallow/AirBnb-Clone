@@ -75,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
       })
 
 
-      return await User.scope(['currentUser', 'noTimeStamp']).findByPk(newUser.id)
+      return await User.scope(['currentUser']).findByPk(newUser.id)
     }
   }
   User.init({
@@ -156,7 +156,7 @@ module.exports = (sequelize, DataTypes) => {
     scopes: {
       currentUser : {
         attributes : {
-          exclude: ['hashedPassword', 'createdAt']
+          exclude: ['hashedPassword']
         }
       },
       allInfo:{

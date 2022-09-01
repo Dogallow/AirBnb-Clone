@@ -43,15 +43,7 @@ router.post(
             username, 
             password });
             
-            // if (!user){
-            //     const err = new Error('User already exists')
-            //     err.status = 403
-            //     err.errors = {
-            //         email : "User with that email already exists"
-            //     }
-            //     next(err)
-            // }
-
+         
         
 
         const token = await setTokenCookie(res, user);
@@ -65,7 +57,7 @@ router.post(
             token
         }
         
-        console.log(user)
+        
         return res.json({...result});
     }
 );
