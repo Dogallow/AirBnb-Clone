@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
 
       User.hasMany(
         models.Spot,
-        {foreignKey: 'ownerId', onDelete: 'CASCADE'}
+        {foreignKey: 'ownerId'}
       )
 
       User.belongsToMany(
@@ -74,16 +74,6 @@ module.exports = (sequelize, DataTypes) => {
         hashedPassword,
       })
 
-      // if (!newUser) {
-      //   const err = new Error('User already exists')
-      //   err.status = 403
-      //   err.errors = {
-      //     email: "User with that email already exists"
-      //   }
-      //   next(err)
-      // }
-
-      
 
       return await User.scope(['currentUser', 'noTimeStamp']).findByPk(newUser.id)
     }
