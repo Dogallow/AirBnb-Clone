@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
             },
 
         ],
-        group: ['spot.id']
+        group: ['Spot.id']
     })
 
     const preview = await SpotImage.findAll({
