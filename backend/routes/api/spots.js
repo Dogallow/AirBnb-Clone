@@ -42,6 +42,7 @@ router.get('/', async (req, res, next) => {
 
     const newArr = []
     Spots.forEach( async (spot)=>{
+        // console.log(spot.id)
         const review = await Review.findAll({
             where:{
                 spotId: spot.id
@@ -54,51 +55,53 @@ router.get('/', async (req, res, next) => {
     })
     
     let spotObj = spot.toJSON()
+    // console.log(review[0].toJSON())
         spotObj.avgRating = review[0].toJSON().avgRating
         // console.log(spotObj)
         newArr.push(spotObj)
+        // console.log(newArr)
     })
-    console.log(newArr)
-
+    
     const preview = await SpotImage.findAll({
 
         attributes: ['preview', 'url', 'spotId'],
-       
+        
     })
+    
 
-
-    let newSpot = []
+    // let newSpot = []
     // let listOfReviews = []
     // for (let review of reviews){
     //     listOfReviews.push(review.toJSON())
     // }
     
-
+    
     // // let index = 0
-    // for (let spot of Spots) {
-    //     let spots = spot.toJSON()
-    //     // console.log(listOfReviews[index])
-    //     // spots.avgRating = 
+    for (let spot of newArr) {
+            // let spots = spot.toJSON()
+            // console.log(listOfReviews[index])
+            // spots.avgRating = 
+        
+                for (let image of preview) {
+                        let newImage = image.toJSON()
+            
+                        if (newImage.preview === true && newImage.spotId === spot.id) {
+                                spot.previewImage = newImage.url
+                }
 
-    //         for (let image of preview) {
-    //             let newImage = image.toJSON()
-
-    //             if (newImage.preview === true && newImage.spotId === spots.id) {
-    //                 spots.previewImage = newImage.url
-    //             }
-
-    //         }
-
-    //     if (spots.previewImage === undefined) {
-    //         spots.previewImage = "No Image provided"
-    //     }
-
-    //     // index++
-    //     newSpot.push(spots)
-    // }
-
+            }
+    
+        if (spot.previewImage === undefined) {
+            spot.previewImage = "No Image provided"
+        }
+    
+        // index++
+        // newArr.push(spots)
+    }
+    
+    // console.log(newArr)
     res.json({
-       newArr
+        Spots: newArr
     })
 })
 
