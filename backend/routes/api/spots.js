@@ -8,32 +8,57 @@ const router = express.Router()
 
 router.get('/', async (req, res, next) => {
     const Spots = await Spot.findAll({
-        // attributes: {
-        //     include: [
-        //         'id',
-        //         [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
-        //     ],
+        attributes: {
+            include: [
+                'id',
+                [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
+            ],
             
-        // },
-        // include: [
-        //     {
-        //         model: Review,
-        //         attributes: []
-        //     },
+        },
+        include: [
+            {
+                model: Review,
+                attributes: []
+            },
             
-        // ],
-        // group: ['Spot.id'],
+        ],
+        group: ['Spot.id'],
     
 })
 
-    const reviews = await Review.findAll({
+// Declare a new var equal to []
+// iterate over spots array
+// take the id of spot
+// as we loop over spots query the review model with an where clause looking for a spot with the spotid
+
+    // const reviews = await Review.findAll({
+    //     attributes: {
+    //         include: [
+    //             [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
+    //         ]
+    //     },
+    //     
+    // })
+
+    const newArr = []
+    Spots.forEach( async (spot)=>{
+        const review = await Review.findAll({
+            where:{
+                spotId: spot.id
+            },
         attributes: {
             include: [
                 [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]
             ]
         },
-        group: ['spotId']
     })
+    
+    let spotObj = spot.toJSON()
+        spotObj.avgRating = review[0].toJSON().avgRating
+        // console.log(spotObj)
+        newArr.push(spotObj)
+    })
+    console.log(newArr)
 
     const preview = await SpotImage.findAll({
 
@@ -43,37 +68,37 @@ router.get('/', async (req, res, next) => {
 
 
     let newSpot = []
-    let listOfReviews = []
-    for (let review of reviews){
-        listOfReviews.push(review.toJSON())
-    }
+    // let listOfReviews = []
+    // for (let review of reviews){
+    //     listOfReviews.push(review.toJSON())
+    // }
     
 
-    let index = 0
-    for (let spot of Spots) {
-        let spots = spot.toJSON()
-        console.log(listOfReviews[index])
-        spots.avgRating = listOfReviews[index].avgRating
+    // // let index = 0
+    // for (let spot of Spots) {
+    //     let spots = spot.toJSON()
+    //     // console.log(listOfReviews[index])
+    //     // spots.avgRating = 
 
-            for (let image of preview) {
-                let newImage = image.toJSON()
+    //         for (let image of preview) {
+    //             let newImage = image.toJSON()
 
-                if (newImage.preview === true && newImage.spotId === spots.id) {
-                    spots.previewImage = newImage.url
-                }
+    //             if (newImage.preview === true && newImage.spotId === spots.id) {
+    //                 spots.previewImage = newImage.url
+    //             }
 
-            }
+    //         }
 
-        if (spots.previewImage === undefined) {
-            spots.previewImage = "No Image provided"
-        }
+    //     if (spots.previewImage === undefined) {
+    //         spots.previewImage = "No Image provided"
+    //     }
 
-        index++
-        newSpot.push(spots)
-    }
+    //     // index++
+    //     newSpot.push(spots)
+    // }
 
     res.json({
-       Spots: newSpot
+       newArr
     })
 })
 
