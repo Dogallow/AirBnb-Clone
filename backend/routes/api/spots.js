@@ -16,7 +16,7 @@ router.get('/', async (req, res, next) => {
         },
         include: [
             {
-                model: models.Review,
+                model: Review,
                 attributes: []
             },
 
