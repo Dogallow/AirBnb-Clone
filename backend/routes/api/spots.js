@@ -414,6 +414,47 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     return res.json({spot})
 })
 
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
+    const {spotId} = req.params
 
+    const spot = await Spot.findOne({
+        where: {
+            id: spotId
+        }
+    })
+
+    // Check if there is a spot
+    if (!spot) {
+        const err = new Error("Spot couldn't be found")
+        err.status = 404
+
+        res.status(404).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err)
+    }
+
+    // Authorization
+    if (req.user.id !== spot.ownerId) {
+        const err = new Error("Must be the Owner of the property")
+        err.status = 400
+
+        res.json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err)
+    }
+    console.log(spot)
+    await spot.destroy()
+
+    return res.json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+    })
+})
 
 module.exports = router
