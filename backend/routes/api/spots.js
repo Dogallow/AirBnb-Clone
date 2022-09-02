@@ -139,7 +139,12 @@ router.get('/current',requireAuth, async (req,res,next) => {
     raw: true
     })
 
-    console.log(spots)
+    const preview = await SpotImage.findAll({
+
+        attributes: ['preview', 'url', 'spotId'],
+
+    })
+    
 
     for (let spot of spots){
         const review = await Review.findAll({
@@ -152,31 +157,26 @@ router.get('/current',requireAuth, async (req,res,next) => {
         })
         console.log(review)
         spot.avgRating = review[0].avgRating
+        
+                for (let image of preview) {
+                    let newImage = image.toJSON()
+        
+                    if (newImage.preview === true && newImage.spotId === spot.id) {
+                        spot.previewImage = newImage.url
+                    }
+        
+                }
+        
+                if (spot.previewImage === undefined) {
+                    spot.previewImage = "No Image provided"
+                }
     }
 
-    const preview = await SpotImage.findAll({
-
-        attributes: ['preview', 'url', 'spotId'],
-
-    })
     
-    for (let spot of result) {
+    for (let spot of spots) {
         // let spots = spot.toJSON()
         // console.log(listOfReviews[index])
         // spots.avgRating = 
-
-        for (let image of preview) {
-            let newImage = image.toJSON()
-
-            if (newImage.preview === true && newImage.spotId === spot.id) {
-                spot.previewImage = newImage.url
-            }
-
-        }
-
-        if (spot.previewImage === undefined) {
-            spot.previewImage = "No Image provided"
-        }
 
         // index++
         // newArr.push(spots)
