@@ -1,6 +1,6 @@
 const express = require('express')
 
-const { Spot, Review, sequelize, SpotImage, User } = require('../../db/models')
+const { Spot, Review, sequelize, SpotImage, User, Booking } = require('../../db/models')
 const { check } = require('express-validator')
 const { handleValidationErrors, } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth')
@@ -454,6 +454,71 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
     return res.json({
         "message": "Successfully deleted",
         "statusCode": 200
+    })
+})
+
+router.get('/:spotId/bookings', requireAuth, async (req,res,next) => {
+    const {spotId} = req.params
+
+    const bookings = await Booking.findAll({
+        where: {
+            spotId
+        },
+        raw:true
+
+    })
+
+    const spot = await Spot.findOne({
+        where: {
+            id:spotId
+        },
+        raw: true
+    })
+
+    if(!spot){
+        const err = new Error("Spot couldn't be found")
+        err.status = 404
+
+        res.status(404).json({
+            "message" : err.message,
+            "statusCode": err.status
+        })
+
+        next(err)
+    }
+
+    const result = []
+    if (req.user.id !== spot.ownerId){
+        for (let booking of bookings){
+
+            const obj = {}
+            obj.spotId = booking.spotId
+            obj.startDate = booking.startDate
+            obj.endDate = booking.endDate
+
+            result.push(obj)
+        }
+
+    }
+    if (req.user.id === spot.ownerId){
+        for (let booking of bookings){
+            let obj = {}
+            const user = await User.findOne({
+                where: {
+                    id: booking.userId
+                }
+            })
+
+            booking.User = user
+            result.push(booking)
+
+        }
+    }
+
+
+
+    return res.json({
+        Bookings: result
     })
 })
 
