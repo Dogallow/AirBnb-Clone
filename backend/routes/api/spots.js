@@ -527,8 +527,26 @@ router.post('/:spotId/bookings', requireAuth, async (req,res,next) => {
     const {spotId} = req.params
     const {startDate, endDate} = req.body
 
-    const spot = await Spot.findByPk(spotId)
+    const spot = await Spot.findOne({
+        where : {
+            id:spotId
+        }, 
+        raw: true
+    })
 
+    if(req.user.id === spot.ownerId){
+        const err = new Error("Cannot book, if you are the owner of the property")
+        err.status = 403
+
+        res.status(403).json({
+            "message": err.message,
+            "statusCode": 403
+        })
+
+        next(err)
+    }
+    
+    
     if(!spot){
         const err = new Error("Spot couldn't be found")
         err.status = 404
@@ -548,7 +566,7 @@ router.post('/:spotId/bookings', requireAuth, async (req,res,next) => {
         raw: true
     })
 
-    console.log(bookings)
+    
 
     for (let booking of bookings){
         let bookedEndTime = new Date(booking.endDate)
