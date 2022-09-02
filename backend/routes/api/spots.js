@@ -524,4 +524,87 @@ router.get('/:spotId/bookings', requireAuth, async (req,res,next) => {
 })
 
 
+
+router.post('/:spotId/bookings', requireAuth, async (req,res,next) => {
+    const {spotId} = req.params
+    const {startDate, endDate} = req.body
+
+    const spot = await Spot.findByPk(spotId)
+
+    if(!spot){
+        const err = new Error("Spot couldn't be found")
+        err.status = 404
+
+        res.status(404).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err)
+    }
+
+    const bookings = await Booking.findAll({
+        where: {
+            spotId
+        },
+        raw: true
+    })
+
+    console.log(bookings)
+
+    for (let booking of bookings){
+        let bookedEndTime = new Date(booking.endDate)
+        let bookedEndTimeMs = bookedEndTime.getTime()
+
+        let bookedStartTime = new Date(booking.startDate)
+        let bookedStartTimeMs = bookedStartTime.getTime()
+
+        let startTime = new Date(startDate)
+        let startTimeMs = startTime.getTime()
+
+        let endTime = new Date(endDate)
+        let endTimeMs = endTime.getTime()
+
+        const err = new Error("Sorry, this spot is already booked for the specified dates")
+        err.status = 403
+        if(startTimeMs < bookedEndTimeMs && startTimeMs > bookedStartTimeMs){
+            err.errors = {
+                "startDate": "Start date conflicts with an existing booking"
+            }
+            res.status(403).json({
+                "message": err.message,
+                "statusCode": err.status,
+                "errors": err.errors
+            })
+            next(err)
+        }
+
+        if(endTimeMs > bookedStartTimeMs && endTimeMs < bookedEndTimeMs){
+            err.errors = {
+                "endDate": "End date conflicts with an existing booking"
+            }
+            res.status(403).json({
+                "message": err.message,
+                "statusCode": err.status,
+                "errors": err.errors
+            })
+            next(err)
+        }
+
+        
+    }
+
+    const booking = await Booking.create({
+        spotId,
+        userId: req.user.id,
+        startDate,
+        endDate
+    })
+
+    return res.json({
+        booking
+    })
+})
+
+
 module.exports = router
