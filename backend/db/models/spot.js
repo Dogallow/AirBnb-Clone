@@ -43,36 +43,120 @@ module.exports = (sequelize, DataTypes) => {
     address: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      validate: {
+        notEmpty:{
+          args: true,
+          msg: "Street Address is required"
+        }
+      }
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "City is required"
+        }
+      }
     },
     state: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "State is required"
+        }
+      }
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Country is required"
+        }
+      }
     },
     lat: {
       type: DataTypes.FLOAT,
-      allowNull: false
-    },
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Latitude is required"
+        },
+        isDecimal: {
+          args: true,
+          msg: "Latitude is not valid"
+        },
+        customValidate(value){
+          if(typeof value !== 'number'){
+            throw new Error('Latitude is not valid')
+          }
+        }
+        
+    }
+  },
     lng: {
       type: DataTypes.FLOAT,
-      allowNull:false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Longitude is required"
+        },
+        isDecimal: {
+          args: true,
+          msg: "Longitude is not valid"
+        },
+        customValidate(value){
+          if (typeof value !== 'number'){
+            throw new Error('Longitude is not valid')
+          }
+        },
+      }
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate:{
+        len: {
+          args: [1,50],
+          msg: "Name must be less than 50 characters"
+        }
+      }
     },
-    description: DataTypes.STRING,
+    description: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Description is required"
+        }
+      }
+    },
     price: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Price per day is required"
+        },
+        isDecimal:{
+          args: true,
+          msg: "Price must be a number"
+        },
+        customValidate(value) {
+          if (typeof value !== 'number') {
+            throw new Error("Price must be a number")
+          }
+        },
+      }
     }
   }, {
     sequelize,
