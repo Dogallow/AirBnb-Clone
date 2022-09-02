@@ -157,7 +157,7 @@ router.get('/current',requireAuth, async (req,res,next) => {
         })
         console.log(review)
         let num = review[0].avgRating
-        console.log(typeof num.toFixed(4))
+        
         num = num.toString()
         console.log(num)
         spot.avgRating = num
