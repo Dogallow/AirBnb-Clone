@@ -287,7 +287,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
         const err = new Error("Spot couldn't be found")
         err.status = 404
 
-        res.json({
+        res.status(404).json({
             "message": err.message,
             "statusCode": err.status
         })
@@ -295,6 +295,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
         next(err)
     }
 
+    // Authorization
     if(req.user.id !== spot.ownerId){
         const err = new Error("Must be the Owner of the property")
         err.status = 400
@@ -321,5 +322,98 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
     res.json({ ...result })
 })
+
+router.put('/:spotId', requireAuth, async (req, res, next) => {
+
+    const {spotId} = req.params
+    const {address, city, state, country, lat, lng, name, description, price} = req.body
+
+    
+    const spot = await Spot.findOne({
+        where: {
+            id: spotId
+        }
+    })
+
+    // Check if there is a spot
+    if (!spot) {
+        const err = new Error("Spot couldn't be found")
+        err.status = 404
+
+        res.status(404).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+         next(err)
+    }
+
+    // Authorization
+    if (req.user.id !== spot.ownerId) {
+        const err = new Error("Must be the Owner of the property")
+        err.status = 400
+
+        res.json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err)
+    }
+
+    spot.set({
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+    })
+
+    // if(address){
+    //     spot.address = address
+    // }
+
+    // if(city){
+    //     spot.city = city
+    // }
+
+    // if(state){
+    //     spot.state = state
+    // }
+
+    // if(country){
+    //     spot.country = country
+    // }
+
+    // if(lat) {
+    //     spot.lat = lat
+    // }
+
+    // if(lng){
+    //     spot.lng = lng
+    // }
+
+    // if(name){
+    //     spot.name = name
+    // } 
+
+    // if(description){
+    //     spot.description = description
+    // }
+
+    // if(price){
+    //     spot.price = price
+    // }
+
+    await spot.save()
+
+    return res.json({spot})
+})
+
+
 
 module.exports = router
