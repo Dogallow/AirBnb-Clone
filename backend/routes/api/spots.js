@@ -457,17 +457,6 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
     })
 })
 
-router.post('/:spotId/images', requireAuth, async (req,res,next) => {
 
-    const {url, preview} = req.body
-    
-    const image = await SpotImage.create({
-        spotId: req.user.id,
-        url,
-        preview
-    })
-
-    res.json({image})
-})
 
 module.exports = router
