@@ -191,25 +191,34 @@ router.get('/current',requireAuth, async (req,res,next) => {
 })
 
 
-router.get('/:spotId', async (req, res) => {
+router.get('/:spotId', async (req, res, next) => {
     const { spotId } = req.params
 
     const spot = await Spot.findOne({
         where: {
             id: spotId
         },
-        include:[
-            {model: SpotImage},
-            {model: User,
-            as: 'Owner',
-            attributes: {
-                exclude: ['email', 'hashedPassword', 'createdAt', 'updatedAt', 'username']
-            }
+        include: [
+            { model: SpotImage },
+            {
+                model: User,
+                as: 'Owner',
+                attributes: {
+                    exclude: ['email', 'hashedPassword', 'createdAt', 'updatedAt', 'username']
+                }
             }
         ]
     })
-
-    
+    console.log(spot)
+    if (!spot) {
+        const err = new Error("Spot couldn't be found")
+        err.status = 404
+        res.status(404).json({
+            'message': err.message,
+            'statusCode': err.status
+        })
+        next(err)
+    }
 
     return res.json({
         spot
