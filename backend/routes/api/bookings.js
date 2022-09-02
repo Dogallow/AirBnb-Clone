@@ -15,10 +15,15 @@ router.get('/current', requireAuth, async (req,res,next) => {
         raw: true
     })
 
-    // if(!bookings){
-    //     const err = new Error('Current user has No bookings')
-
-    // }
+    if(!bookings){
+        const err = new Error('Current user has No bookings')
+        err.status = 404
+        res.status(404).json({
+            "message": err.status,
+            "statusCode": err.status
+        })
+        next(err)
+    }
 
     const result = []
     for (let booking of bookings){
