@@ -158,7 +158,7 @@ router.get('/current',requireAuth, async (req,res,next) => {
         console.log(review)
         let num = review[0].avgRating
         
-        num = num.toString()
+        num = parseFloat(num)
         console.log(num)
         spot.avgRating = num
                 for (let image of preview) {
