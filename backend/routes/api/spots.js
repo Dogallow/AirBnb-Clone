@@ -273,4 +273,17 @@ router.post('/', requireAuth, async (req, res, next) => {
     return res.status(201).json({spot})
 })
 
+router.post('/:spotId/images', requiredAuth, async (req,res,next) => {
+
+    const {url, preview} = req.body
+    
+    const image = await SpotImage.create({
+        spotId: req.user.id,
+        url,
+        preview
+    })
+
+    res.json({image})
+})
+
 module.exports = router
