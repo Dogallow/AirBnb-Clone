@@ -1,6 +1,6 @@
 const express = require('express')
 
-const { Spot,Review, sequelize, SpotImage } = require('../../db/models')
+const { Spot,Review, sequelize, SpotImage, User } = require('../../db/models')
 const { check } = require('express-validator')
 const { handleValidationErrors, } = require('../../utils/validation');
 const {requireAuth} = require('../../utils/auth')
@@ -116,14 +116,100 @@ console.log(result)
 
 router.get('/current',requireAuth, async (req,res,next) => {
     console.log(req.user.id)
+    const result = []
     const spots = await Spot.findAll({
         where: {
-            id: req.user.id
-        }
+            ownerId: req.user.id
+        },
+        //   attributes: {
+        //     include: [
+        //         'id',
+        //         [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
+        //     ],
+
+        // },
+        // include: [
+        //     {
+        //         model: Review,
+        //         attributes: []
+        //     },
+
+        // ],
+        // group: ['Spot.id'],
+    raw: true
     })
+
+    console.log(spots)
+
+    for (let spot of spots){
+        const review = await Review.findAll({
+            where: {
+                spotId: spot.id
+            },
+            attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]],
+            raw: true
+
+        })
+        console.log(review)
+        spot.avgRating = review[0].avgRating
+    }
+
+    const preview = await SpotImage.findAll({
+
+        attributes: ['preview', 'url', 'spotId'],
+
+    })
+    
+    for (let spot of result) {
+        // let spots = spot.toJSON()
+        // console.log(listOfReviews[index])
+        // spots.avgRating = 
+
+        for (let image of preview) {
+            let newImage = image.toJSON()
+
+            if (newImage.preview === true && newImage.spotId === spot.id) {
+                spot.previewImage = newImage.url
+            }
+
+        }
+
+        if (spot.previewImage === undefined) {
+            spot.previewImage = "No Image provided"
+        }
+
+        // index++
+        // newArr.push(spots)
+    }
 
    return res.json({
         spots
+    })
+})
+
+
+router.get('/:spotId', async (req, res) => {
+    const { spotId } = req.params
+
+    const spot = await Spot.findOne({
+        where: {
+            id: spotId
+        },
+        include:[
+            {model: SpotImage},
+            {model: User,
+            as: 'Owner',
+            attributes: {
+                exclude: ['email', 'hashedPassword', 'createdAt', 'updatedAt', 'username']
+            }
+            }
+        ]
+    })
+
+    
+
+    return res.json({
+        spot
     })
 })
 

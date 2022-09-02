@@ -47,6 +47,18 @@ module.exports = {
    description: "Funnest Place in the world",
    price: 44564
   },
+  {
+   ownerId: 1,
+   address: "111 heaven lane",
+   city: "San Francisco",
+   state: "California",
+   country: "United States of America",
+   lat: 59.7635,
+   lng: 300.444,
+   name: "Stairway to Heaven",
+   description: "Best Place in the world",
+   price: 100000
+  },
   ])
   },
 
