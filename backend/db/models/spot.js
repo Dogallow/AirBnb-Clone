@@ -127,6 +127,10 @@ module.exports = (sequelize, DataTypes) => {
         len: {
           args: [1,50],
           msg: "Name must be less than 50 characters"
+        },
+        notEmpty:{
+          args:true,
+          msg: "Name is required"
         }
       }
     },
