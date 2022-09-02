@@ -191,7 +191,7 @@ router.get('/current',requireAuth, async (req,res,next) => {
 })
 
 
-router.get('/:spotId', async (req, res) => {
+router.get('/:spotId', async (req, res,next) => {
     const { spotId } = req.params
 
     const spot = await Spot.findOne({
@@ -209,7 +209,11 @@ router.get('/:spotId', async (req, res) => {
         ]
     })
 
-    
+    if(!spot){
+        const err = new Error("Spot couldn't be found")
+        err.status = 404
+        next(err)
+    }
 
     return res.json({
         spot
