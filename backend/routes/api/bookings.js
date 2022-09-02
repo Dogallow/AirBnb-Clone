@@ -15,11 +15,11 @@ router.get('/current', requireAuth, async (req,res,next) => {
         raw: true
     })
 
-    if(!bookings){
+    if(!bookings.length){
         const err = new Error('Current user has No bookings')
         err.status = 404
         res.status(404).json({
-            "message": err.status,
+            "message": err.message,
             "statusCode": err.status
         })
         next(err)
