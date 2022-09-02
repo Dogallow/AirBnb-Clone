@@ -274,16 +274,52 @@ router.post('/', requireAuth, async (req, res, next) => {
 })
 
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
-
+    const {spotId} = req.params
     const { url, preview } = req.body
 
+    const spot = await Spot.findOne({
+        where : {
+            id: spotId
+        }
+    })
+    console.log(spot)
+    if(!spot){
+        const err = new Error("Spot couldn't be found")
+        err.status = 404
+
+        res.json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err)
+    }
+
+    if(req.user.id !== spot.ownerId){
+        const err = new Error("Must be the Owner of the property")
+        err.status = 400
+
+        res.json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err)
+    }
+
     const image = await SpotImage.create({
-        spotId: req.user.id,
+        spotId,
         url,
         preview
     })
 
-    res.json({ image })
+    const imageJson = image.toJSON()
+    const result = {}
+    result.id = imageJson.id
+    result.url = imageJson.url
+    result.preview = imageJson.preview
+
+    res.json({ ...result })
 })
 
 module.exports = router
