@@ -215,9 +215,11 @@ router.get('/:spotId', async (req, res, next) => {
     })
 
 
+
    
 
     console.log(spot)
+
     if (!spot) {
         const err = new Error("Spot couldn't be found")
         err.status = 404
@@ -228,9 +230,25 @@ router.get('/:spotId', async (req, res, next) => {
 
         next(err)
     }
+    const avg = await Review.findOne({
+        where: {
+            spotId
+        },
+        attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"], [sequelize.fn('COUNT', sequelize.col('review')), 'numReviews']],
+        raw: true
+    })
+
+    // const reviews = await Review.findAll({
+    //     where :{spot}
+    // })
+
+    console.log(avg)
+    const spotJson = spot.toJSON()
+    spotJson.avgRating = parseFloat(avg.avgRating)
+    spotJson.numReviews = avg.numReviews
 
     return res.json({
-        spot
+        spot: spotJson
     })
 })
 
