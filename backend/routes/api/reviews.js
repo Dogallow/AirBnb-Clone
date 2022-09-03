@@ -22,7 +22,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             },
             raw: true
         })
-        review.User = user
+        review.User = user;
 
         const spot = await Spot.findOne({
             where: {
@@ -50,14 +50,16 @@ router.get('/current', requireAuth, async (req, res, next) => {
             }
         })
 
-        review.ReviewImage = reviewImages
+        review.ReviewImage = reviewImages;
 
-        result.push(review)
+        result.push(review);
     }
 
 
 
     return res.json({ Reviews: result })
 })
+
+
 
 module.exports = router;
