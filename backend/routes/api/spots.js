@@ -659,4 +659,57 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 })
 
 
+router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+    const { spotId } = req.params;
+
+    const { review, stars } = req.body;
+
+    const spot = await Spot.findOne({
+        where: {
+            id: spotId
+        }
+    })
+
+    if (!spot) {
+        const err = new Error("Spot couldn't be found");
+        err.status = 404;
+
+        res.status(404).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+    }
+
+    const reviews = await Review.findAll({
+        where: {
+            spotId
+        },
+        raw: true
+    })
+
+    for (let review of reviews) {
+        if (req.user.id === review.userId){
+            const err = new Error("User already has a review for this spot");
+            err.status = 403;
+
+            res.status(403).json({
+                "message": err.message,
+                "statusCode": 403
+            })
+
+            next(err)
+        }
+    }
+
+    const newReview = await Review.create({
+        userId: req.user.id,
+        spotId: spotId,
+        review,
+        stars
+    })
+
+    res.json({newReview})
+})
+
+
 module.exports = router
