@@ -68,7 +68,7 @@ router.put('/:bookingId', requireAuth, async (req,res, next) => {
     const booking = await Booking.findOne({
         where: {
             id: bookingId
-        },
+        }
         
     })
 
@@ -167,6 +167,67 @@ router.put('/:bookingId', requireAuth, async (req,res, next) => {
 })
 
 
+
+router.delete('/:bookingId', requireAuth, async (req, res, next) => {
+    const { bookingId } = req.params;
+
+    const booking = await Booking.findOne({
+        where: {
+            id: bookingId
+        },
+        
+    })
+
+    if (!booking) {
+        const err = new Error("Booking couldn't be found");
+        err.status = 404;
+
+        res.status(404).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err);
+    }
+
+    const spot = await Spot.findOne({
+        where: {
+            id: booking.spotId
+        },
+        raw: true
+    })
+
+    if (req.user.id !== booking.userId && req.user.id !== spot.ownerId ) {
+        const err = new Error("Booking must belong to the current user or the Spot must belong to the current user");
+        err.status = 403;
+
+        res.status(403).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+    }
+
+    const currentDate = new Date();
+    const bookedStartDate = new Date(booking.startDate)
+    if (currentDate > bookedStartDate) {
+        const err = new Error("Bookings that have been started can't be deleted");
+        err.status = 403;
+
+        res.status(403).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err)
+    }
+
+    await booking.destroy()
+
+    return res.json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+    })
+})
 
 
 module.exports = router
