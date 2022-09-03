@@ -60,6 +60,64 @@ router.get('/current', requireAuth, async (req, res, next) => {
     return res.json({ Reviews: result })
 })
 
+router.get('/:reviewId/images', requireAuth, async (req, res, next) => {
+    const { reviewId } = req.params;
+    const { url } = req.body;
+    
+    const review = await Review.findOne({
+        where: {
+            id: reviewId
+        },
+        raw: true
+    })
+
+    if ( !review ) {
+        const err = new Error("Review couldn't be found");
+        err.status = 404;
+
+        res.status(404).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err);
+    }
+
+    if ( review.userId !== req.user.id ) {
+        const err = new Error("Review must belong to the current user");
+        err.status = 403;
+
+        res.status(403).json({
+            "message": err.message,
+            "statusCode": 403
+        })
+
+        next(err);
+    }
+
+    const reviewImages = await ReviewImage.findAll({
+        where: {
+            reviewId
+        },
+        raw: true
+    })
+
+    if (reviewImages.length >= 10) {
+        const err = new Error("Maximum number of images for this resource was reached");
+        err.status = 403;
+
+        res.status(403).json()
+    }
+
+
+    const reviewImage = await ReviewImage.create({
+        reviewId,
+        url
+    })
+
+    res.json({ reviewImage })
+})
+
 
 
 
