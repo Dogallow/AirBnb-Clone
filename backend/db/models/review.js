@@ -65,6 +65,11 @@ module.exports = (sequelize, DataTypes) => {
         min: {
           args: 1,
           msg: "Stars must be an integer from 1 to 5"
+        },
+        isNumber(value){
+          if (typeof value !== 'number'){
+            throw new Error("Stars must be an integer from 1 to 5")
+          }
         }
       }
     }

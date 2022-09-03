@@ -60,7 +60,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
     return res.json({ Reviews: result })
 })
 
-router.get('/:reviewId/images', requireAuth, async (req, res, next) => {
+router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
     const { reviewId } = req.params;
     const { url } = req.body;
     
@@ -83,6 +83,8 @@ router.get('/:reviewId/images', requireAuth, async (req, res, next) => {
         next(err);
     }
 
+    console.log(review.userId, req.user.id)
+    
     if ( review.userId !== req.user.id ) {
         const err = new Error("Review must belong to the current user");
         err.status = 403;
@@ -106,7 +108,12 @@ router.get('/:reviewId/images', requireAuth, async (req, res, next) => {
         const err = new Error("Maximum number of images for this resource was reached");
         err.status = 403;
 
-        res.status(403).json()
+        res.status(403).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err);
     }
 
 
@@ -115,7 +122,59 @@ router.get('/:reviewId/images', requireAuth, async (req, res, next) => {
         url
     })
 
-    res.json({ reviewImage })
+    const reviewImageJson = reviewImage.toJSON();
+    const obj = {}
+    obj.id = reviewImageJson.id;
+    obj.url = reviewImageJson.url
+
+    res.json({ ...obj })
+})
+
+router.put('/:reviewId', requireAuth, async (req, res, next) => {
+    const { reviewId } = req.params;
+    const { review, stars } = req.body;
+
+    const targetReview = await Review.findOne({
+        where: {
+            id: reviewId
+        },
+        
+    })
+
+    if (!targetReview) {
+        const err = new Error("Review Couldn't be found");
+        err.status = 404;
+
+        res.status(404).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err);
+    }
+
+    if (req.user.id !== targetReview.userId){
+        const err = new Error("Review must belong to the current user");
+        err.status = 403
+
+        res.status(403).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err);
+    }
+
+    await targetReview.set({
+        
+        review,
+        stars
+    })
+
+    targetReview.save()
+    const reviewJson = targetReview.toJSON();
+
+    return res.json({...reviewJson})
 })
 
 
