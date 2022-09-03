@@ -61,6 +61,84 @@ router.get('/current', requireAuth, async (req,res,next) => {
     })
 })
 
+router.put('/:bookingId', requireAuth, async (req,res, next) => {
+    const {bookingId} = req.params
+    const {startDate, endDate} = req.body
+
+    const booking = await Booking.findOne({
+        where: {
+            id: bookingId
+        },
+        
+    })
+
+
+    console.log(booking)
+    
+    if(!booking) {
+        const err = new Error("Booking couldn't be found")
+        err.status = 404
+        res.status(404).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err)
+    }
+    if(req.user.id !== booking.userId){
+        const err = new Error("Can only edit your own booking")
+        err.status= 403
+        res.status(403).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err)
+    }
+
+    const currentDate = new Date()
+    const bookingEndDate = new Date(endDate)
+    if(bookingEndDate < currentDate){
+        const err = new Error("Past bookings can't be modified")
+        err.status = 403
+        res.status(403).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err)
+    }
+
+    const bookings = await Booking.findAll({
+        where: {
+            spotId: booking.spotId
+        },
+        raw:true
+    })
+
+    for (let booking of bookings){
+        let bookedStart = new Date(booking.startDate)
+        let bookedEnd = new Date(booking.endDate)
+        let start = new Date(startDate)
+        let end = new Date(endDate)
+
+        const err = new Error("Sorry, this spot is already booked for the specified dates")
+        err.status = 403
+
+        if(start < bookedEnd && sta)
+    }
+
+
+    booking.set({
+        startDate,
+        endDate
+    })
+
+    await booking.save()
+
+    return res.json({booking})
+})
+
 
 
 
