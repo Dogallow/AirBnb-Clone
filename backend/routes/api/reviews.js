@@ -80,10 +80,10 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
             "statusCode": err.status
         })
 
-        next(err);
+        return next(err);
     }
 
-    console.log(review.userId, req.user.id)
+    
     
     if ( review.userId !== req.user.id ) {
         const err = new Error("Review must belong to the current user");
@@ -94,7 +94,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
             "statusCode": 403
         })
 
-        next(err);
+        return next(err);
     }
 
     const reviewImages = await ReviewImage.findAll({
