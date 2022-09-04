@@ -150,7 +150,7 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
             "statusCode": err.status
         })
 
-        next(err);
+        return next(err);
     }
 
     if (req.user.id !== targetReview.userId){
@@ -162,19 +162,18 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
             "statusCode": err.status
         })
 
-        next(err);
+        return next(err);
     }
 
-    await targetReview.set({
-        
+     targetReview.set({
         review,
         stars
     })
 
-    targetReview.save()
+   await targetReview.save()
     const reviewJson = targetReview.toJSON();
 
-    return res.json({...reviewJson})
+    return res.json({targetReview})
 })
 
 router.delete('/:reviewId', requireAuth, async (req, res, next) => {
