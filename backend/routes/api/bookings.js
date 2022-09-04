@@ -163,7 +163,9 @@ router.put('/:bookingId', requireAuth, async (req,res, next) => {
 
     await booking.save()
 
-    return res.json({booking})
+    const bookingJson = booking.toJSON();
+
+    return res.json({...bookingJson})
 })
 
 
