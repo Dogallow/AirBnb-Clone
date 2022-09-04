@@ -59,7 +59,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             }
         })
 
-        review.ReviewImage = reviewImages;
+        review.ReviewImages = reviewImages;
 
         result.push(review);
     }

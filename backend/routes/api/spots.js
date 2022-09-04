@@ -292,7 +292,7 @@ router.get('/:spotId', async (req, res, next) => {
     spotJson.numReviews = avg.numReviews
 
     return res.json({
-        spot: spotJson
+        ...spotJson
     })
 })
 
@@ -312,9 +312,9 @@ router.post('/', requireAuth, async (req, res, next) => {
         price
     })
 
+    const spotJson = spot.toJSON()
 
-
-    return res.status(201).json({ spot })
+    return res.status(201).json({ ...spotJson })
 })
 
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
@@ -454,8 +454,9 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     // }
 
     await spot.save()
+    const spotJson = spot.toJSON()
 
-    return res.json({ spot })
+    return res.json({ ...spotJson })
 })
 
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
@@ -661,8 +662,10 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         endDate
     })
 
+    const bookingJson = booking.toJSON();
+
     return res.json({
-        booking
+        ...bookingJson
     })
 })
 
@@ -740,17 +743,17 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
          return next(err);
     }
 
-    if(spot.ownerId === req.user.id){
-        const err = new Error("If you are the owner of the property you cannot leave a review")
-        err.status = 403;
+    // if(spot.ownerId === req.user.id){
+    //     const err = new Error("If you are the owner of the property you cannot leave a review")
+    //     err.status = 403;
 
-        res.status(403).json({
-            "message": err.message,
-            "status": err.status
-        })
+    //     res.status(403).json({
+    //         "message": err.message,
+    //         "status": err.status
+    //     })
 
-         return next(err)
-    }
+    //      return next(err)
+    // }
 
     const reviews = await Review.findAll({
         where: {
