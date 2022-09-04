@@ -736,6 +736,20 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
             "message": err.message,
             "statusCode": err.status
         })
+
+        next(err);
+    }
+
+    if(spot.ownerId === req.user.id){
+        const err = new Error("If you are the owner of the property you cannot leave a review")
+        err.status = 403;
+
+        res.json({
+            "message": err.message,
+            "status": err.status
+        })
+
+        next(err)
     }
 
     const reviews = await Review.findAll({
