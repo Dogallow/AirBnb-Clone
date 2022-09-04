@@ -184,7 +184,7 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
             id: reviewId
         }
     })
-
+    console.log(review)
     if( !review ) {
         const err = new Error("Review couldn't be found");
         err.status = 404;
