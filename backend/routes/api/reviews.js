@@ -190,11 +190,11 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
         err.status = 404;
 
         res.status(404).json({
-            "message": err.status,
+            "message": err.message,
             "statusCode": err.status
         })
 
-        next(err);
+        return next(err);
     }
 
     if(req.user.id !== review.userId){
@@ -206,7 +206,7 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
             "statusCode": err.status
         })
 
-        next(err);
+        return next(err);
     }
 
     await review.destroy();
