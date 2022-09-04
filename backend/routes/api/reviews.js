@@ -12,8 +12,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         },
         raw: true
     })
-    console.log(reviews)
-    console.log(req.user.id)
+    
     if(!reviews){
         const err = new Error("Current user has no reviews")
     }
@@ -35,20 +34,24 @@ router.get('/current', requireAuth, async (req, res, next) => {
             },
             raw: true
         })
-        
-        const images = await SpotImage.findOne({
-            where: {
-                preview: true,
-                spotId: spot.id
-            }
-        })
-        if ( !images ) {
-            spot.previewImage = "There is No Image"
-        } else {
-            spot.previewImage = images.url
-        }
 
-        review.Spot = spot;
+        if(spot){
+
+            console.log(spot)
+            const images = await SpotImage.findOne({
+                where: {
+                    preview: true,
+                    spotId: spot.id
+                }
+            })
+            if ( !images ) {
+                spot.previewImage = "There is No Image"
+            } else {
+                spot.previewImage = images.url
+            }
+    
+            review.Spot = spot;
+        }
 
         const reviewImages = await ReviewImage.findAll({
             where: {
