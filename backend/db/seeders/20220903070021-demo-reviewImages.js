@@ -28,6 +28,6 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
 
-    await queryInterface.bulkDelete('ReviewImage', null, [])
+    await queryInterface.bulkDelete('ReviewImages', null, {})
   }
 };
