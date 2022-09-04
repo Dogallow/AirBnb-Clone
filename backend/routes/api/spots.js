@@ -69,7 +69,7 @@ router.get('/', async (req, res, next) => {
         // ],
         // group: ['Spot.id'],
         ...pagination,
-
+        raw: true
     })
 
     console.log(Spots)
