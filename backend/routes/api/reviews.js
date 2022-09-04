@@ -172,7 +172,7 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
 
    await targetReview.save()
     const reviewJson = targetReview.toJSON();
-
+    console.log('targetReview')
     return res.json({targetReview})
 })
 
