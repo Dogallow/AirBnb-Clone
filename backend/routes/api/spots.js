@@ -577,7 +577,18 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         },
         raw: true
     })
+    
+    if (!spot) {
+        const err = new Error("Spot couldn't be found")
+        err.status = 404
 
+        res.status(404).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err)
+    }
     if (req.user.id === spot.ownerId) {
         const err = new Error("Cannot book, if you are the owner of the property")
         err.status = 403
@@ -591,17 +602,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
     }
 
 
-    if (!spot) {
-        const err = new Error("Spot couldn't be found")
-        err.status = 404
-
-        res.status(404).json({
-            "message": err.message,
-            "statusCode": err.status
-        })
-
-        next(err)
-    }
 
     const bookings = await Booking.findAll({
         where: {
