@@ -3,7 +3,8 @@ const express = require('express')
 const { Spot, Review, sequelize, SpotImage, User, Booking, ReviewImage } = require('../../db/models')
 const { check } = require('express-validator')
 const { handleValidationErrors, } = require('../../utils/validation');
-const { requireAuth } = require('../../utils/auth')
+const { requireAuth } = require('../../utils/auth');
+const review = require('../../db/models/review');
 
 const router = express.Router()
 
@@ -632,7 +633,10 @@ router.get('/:spotId/reviews', async (req, res, next) => {
         where: {
             spotId
         },
-        include: { model: ReviewImage }
+        include: [
+            { model: ReviewImage },
+            { model: User }
+        ]
     })
 
     const spot = await Spot.findOne({
@@ -640,6 +644,15 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             id: spotId
         }
     })
+
+    // const user = await User.findOne({
+    //     where: {
+    //         id: review.userId
+    //     },
+    //     raw: true
+    // })
+
+    // console.log(user)
 
     if ( !spot ) {
         const err = new Error("Spot couldn't be found");
@@ -650,7 +663,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             "statusCode": err.status
         })
 
-        next(err)
+       return next(err)
     }
 
     return res.json({
