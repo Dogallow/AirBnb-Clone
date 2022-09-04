@@ -771,7 +771,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         stars
     })
 
-    const newReviewJson = newReview.JSON()
+    const newReviewJson = newReview.toJSON()
 
     res.json({ ...newReviewJson })
 })
