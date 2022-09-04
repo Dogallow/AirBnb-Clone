@@ -91,7 +91,7 @@ router.get('/', async (req, res, next) => {
             raw: true
         })
         // console.log(review[0].avgRating)
-        spot.avgRating = review[0].avgRating
+        spot.avgRating = parseFloat(review[0].avgRating)
         // console.log('review', review)
         result.push(spot)
         // let spotObj = spot.toJSON()
