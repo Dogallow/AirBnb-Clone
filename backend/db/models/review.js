@@ -12,20 +12,21 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Review.belongsTo(
-        models.User, 
-        {foreignKey: 'userId'}
+        models.User,
+        { foreignKey: 'userId' }
       )
 
       Review.belongsTo(
         models.Spot,
-        {foreignKey: 'spotId'}
+        { foreignKey: 'spotId' }
       )
 
       Review.hasMany(
         models.ReviewImage,
-        {foreignKey: 'reviewId',
-      onDelete: 'CASCADE'
-      }
+        {
+          foreignKey: 'reviewId',
+          onDelete: 'CASCADE'
+        }
       )
     }
   }
@@ -33,18 +34,18 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      
+
     },
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      
+
     },
     review: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty:{
+        notEmpty: {
           args: true,
           msg: "Review text is required",
         }
@@ -54,11 +55,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        isInt:{
+        isInt: {
           args: true,
           msg: "Stars must be an integer from 1 to 5"
         },
-        max:{
+        max: {
           args: 5,
           msg: "Stars must be an integer from 1 to 5"
         },
@@ -66,8 +67,8 @@ module.exports = (sequelize, DataTypes) => {
           args: 1,
           msg: "Stars must be an integer from 1 to 5"
         },
-        isNumber(value){
-          if (typeof value !== 'number'){
+        isNumber(value) {
+          if (typeof value !== 'number') {
             throw new Error("Stars must be an integer from 1 to 5")
           }
         }

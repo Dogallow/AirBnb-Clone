@@ -9,9 +9,49 @@ const review = require('../../db/models/review');
 const router = express.Router()
 
 router.get('/', async (req, res, next) => {
-
+    
     let result = []
 
+
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+    if (!page) {page = 1}
+    if (!size) {size = 20}
+
+    page = parseInt(page);
+    size = parseInt(size);
+
+    const pagination = {}
+
+    if (size >= 0 && size <= 20) {
+        pagination.limit = size
+    } else {
+        const err = new Error("Size must be greater than or equal to 20");
+        err.status = 400;
+
+        res.status(400).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err);
+    }
+    if (page >= 0 && page <= 10) {
+        pagination.offset = size * (page - 1)
+    } else {
+        const err = new Error("Page must be greater than or equal to 0");
+        err.status = 400;
+
+        res.status(400).json({
+            "message": err.message,
+            "statusCode": err.status
+        })
+
+        next(err);
+    }
+
+
+   
     const Spots = await Spot.findAll({
         // attributes: {
         //     include: [
@@ -28,10 +68,11 @@ router.get('/', async (req, res, next) => {
 
         // ],
         // group: ['Spot.id'],
-        raw: true
+        ...pagination,
+
     })
 
-    // console.log(Spots)
+    console.log(Spots)
 
     // Declare a new var equal to []
     // iterate over spots array
@@ -61,7 +102,7 @@ router.get('/', async (req, res, next) => {
 
         // newArr.push(spotObj)
     }
-    console.log(result)
+    // console.log(result)
 
     // const reviews = await Review.findAll({
     //     attributes: {
@@ -111,7 +152,9 @@ router.get('/', async (req, res, next) => {
 
     // console.log(newArr)
     return res.json({
-        Spots: result
+        Spots: result,
+        page,
+        size
     })
 })
 
@@ -275,16 +318,16 @@ router.post('/', requireAuth, async (req, res, next) => {
 })
 
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
-    const {spotId} = req.params
+    const { spotId } = req.params
     const { url, preview } = req.body
 
     const spot = await Spot.findOne({
-        where : {
+        where: {
             id: spotId
         }
     })
     console.log(spot)
-    if(!spot){
+    if (!spot) {
         const err = new Error("Spot couldn't be found")
         err.status = 404
 
@@ -297,7 +340,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     }
 
     // Authorization
-    if(req.user.id !== spot.ownerId){
+    if (req.user.id !== spot.ownerId) {
         const err = new Error("Must be the Owner of the property")
         err.status = 400
 
@@ -326,10 +369,10 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
 router.put('/:spotId', requireAuth, async (req, res, next) => {
 
-    const {spotId} = req.params
-    const {address, city, state, country, lat, lng, name, description, price} = req.body
+    const { spotId } = req.params
+    const { address, city, state, country, lat, lng, name, description, price } = req.body
 
-    
+
     const spot = await Spot.findOne({
         where: {
             id: spotId
@@ -346,7 +389,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
             "statusCode": err.status
         })
 
-         next(err)
+        next(err)
     }
 
     // Authorization
@@ -412,11 +455,11 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
 
     await spot.save()
 
-    return res.json({spot})
+    return res.json({ spot })
 })
 
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
-    const {spotId} = req.params
+    const { spotId } = req.params
 
     const spot = await Spot.findOne({
         where: {
@@ -458,30 +501,30 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
     })
 })
 
-router.get('/:spotId/bookings', requireAuth, async (req,res,next) => {
-    const {spotId} = req.params
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const { spotId } = req.params
 
     const bookings = await Booking.findAll({
         where: {
             spotId
         },
-        raw:true
+        raw: true
 
     })
 
     const spot = await Spot.findOne({
         where: {
-            id:spotId
+            id: spotId
         },
         raw: true
     })
 
-    if(!spot){
+    if (!spot) {
         const err = new Error("Spot couldn't be found")
         err.status = 404
 
         res.status(404).json({
-            "message" : err.message,
+            "message": err.message,
             "statusCode": err.status
         })
 
@@ -489,8 +532,8 @@ router.get('/:spotId/bookings', requireAuth, async (req,res,next) => {
     }
 
     const result = []
-    if (req.user.id !== spot.ownerId){
-        for (let booking of bookings){
+    if (req.user.id !== spot.ownerId) {
+        for (let booking of bookings) {
 
             const obj = {}
             obj.spotId = booking.spotId
@@ -501,8 +544,8 @@ router.get('/:spotId/bookings', requireAuth, async (req,res,next) => {
         }
 
     }
-    if (req.user.id === spot.ownerId){
-        for (let booking of bookings){
+    if (req.user.id === spot.ownerId) {
+        for (let booking of bookings) {
             let obj = {}
             const user = await User.findOne({
                 where: {
@@ -524,18 +567,18 @@ router.get('/:spotId/bookings', requireAuth, async (req,res,next) => {
 })
 
 
-router.post('/:spotId/bookings', requireAuth, async (req,res,next) => {
-    const {spotId} = req.params
-    const {startDate, endDate} = req.body
+router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const { spotId } = req.params
+    const { startDate, endDate } = req.body
 
     const spot = await Spot.findOne({
-        where : {
-            id:spotId
-        }, 
+        where: {
+            id: spotId
+        },
         raw: true
     })
 
-    if(req.user.id === spot.ownerId){
+    if (req.user.id === spot.ownerId) {
         const err = new Error("Cannot book, if you are the owner of the property")
         err.status = 403
 
@@ -546,9 +589,9 @@ router.post('/:spotId/bookings', requireAuth, async (req,res,next) => {
 
         next(err)
     }
-    
-    
-    if(!spot){
+
+
+    if (!spot) {
         const err = new Error("Spot couldn't be found")
         err.status = 404
 
@@ -567,9 +610,9 @@ router.post('/:spotId/bookings', requireAuth, async (req,res,next) => {
         raw: true
     })
 
-    
 
-    for (let booking of bookings){
+
+    for (let booking of bookings) {
         let bookedEndTime = new Date(booking.endDate)
         let bookedEndTimeMs = bookedEndTime.getTime()
 
@@ -584,7 +627,7 @@ router.post('/:spotId/bookings', requireAuth, async (req,res,next) => {
 
         const err = new Error("Sorry, this spot is already booked for the specified dates")
         err.status = 403
-        if(startTimeMs < bookedEndTimeMs && startTimeMs > bookedStartTimeMs){
+        if (startTimeMs < bookedEndTimeMs && startTimeMs > bookedStartTimeMs) {
             err.errors = {
                 "startDate": "Start date conflicts with an existing booking"
             }
@@ -596,7 +639,7 @@ router.post('/:spotId/bookings', requireAuth, async (req,res,next) => {
             next(err)
         }
 
-        if(endTimeMs > bookedStartTimeMs && endTimeMs < bookedEndTimeMs){
+        if (endTimeMs > bookedStartTimeMs && endTimeMs < bookedEndTimeMs) {
             err.errors = {
                 "endDate": "End date conflicts with an existing booking"
             }
@@ -608,7 +651,7 @@ router.post('/:spotId/bookings', requireAuth, async (req,res,next) => {
             next(err)
         }
 
-        
+
     }
 
     const booking = await Booking.create({
@@ -657,7 +700,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
 
     // console.log(user)
 
-    if ( !spot ) {
+    if (!spot) {
         const err = new Error("Spot couldn't be found");
         err.status = 404;
 
@@ -666,7 +709,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             "statusCode": err.status
         })
 
-       return next(err)
+        return next(err)
     }
 
     return res.json({
@@ -703,7 +746,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
     })
 
     for (let review of reviews) {
-        if (req.user.id === review.userId){
+        if (req.user.id === review.userId) {
             const err = new Error("User already has a review for this spot");
             err.status = 403;
 
@@ -723,7 +766,9 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         stars
     })
 
-    res.json({...newReview})
+    const newReviewJson = newReview.JSON()
+
+    res.json({ ...newReviewJson })
 })
 
 module.exports = router
