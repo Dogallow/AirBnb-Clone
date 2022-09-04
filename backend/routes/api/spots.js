@@ -742,7 +742,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
             "statusCode": err.status
         })
 
-        next(err);
+         return next(err);
     }
 
     if(spot.ownerId === req.user.id){
@@ -754,7 +754,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
             "status": err.status
         })
 
-        next(err)
+         return next(err)
     }
 
     const reviews = await Review.findAll({
@@ -774,7 +774,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
                 "statusCode": 403
             })
 
-            next(err)
+            return next(err)
         }
     }
 
@@ -787,7 +787,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
 
     const newReviewJson = newReview.toJSON()
 
-    res.json({ ...newReviewJson })
+   return res.json({ ...newReviewJson })
 })
 
 
