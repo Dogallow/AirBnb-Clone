@@ -749,7 +749,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         const err = new Error("If you are the owner of the property you cannot leave a review")
         err.status = 403;
 
-        res.json({
+        res.status(403).json({
             "message": err.message,
             "status": err.status
         })
