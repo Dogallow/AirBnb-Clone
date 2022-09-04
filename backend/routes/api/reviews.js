@@ -12,7 +12,12 @@ router.get('/current', requireAuth, async (req, res, next) => {
         },
         raw: true
     })
-
+    console.log(reviews)
+    console.log(req.user.id)
+    if(!reviews){
+        const err = new Error("Current user has no reviews")
+    }
+    
     let result = [];
     for (let review of reviews){
         
@@ -33,7 +38,8 @@ router.get('/current', requireAuth, async (req, res, next) => {
         
         const images = await SpotImage.findOne({
             where: {
-                preview: true
+                preview: true,
+                spotId: spot.id
             }
         })
         if ( !images ) {
