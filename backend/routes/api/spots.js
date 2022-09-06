@@ -5,6 +5,7 @@ const { check } = require('express-validator')
 const { handleValidationErrors, } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 const review = require('../../db/models/review');
+const { Op } = require("sequelize");
 
 const router = express.Router()
 
@@ -22,7 +23,136 @@ router.get('/', async (req, res, next) => {
     size = parseInt(size);
 
     const pagination = {}
+    const where = {};
 
+    if (minPrice) {
+        if ( parseFloat(minPrice) <= 0){
+            const err = new Error("Min Price must be greater than 0")
+            err.status= 400
+
+            res.json({
+                "message": err.message,
+                "statusCode": err.status
+            })
+
+            return next(err)
+
+        }
+        where.price = {
+            [Op.gte] : parseFloat(minPrice)
+        }
+    }
+
+    if(maxPrice) {
+        if (parseFloat(maxPrice) <= 0) {
+            const err = new Error("Max Price must be greater than 0")
+            err.status = 400
+
+            res.json({
+                "message": err.message,
+                "statusCode": err.status
+            })
+
+            return next(err)
+
+        }
+        where.price = {
+            [Op.lte] : parseFloat(maxPrice)
+        }
+    }
+    
+    if(maxPrice && minPrice){
+        where.price = {
+            [Op.between]: [parseFloat(minPrice), parseFloat(maxPrice)]
+        }
+    }
+
+    if (minLat) {
+        if (typeof parseFloat(minLat) !== 'number') {
+            const err = new Error("Min Latitude is invalid")
+            err.status = 400;
+
+            res.json({
+                "message": err.message,
+                "statusCode": err.status
+            })
+
+            return next(err);
+        }
+
+        where.lat = {
+            [Op.gte] : parseFloat(minLat)
+        }
+    }
+
+    if (maxLat) {
+        if (typeof parseFloat(maxLat) !== 'number') {
+            const err = new Error("Max Latitude is invalid")
+            err.status = 400;
+
+            res.json({
+                "message": err.message,
+                "statusCode": err.status
+            })
+
+            return next(err);
+        }
+
+        where.lat = {
+            [Op.gte]: parseFloat(maxLat)
+        }
+    }
+
+    if (minLat && maxLat) {
+        where.lat = {
+            [Op.between]: [parseFloat(minLat), parseFloat(maxLat)]
+        }
+    }
+
+
+    if (minLng) {
+        if (typeof parseFloat(minLng) !== 'number') {
+            const err = new Error("Min Longitude is invalid")
+            err.status = 400;
+
+            res.json({
+                "message": err.message,
+                "statusCode": err.status
+            })
+
+            return next(err);
+        }
+
+        where.lng = {
+            [Op.gte] : parseFloat(minLng)
+        }
+    }
+
+    if (maxLng) {
+        if (typeof parseFloat(maxLng) !== 'number') {
+            const err = new Error("Max Longitude is invalid")
+            err.status = 400;
+
+            res.json({
+                "message": err.message,
+                "statusCode": err.status
+            })
+
+            return next(err);
+        }
+
+        where.lng = {
+            [Op.gte]: parseFloat(maxLng)
+        }
+    }
+
+    if (minLng && maxLng) {
+        where.lng = {
+            [Op.between]: [parseFloat(minLng), parseFloat(maxLng)]
+        }
+    }
+    console.log(where)
+    
     if (size >= 0 && size <= 20) {
         pagination.limit = size
     } else {
@@ -68,6 +198,7 @@ router.get('/', async (req, res, next) => {
 
         // ],
         // group: ['Spot.id'],
+        where,
         ...pagination,
         raw: true
     })
