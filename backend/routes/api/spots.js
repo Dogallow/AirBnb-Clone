@@ -146,9 +146,9 @@ router.get('/', async (req, res, next) => {
         }
     }
 
-    if (minLng && minLng) {
-        where.lat = {
-            [Op.between]: [parseFloat(minLat), parseFloat(maxLat)]
+    if (minLng && maxLng) {
+        where.lng = {
+            [Op.between]: [parseFloat(minLng), parseFloat(maxLng)]
         }
     }
     console.log(where)
