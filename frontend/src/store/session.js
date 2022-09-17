@@ -33,9 +33,13 @@ export const getLoggedIn = (user) => async dispatch => {
 
     if(res.ok){
         const currentUser = await res.json()
-        console.log(currentUser)
+        
         dispatch(useLogin(currentUser))
+        return currentUser
     }
+        console.log(res)
+        return res.status
+    
 }
 
 
