@@ -4,8 +4,7 @@ import { csrfFetch } from "./csrf"
 const LOGIN = 'session/LOGIN'
 const LOGOUT = 'session/LOGOUT'
 
-// new comment
-// comment
+
 // ACTION CREATORS
 export const useLogin = (user) => {
     return {
@@ -40,6 +39,15 @@ export const getLoggedIn = (user) => async dispatch => {
         console.log(res)
         return res.status
     
+}
+
+export const restoreUser = () => async dispatch => {
+    const res = await csrfFetch('/api/session')
+
+    if(res.ok){
+        const user = await res.json();
+        dispatch(useLogin(user))
+    }
 }
 
 

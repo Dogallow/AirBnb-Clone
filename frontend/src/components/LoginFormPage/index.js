@@ -15,6 +15,8 @@ const LoginFormPage = () => {
     if(sessionUser){
         history.push('/')
     }
+
+ 
     
     const handleSubmit =async (e) => {
         e.preventDefault()
