@@ -13,7 +13,7 @@ const LoginFormPage = () => {
     const sessionUser = useSelector(state => state.session.user)
 
     if(sessionUser){
-        history.push('/')
+      return history.push('/')
     }
 
  

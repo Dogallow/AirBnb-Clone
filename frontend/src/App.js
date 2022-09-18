@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "./store/session";
 import LoginFormPage from "./components/LoginFormPage";
+import SignupFormPage from "./components/SignupFormPage";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -18,6 +19,9 @@ function App() {
         <Switch>
           <Route path="/login">
             <LoginFormPage/>
+          </Route>
+          <Route path="/signup">
+            <SignupFormPage />
           </Route>
         </Switch>
       </>
