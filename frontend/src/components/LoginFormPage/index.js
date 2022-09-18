@@ -18,7 +18,7 @@ const LoginFormPage = () => {
 
  
     
-    const handleSubmit =async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
 
         setErrorValidation([])
@@ -28,7 +28,7 @@ const LoginFormPage = () => {
             password
         }
 
-        return await dispatch(sessionActions.getLoggedIn(userInfo))
+        return  dispatch(sessionActions.getLoggedIn(userInfo))
             .catch(async res => {
                 const data = await res.json()
                 console.log(data)
@@ -48,7 +48,7 @@ const LoginFormPage = () => {
             </ul>
             <div className="form-container">
                 <div className='header-text'>
-                    Log In or Sign up
+                    Log In
                 </div>
                 <form onSubmit={handleSubmit}>
                 

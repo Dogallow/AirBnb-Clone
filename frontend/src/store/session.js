@@ -70,6 +70,17 @@ export const newUser = (userData) => async dispatch => {
     }
 } 
 
+export const getLoggedOut = () => async dispatch =>{
+    const res = await csrfFetch('/api/session',{
+        method:'DELETE'
+    })
+
+    if(res.ok){
+        dispatch(useLogout())
+        return res
+    }
+}
+
 
 // REDUCER
 const initialState = {user:null}

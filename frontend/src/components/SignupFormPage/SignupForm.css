@@ -1,0 +1,30 @@
+.signup-component-container{
+    height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}
+
+.signup-form-container{
+    border: 1px solid black;
+        height: 650px;
+        width: 566px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px 0;
+        border-radius: 12px;
+}
+
+.additional-input-field{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.additional-input-field input{
+    font-size: 16px;
+}
