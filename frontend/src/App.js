@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import * as sessionActions from "./store/session";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
+import Navigation from "./components/Navigation";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -16,6 +17,7 @@ function App() {
     return isLoaded && (
       
       <>
+      <Navigation />
         <Switch>
           <Route path="/login">
             <LoginFormPage/>
