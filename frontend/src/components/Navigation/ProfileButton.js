@@ -30,6 +30,8 @@ const ProfileButton = ({ user }) => {
         e.preventDefault()
         dispatch(sessionActions.getLoggedOut())
     }
+
+    
     
     return (
         <div className="profile-button-container">
@@ -46,8 +48,8 @@ const ProfileButton = ({ user }) => {
                 <div className="menu">
                 {showMenu && (
                     <ul className='profile-button-list'>
-                        <li className='profile-button-list-item'>{user.user.username}</li>
-                        <li className='profile-button-list-item'>{user.user.email}</li>
+                        <li className='profile-button-list-item'>{user.username}</li>
+                        <li className='profile-button-list-item'>{user.email}</li>
                         <li className='profile-button-list-item' onClick={logout}>
                             Logout
                         </li>
