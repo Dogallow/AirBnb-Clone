@@ -2,6 +2,7 @@ import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
 import  ProfileButton  from "./ProfileButton"
 import "./Navigation.css"
+import LoginFormModal from "../LoginFormModal"
 
 
 const Navigation = ({ isLoaded }) => {
@@ -23,7 +24,7 @@ const Navigation = ({ isLoaded }) => {
                         <NavLink style={{ textDecoration: "none" }} exact to='/'>Home</NavLink>
                     </li>
                     <li className="link-item">
-                        <NavLink style={{ textDecoration: "none" }} to='/login'>Login</NavLink>
+                        <LoginFormModal />
                     </li>
                     <li className="link-item">
                         <NavLink style={{ textDecoration: "none", color:"#222222"}} to='/signup'>Signup</NavLink>
