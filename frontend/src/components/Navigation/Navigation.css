@@ -1,0 +1,78 @@
+.profile-button-container{
+    position: relative;
+}
+
+/* .profile-button-list{
+    position: absolute;
+    
+} */
+
+.icon-button-container{
+
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    width: 60%;
+    position: relative;
+    margin: 0 auto;
+    height: 80px;
+    padding: 0 80px;
+    color: #222222;
+   
+}
+
+.icon-button-container button{
+    padding: 5px 5px 5px 12px;
+    border-radius: 21px;
+    cursor: pointer;
+    height: 42px;
+    width: 58px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    border: 1px solid #DDDDDD
+}
+
+.user-icon{
+    margin-left: 12px;
+    color: #222222;
+    
+}
+
+.menu{
+    position: absolute;
+    min-width: 240px;
+    top: 50%;
+    /* right:0px; */
+   
+    
+    
+   
+    border-radius: 12px;
+    overflow-y: scroll;
+    z-index: 2;
+    /* display: block; */
+    padding: 0px 8px;
+    margin-top: 34px;
+    max-height: calc(100vh - 100px);
+    
+    /* border: 1px solid #DDDDDD */
+}
+
+/* .menu-parent-postion{
+    display: flex;
+        justify-content: right;
+        align-items: center;
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+        height: 80px;
+        padding: 0 80px;
+} */
+
+.profile-button-list-item{
+    list-style-type: none;
+    cursor: pointer;
+}
