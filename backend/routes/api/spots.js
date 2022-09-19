@@ -151,7 +151,7 @@ router.get('/', async (req, res, next) => {
             [Op.between]: [parseFloat(minLng), parseFloat(maxLng)]
         }
     }
-    console.log(where)
+   
     
     if (size >= 0 && size <= 20) {
         pagination.limit = size
@@ -203,7 +203,7 @@ router.get('/', async (req, res, next) => {
         raw: true
     })
 
-    console.log(Spots)
+   
 
     // Declare a new var equal to []
     // iterate over spots array
@@ -290,7 +290,7 @@ router.get('/', async (req, res, next) => {
 })
 
 router.get('/current', requireAuth, async (req, res, next) => {
-    console.log(req.user.id)
+    
     const result = []
     const spots = await Spot.findAll({
         where: {
@@ -330,11 +330,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
             raw: true
 
         })
-        console.log(review)
+        
         let num = review[0].avgRating
 
         num = parseFloat(num)
-        console.log(num)
+       
         spot.avgRating = num
         for (let image of preview) {
             let newImage = image.toJSON()
@@ -393,8 +393,7 @@ router.get('/:spotId', async (req, res, next) => {
 
 
 
-    console.log(spot)
-
+    
     if (!spot) {
         const err = new Error("Spot couldn't be found")
         err.status = 404
@@ -417,7 +416,7 @@ router.get('/:spotId', async (req, res, next) => {
     //     where :{spot}
     // })
 
-    console.log(avg)
+    
     const spotJson = spot.toJSON()
     spotJson.avgRating = parseFloat(avg.avgRating)
     spotJson.numReviews = avg.numReviews
@@ -457,7 +456,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
             id: spotId
         }
     })
-    console.log(spot)
+   
     if (!spot) {
         const err = new Error("Spot couldn't be found")
         err.status = 404
@@ -624,7 +623,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
         next(err)
     }
-    console.log(spot)
+    
     await spot.destroy()
 
     return res.json({

@@ -31,7 +31,7 @@ const LoginFormPage = () => {
         return  dispatch(sessionActions.getLoggedIn(userInfo))
             .catch(async res => {
                 const data = await res.json()
-                console.log(data)
+                
                 if(data && data.errors){
                     setErrorValidation(data.errors)
                 }

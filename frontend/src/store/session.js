@@ -36,7 +36,7 @@ export const getLoggedIn = (user) => async dispatch => {
         dispatch(useLogin(currentUser))
         return currentUser
     }
-        console.log(res)
+        
         return res.status
     
 }

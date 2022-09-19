@@ -31,7 +31,7 @@ router.delete('/:imageId', requireAuth, async (req, res, next) => {
         }
     })
 
-    console.log(review)
+   
     if (req.user.id !== review.userId){
         const err = new Error("Review must belong to the current User");
         err.status = 403;
