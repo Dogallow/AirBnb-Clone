@@ -37,7 +37,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
         if(spot){
 
-            console.log(spot)
+            
             const images = await SpotImage.findOne({
                 where: {
                     preview: true,
@@ -181,7 +181,7 @@ router.put('/:reviewId', requireAuth, async (req, res, next) => {
 
    await targetReview.save()
     const reviewJson = targetReview.toJSON();
-    console.log('targetReview')
+    
     return res.json({...reviewJson})
 })
 
@@ -193,7 +193,7 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
             id: reviewId
         }
     })
-    console.log(review)
+    
     if( !review ) {
         const err = new Error("Review couldn't be found");
         err.status = 404;

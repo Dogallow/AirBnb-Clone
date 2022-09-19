@@ -68,7 +68,6 @@ module.exports = (sequelize, DataTypes) => {
       
       if(user && user.validatePassword(password)){
         const newUser = await User.scope('currentUser').findByPk(user.id)
-        console.log(newUser)
         return newUser
       }
     }

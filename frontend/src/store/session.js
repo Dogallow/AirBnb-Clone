@@ -4,8 +4,7 @@ import { csrfFetch } from "./csrf"
 const LOGIN = 'session/LOGIN'
 const LOGOUT = 'session/LOGOUT'
 
-// new comment
-// comment
+
 // ACTION CREATORS
 export const useLogin = (user) => {
     return {
@@ -33,8 +32,52 @@ export const getLoggedIn = (user) => async dispatch => {
 
     if(res.ok){
         const currentUser = await res.json()
-        console.log(currentUser)
+        
         dispatch(useLogin(currentUser))
+        return currentUser
+    }
+        
+        return res.status
+    
+}
+
+export const restoreUser = () => async dispatch => {
+    const res = await csrfFetch('/api/session')
+
+    if(res.ok){
+        const user = await res.json();
+        dispatch(useLogin(user))
+    }
+}
+
+export const newUser = (userData) => async dispatch => {
+    const { firstName, lastName, email, username, password } = userData
+    const res = await csrfFetch('/api/users', {
+        method: 'POST',
+        body: JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            username,
+            password
+        })
+    })
+
+    if (res.ok) {
+        const newUser = await res.json();
+        dispatch(useLogin(newUser))
+        return newUser
+    }
+} 
+
+export const getLoggedOut = () => async dispatch =>{
+    const res = await csrfFetch('/api/session',{
+        method:'DELETE'
+    })
+
+    if(res.ok){
+        dispatch(useLogout())
+        return res
     }
 }
 

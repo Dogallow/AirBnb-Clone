@@ -4,8 +4,10 @@
   "description": "## Database Schema Design ![bnb-clone-image](https://user-images.githubusercontent.com/95613961/186736342-207df3aa-6f41-4d72-b36b-1a048072d316.png)",
   "main": "index.js",
   "scripts": {
+    "heroku-postbuild": "npm run build --prefix frontend",
     "install": "npm --prefix backend install backend",
     "dev:backend": "npm install --prefix backend start",
+    "dev:frontend": "npm install --prefix frontend start",
     "sequelize": "npm run --prefix backend sequelize",
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
     "start": "npm start --prefix backend"

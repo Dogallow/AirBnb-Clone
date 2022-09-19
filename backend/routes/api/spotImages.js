@@ -34,7 +34,7 @@ router.delete('/:spotImageId', requireAuth, async (req, res, next) => {
 
     
 
-console.log(req.user.id, spot.ownerId)
+
     if (req.user.id !== spot.ownerId){
         const err = new Error("Spot must belong to the current user");
         err.status = 403;

@@ -67,14 +67,14 @@ router.delete(
 router.get(
     '/',
     restoreUser,
-    requireAuth,
+    // requireAuth,
     (req, res) => {
         const { user } = req;
         if (user) {
             return res.json({
                 user: user.toSafeObject()
             });
-        } else return res.json({});
+        } else return res.json(null);
     }
 );
 

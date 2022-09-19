@@ -27,7 +27,7 @@ router.get('/current', requireAuth, async (req,res,next) => {
 
     const result = []
     for (let booking of bookings){
-        console.log(booking.spotId)
+        
         const spot = await Spot.findOne({
             where: {
                 id: booking.spotId
@@ -73,7 +73,7 @@ router.put('/:bookingId', requireAuth, async (req,res, next) => {
     })
 
 
-    console.log(booking)
+   
     
     if(!booking) {
         const err = new Error("Booking couldn't be found")

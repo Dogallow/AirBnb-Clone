@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+body{
+    height: 100vh;
+    font-family: Raleway, sans-serif;
+    font-weight: 700;
+}
+#root{
+    height:100%;
+}
+
+.header-text{
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+    width: 100%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-component-container{
+    height:100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.form-container{
+    border: 1px solid black;
+    height: 380px;
+    width: 566px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px 0;
+    border-radius: 12px;
+}
+
+form {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    height: 90%;
+}
+
+form input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 56px;
+    border: 1px solid black;
+    
+}
+form button {
+    background-color: #E61E4D;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: 800;
+    width: 100%;
+    height: 20px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.input-field-container1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.input-field-container1 input{
+    border: 1px solid black;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+    font-size: 16px;
+}
+
+.input-field-container2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.input-field-container2 input{
+    border: 1px solid black;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    font-size: 16px;
+}
+
+
+.button-field-container1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+   
+}
+
+.welcome-text{
+    width: 100%;
+    padding-top: 10px;
+}
+
+h3{
+    font-size: 22px;
+}
