@@ -1,5 +1,7 @@
 .profile-button-container{
     position: relative;
+    width: 100%;
+    border-bottom: 1px solid #DDDDDD;
 }
 
 /* .profile-button-list{
@@ -47,9 +49,6 @@
     top: 50%;
     /* right:0px; */
    
-    
-    
-   
     border-radius: 12px;
     overflow-y: scroll;
     z-index: 2;
@@ -61,18 +60,37 @@
     /* border: 1px solid #DDDDDD */
 }
 
-/* .menu-parent-postion{
-    display: flex;
-        justify-content: right;
-        align-items: center;
-        width: 100%;
-        max-width: 1440px;
-        margin: 0 auto;
-        height: 80px;
-        padding: 0 80px;
-} */
+
 
 .profile-button-list-item{
     list-style-type: none;
     cursor: pointer;
+}
+
+.link-item{
+    list-style-type: none;
+    padding: 0 5px;
+    
+}
+
+.link-container{
+    width: 80%;
+
+    height: 80px;
+    padding: 0 80px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.link-container ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    
+}
+
+.main-container{
+    width: 100%;
+    border-bottom: 1px solid #DDDDDD;
 }
