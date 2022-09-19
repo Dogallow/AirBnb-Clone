@@ -28,12 +28,12 @@ const ProfileButton = ({ user }) => {
 
     const logout = (e) => {
         e.preventDefault()
-        dispatch(sessionActions.useLogout())
+        dispatch(sessionActions.getLoggedOut())
     }
     
     return (
         <div className="profile-button-container">
-        <div className="menu-parent-position">
+        
             <div className='icon-button-container'>
                 <button onClick={openMenu}>
                     <span>
@@ -57,7 +57,7 @@ const ProfileButton = ({ user }) => {
                 </div>
             </div>
             
-        </div>
+       
     )
 }
 

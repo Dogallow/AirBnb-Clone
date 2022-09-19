@@ -14,10 +14,11 @@ function App() {
       dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
     }, [dispatch])
     
-    return isLoaded && (
+    return (
       
       <>
       <Navigation isLoaded={isLoaded}/>
+      {isLoaded && (
         <Switch>
           <Route path="/login">
             <LoginFormPage/>
@@ -26,6 +27,7 @@ function App() {
             <SignupFormPage />
           </Route>
         </Switch>
+      )}
       </>
     );
 }
