@@ -46,8 +46,15 @@ export const restoreUser = () => async dispatch => {
 
     if(res.ok){
         const user = await res.json();
-        console.log('user', user)
-        dispatch(useLogin(user))
+        if(user === null){
+            console.log('user',user)
+            dispatch(useLogin(user))
+
+        }else{
+            console.log(user)
+            dispatch(useLogin('user',user.user))
+        }
+        
         return res
     }
 }
@@ -92,8 +99,8 @@ const sessionReducer = (state = initialState, action) => {
         case LOGIN:
             newState = {...state, user: {...state.user}}
             
-            console.log(newState)
-            newState.user = {...action.user}
+            console.log(newState, action.user)
+            newState.user = action.user
             return newState
         case LOGOUT:
             newState = {...state}
