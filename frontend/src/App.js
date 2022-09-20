@@ -3,8 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "./store/session";
 import LoginFormPage from "./components/LoginFormModal";
-import SignupFormPage from "./components/SignupFormPage";
+import SignupFormPage from "./components/SignupFormModal";
 import Navigation from "./components/Navigation";
+import Home from "./components/Home"
+import NewSpot from "./components/NewSpot"
+import SingleSpot from "./components/SingleSpot";
+import EditSpot from "./components/EditSpot";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -20,9 +24,18 @@ function App() {
       <Navigation isLoaded={isLoaded}/>
       {isLoaded && (
         <Switch>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/newSpot">
+              <NewSpot />
+            </Route>
+            <Route path="/edit/:spotId">
+              <EditSpot />
+            </Route>
+            <Route path="/:spotId">
+              <SingleSpot />
+            </Route>
         </Switch>
       )}
       

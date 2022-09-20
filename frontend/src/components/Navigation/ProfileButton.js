@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import * as sessionActions from '../../store/session'
 import './Navigation.css';
+import { NavLink } from 'react-router-dom'
 
 const ProfileButton = ({ user }) => {
     const [showMenu, setShowMenu] = useState(false)
@@ -11,6 +12,10 @@ const ProfileButton = ({ user }) => {
         if (showMenu) return;
         setShowMenu(true)
     }
+    let currentUser = user.user || user
+ 
+    console.log('profile button user', user)
+    // console.log('current User',currentUser.user)
     
 
     useEffect(() => {
@@ -37,6 +42,12 @@ const ProfileButton = ({ user }) => {
         <div className="profile-button-container">
         
             <div className='icon-button-container'>
+                <span>
+                    <NavLink style={{ textDecoration: "none" }} exact to='/'>Home</NavLink>
+                </span>
+                <span>
+                    <NavLink to="/newSpot">Create New Spot</NavLink>
+                </span>
                 <button onClick={openMenu}>
                     <span>
                         <i className="fa-solid fa-bars"></i>
@@ -46,10 +57,10 @@ const ProfileButton = ({ user }) => {
                     </span>
                 </button>
                 <div className="menu">
-                {showMenu && (
+                {showMenu && currentUser && (
                     <ul className='profile-button-list'>
-                        <li className='profile-button-list-item'>{user.username}</li>
-                        <li className='profile-button-list-item'>{user.email}</li>
+                        <li className='profile-button-list-item'>{currentUser.username}</li>
+                        <li className='profile-button-list-item'>{currentUser.email}</li>
                         <li className='profile-button-list-item' onClick={logout}>
                             Logout
                         </li>

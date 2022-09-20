@@ -3,16 +3,26 @@ import { NavLink } from "react-router-dom"
 import  ProfileButton  from "./ProfileButton"
 import "./Navigation.css"
 import LoginFormModal from "../LoginFormModal"
+import SignUpFormModal from "../SignupFormModal"
+import { useEffect } from "react"
 
 
 const Navigation = ({ isLoaded }) => {
     const userSession = useSelector(state => state.session.user)
    
+    console.log('UserSession',userSession)
+    useEffect(()=> {
 
+    },[userSession])
+    
     if (userSession){
 
         return isLoaded && (
-            <ProfileButton user={userSession} />
+            <>
+               
+                <NavLink to='/newSpot' >Create New Spot</NavLink>
+                <ProfileButton user={userSession} />
+            </>
         )
     }
 
@@ -27,7 +37,7 @@ const Navigation = ({ isLoaded }) => {
                         <LoginFormModal />
                     </li>
                     <li className="link-item">
-                        <NavLink style={{ textDecoration: "none", color:"#222222"}} to='/signup'>Signup</NavLink>
+                        <SignUpFormModal />
                     </li>
 
                 </ul>
