@@ -2,11 +2,12 @@ import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import * as sessionActions from '../../store/session'
 import './Navigation.css';
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect, useHistory } from 'react-router-dom'
 
 const ProfileButton = ({ user }) => {
     const [showMenu, setShowMenu] = useState(false)
     const dispatch = useDispatch()
+    const history = useHistory()
 
     const openMenu = () => {
         if (showMenu) return;
@@ -36,6 +37,9 @@ const ProfileButton = ({ user }) => {
         dispatch(sessionActions.getLoggedOut())
     }
 
+    const goToMySpots = () => {
+        return  history.push('/mySpots') 
+    }
     
     
     return (
@@ -63,6 +67,9 @@ const ProfileButton = ({ user }) => {
                         <li className='profile-button-list-item'>{currentUser.email}</li>
                         <li className='profile-button-list-item' onClick={logout}>
                             Logout
+                        </li>
+                        <li className='profile-button-list-item' onClick={goToMySpots}>
+                            My Spots
                         </li>
                     </ul>
                 )}

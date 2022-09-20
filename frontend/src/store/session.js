@@ -51,8 +51,8 @@ export const restoreUser = () => async dispatch => {
             dispatch(useLogin(user))
 
         }else{
-            console.log(user)
-            dispatch(useLogin('user',user.user))
+            console.log('user', user)
+            dispatch(useLogin(user.user))
         }
         
         return res

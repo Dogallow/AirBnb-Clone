@@ -9,6 +9,7 @@ import Home from "./components/Home"
 import NewSpot from "./components/NewSpot"
 import SingleSpot from "./components/SingleSpot";
 import EditSpot from "./components/EditSpot";
+import MySpots from "./components/MySpots"
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -31,6 +32,9 @@ function App() {
             </Route>
             <Route path="/edit/:spotId">
               <EditSpot />
+            </Route>
+            <Route path="/mySpots">
+              <MySpots />
             </Route>
             <Route path="/:spotId">
               <SingleSpot />

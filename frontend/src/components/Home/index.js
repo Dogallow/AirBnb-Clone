@@ -20,7 +20,7 @@ const Home = () => {
     
     
     if(!spotValues) return (<p>Loading...</p>)
-    console.log(spotValues)
+    console.log('Spot Values ./Home/index.js',spotValues)
     return (
         <div>
             {spotValues.map((spot, index) => {
@@ -30,6 +30,9 @@ const Home = () => {
                     <NavLink to={`/${spot.id}`}>
                         <h3>{spot.address}</h3>
                         <h3>{spot.city}, {spot.state}</h3>
+                        {spot.previewImage !== "No Image provided" && (
+                            <img src={spot.previewImage} alt={spot.description} />
+                        )}
                     </NavLink>
                 </div>
                 )

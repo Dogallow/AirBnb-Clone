@@ -4,7 +4,17 @@ const ALL_SPOTS = 'spots/ALL_SPOTS'
 const CREATE_SPOT = 'spots/CREATE_SPOT'
 const ONE_SPOT = 'spots/ONE_SPOT'
 const EDIT_SPOT = 'spots/EDIT_SPOT'
+const DELETE_SPOT = 'spots/DELETE_SPOT'
+const ADD_IMAGE = 'spots/ADD_IMAGE'
+const MY_SPOTS = 'spots/MY_SPOTS'
 
+
+const deleteSpot = (id) => {
+    return {
+        type: DELETE_SPOT,
+        id
+    }
+}
 
 const allSpots = (spots) => {
     return {
@@ -31,6 +41,63 @@ const editSpot = (spot) => {
     return {
         type: EDIT_SPOT,
         spot
+    }
+}
+
+const addImage = (img) => {
+    return {
+        type: ADD_IMAGE,
+        img
+    }
+}
+
+const mySpots = (spots) => {
+    return {
+        type: MY_SPOTS,
+        spots
+    }
+}
+
+export const currentSpots = () => async dispatch => {
+    const res = await csrfFetch('/api/spots/current')
+
+    if (res.ok) {
+        const { spots } = await res.json()
+        console.log(spots)
+        dispatch(mySpots(spots))
+        return spots
+    }
+}
+
+export const addSingleImage = (id, dataObj) => async dispatch =>{
+    const { spotId, url, preview} = dataObj
+    const res = await csrfFetch(`/api/spots/${id}/images`, {
+        method: "POST",
+        body: JSON.stringify({
+            spotId,
+            url,
+            preview
+        })
+    })
+    console.log('hello', res)
+
+    if (res.ok){
+        const result = await res.json()
+        console.log('result ./store/spots',result)
+        // dispatch(addImage(result))
+    }
+}
+
+export const deleteSingleSpot = (id) => async dispatch => {
+    const res = await csrfFetch(`/api/spots/${id}`, {
+        method: 'DELETE'
+    })
+
+    if (res.ok){
+        const deleted = await res.json();
+        console.log(deleted.message)
+        dispatch(deleteSpot(id))
+        return deleted.message
     }
 }
 
@@ -128,6 +195,14 @@ const spotsReducer = (state=initialState, action) => {
             })
             console.log(newState)
             return newState
+        case MY_SPOTS:
+            newState = {...state, allSpots:{...state.allSpots}}
+            console.log(action.spots)
+            action.spots.forEach((spot) => {
+                newState.allSpots[spot.id] = spot
+            })
+            console.log(newState)
+            return newState
         case CREATE_SPOT:
             newState = {...state}
             newState.allSpots = [...state.allSpots, action.spot]
@@ -138,8 +213,21 @@ const spotsReducer = (state=initialState, action) => {
             console.log('state of single spot',newState.singleSpot)
             return newState
         case EDIT_SPOT:
-            newState = {...state, singleSpot: {...state.singleSpot}}
-            newState.singleSpot = action.spot
+            newState = {...state, singleSpot: {...state.singleSpot, ...action.spot}}
+            
+            console.log('EDIT_SPOT', action.spot)
+            
+            return newState
+        case DELETE_SPOT: 
+            newState = {...state, allSpots: {...state.allSpots}}
+            console.log('delete reducer', newState.allSpots[action.id])
+            delete newState.allSpots[action.id]
+            console.log('post Delete reducer', newState.allSpots[action.id])
+            return newState
+        case ADD_IMAGE:
+            newState = {...state, singleSpot:{...state.singleSpot, SpotImages:[...state.SpotImages]}}
+            newState.singleSpot.SpotImages = [...state.singleSpot.SpotImages, action.img]
+            console.log('how is code reaching here')
             return newState
         default: 
         return state
