@@ -26,6 +26,7 @@ router.delete('/:spotImageId', requireAuth, async (req, res, next) => {
 
        return next(err);
     }
+    
     const spot = await Spot.findOne({
         where: {
             id: spotImage.spotId

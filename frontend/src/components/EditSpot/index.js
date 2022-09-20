@@ -17,12 +17,15 @@ const EditSpot = () => {
     const [description, setDescription] = useState(spot.description)
     const [price, setPrice] = useState(spot.price)
     const [goHome, setGoHome] = useState(false)
+
+    const [imgUrl, setImgUrl] = useState('')
+    const [preview, setPreview] = useState(false)
     
     const history = useHistory()
     
     if(goHome){
         setGoHome(false)
-        history.push(`/`)
+        history.push(`/${spotId}`)
     }
 
     const handleSubmit = (e) => {
@@ -38,8 +41,18 @@ const EditSpot = () => {
             description,
             price
         }
+
+        const imgObj = {
+            spotId,
+            url: imgUrl,
+            preview: Boolean(preview)
+        }
         setGoHome(true)
-        return dispatch(spotsActions.editSingleSpot(spotId, editObj))
+         dispatch(spotsActions.editSingleSpot(spotId, editObj))
+         if(imgObj.url && preview.toString()){
+            dispatch(spotsActions.addSingleImage(spotId, imgObj))
+         }
+         return
     }
     
     return (
@@ -73,6 +86,15 @@ const EditSpot = () => {
             </div>
             <div >
                 <input style={{ width: '150px', height: '20px' }} onChange={(e)=> setName(e.target.value)} value={name}/>
+            </div>
+            <div >
+                <input style={{ width: '150px', height: '20px' }} onChange={(e)=> setImgUrl(e.target.value)} value={imgUrl}/>
+            </div>
+            <div >
+                <select style={{ width: '150px', height: '20px' }} onChange={(e)=> setPreview(e.target.value)} value={preview}>
+                    <option value='false'>False</option>
+                    <option value='true'>True</option>
+                </select>
             </div>
             <button type='submit' style={{width: '150px'}} >Submit</button>
         </form>

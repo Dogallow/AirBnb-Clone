@@ -19,6 +19,18 @@ const SingleSpot = () => {
     useEffect(()=> {
         dispatch(spotsActions.getOneSpot(spotId))
     }, [])
+
+    const deleteSpot = async () =>{
+        const message = await dispatch(spotsActions.deleteSingleSpot(spotId))
+        alert(message)
+        history.push('/')
+    }
+
+    // const deleteImage = () => {
+    //    console.log('Finish CRUD for Reviews first')
+    //     { smallAuth && <button onClick={deleteImage}>Delete Image</button> }
+    // }
+    console.log(spot.SpotImages)
     
     if(!spot.Owner)return <div>Loading...</div>
     return (
@@ -27,6 +39,17 @@ const SingleSpot = () => {
             <h2>Owner: {spot.Owner.firstName}  {spot.Owner.lastName}</h2>
             <h4>Average Rating: {spot.avgRating}</h4>
             {smallAuth && <button onClick={() => history.push(`/edit/${spot.id}`)}>Edit Spot</button>}
+            {smallAuth && <button onClick={deleteSpot}>Delete Spot</button>}
+            { spot.SpotImages.length > 0 && (
+                spot.SpotImages.map((spotImage, index) => {
+                    return (
+                        <div key={index}>
+                        <img src={spotImage.url} alt="No Image" />
+                        
+                        </div>
+                    )
+                })
+            )}
         </div>
     )
 }
