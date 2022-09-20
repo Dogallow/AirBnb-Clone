@@ -4,7 +4,7 @@ import * as sessionActions from '../../store/session'
 import { useHistory } from 'react-router-dom'
 import './SignupForm.css'
 
-const SignupFormPage = () => {
+const SignUpForm = () => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
@@ -16,13 +16,13 @@ const SignupFormPage = () => {
     const history = useHistory()
     const session = useSelector(state => state.session.user)
 
-    if(session){
-        history.push('/')
-    }
+    // if (session) {
+    //     history.push('/')
+    // }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(password === confirmPassword) {
+        if (password === confirmPassword) {
             setErrors([])
             const newUser = {
                 firstName,
@@ -31,8 +31,8 @@ const SignupFormPage = () => {
                 username,
                 password
             }
-    
-            return dispatch(sessionActions.newUser(newUser)).catch(async err =>{
+
+            return dispatch(sessionActions.newUser(newUser)).catch(async err => {
                 const error = await err.json()
                 if (error && error.errors) setErrors(error.errors)
 
@@ -40,10 +40,10 @@ const SignupFormPage = () => {
         }
         return setErrors(['password and confirm password must match'])
     }
-    
+
     return (
         <div className='signup-component-container'>
-        
+
             <ul>
                 {errors && (errors.map((err, index) => (
                     <li key={index}>{err}</li>
@@ -59,7 +59,7 @@ const SignupFormPage = () => {
                     </div>
                     <div className='input-field-container1'>
                         <label></label>
-                        <input placeholder='FirstName'  onChange={(e) => setFirstName(e.target.value)} value={firstName}/>
+                        <input placeholder='FirstName' onChange={(e) => setFirstName(e.target.value)} value={firstName} />
                     </div>
                     <div className='additional-input-field'>
                         <label></label>
@@ -79,7 +79,7 @@ const SignupFormPage = () => {
                     </div>
                     <div className='input-field-container2'>
                         <label></label>
-                        <input placeholder='Confirm Password'  onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} />
+                        <input placeholder='Confirm Password' onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} />
                     </div>
                     <button type='submit'>Continue</button>
                 </form>
@@ -88,4 +88,4 @@ const SignupFormPage = () => {
     )
 }
 
-export default SignupFormPage
+export default SignUpForm
