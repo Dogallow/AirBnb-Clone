@@ -19,7 +19,6 @@ function App() {
     }, [dispatch])
     
     return (
-      
       <>
       <Navigation isLoaded={isLoaded}/>
       {isLoaded && (
