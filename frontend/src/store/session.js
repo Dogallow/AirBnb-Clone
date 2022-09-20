@@ -46,8 +46,8 @@ export const restoreUser = () => async dispatch => {
 
     if(res.ok){
         const user = await res.json();
-        console.log('user', user.user)
-        dispatch(useLogin(user.user))
+        console.log('user', user)
+        dispatch(useLogin(user))
         return res
     }
 }

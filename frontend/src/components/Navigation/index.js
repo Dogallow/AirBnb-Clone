@@ -16,11 +16,9 @@ const Navigation = ({ isLoaded }) => {
     },[userSession])
     
     if (userSession){
-
         return isLoaded && (
             <>
-               
-                <NavLink to='/newSpot' >Create New Spot</NavLink>
+                
                 <ProfileButton user={userSession} />
             </>
         )
