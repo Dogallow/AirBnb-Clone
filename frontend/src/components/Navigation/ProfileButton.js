@@ -40,6 +40,10 @@ const ProfileButton = ({ user }) => {
     const goToMySpots = () => {
         return  history.push('/mySpots') 
     }
+
+    const goToMyReviews = () => {
+        return  history.push('/myReviews') 
+    }
     
     
     return (
@@ -70,6 +74,9 @@ const ProfileButton = ({ user }) => {
                         </li>
                         <li className='profile-button-list-item' onClick={goToMySpots}>
                             My Spots
+                        </li>
+                        <li className='profile-button-list-item' onClick={goToMyReviews}>
+                            My Reviews
                         </li>
                     </ul>
                 )}

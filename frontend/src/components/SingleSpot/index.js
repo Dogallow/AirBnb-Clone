@@ -1,24 +1,32 @@
 import { Link, Redirect, useParams,useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import * as spotsActions from '../../store/spots'
+import * as reviewsActions from '../../store/reviews'
 import { useEffect } from 'react'
+
 
 const SingleSpot = () => {
     const { spotId } = useParams()
     const dispatch = useDispatch()
     const spot = useSelector(state => state.spots.singleSpot)
     const user = useSelector(state => state.session.user)
+    let reviews = useSelector(state => state.reviews.spot)
     const history = useHistory()
+
+    // All reviews by a spot's Id
+    reviews = Object.values(reviews)
     
     console.log('selector user',user)
     console.log('selector spot',spot)
 
     const smallAuth = user.id === spot.ownerId
     console.log(smallAuth)
+    console.log(reviews)
     
     useEffect(()=> {
         dispatch(spotsActions.getOneSpot(spotId))
-    }, [])
+        dispatch(reviewsActions.getSpotReviews(spotId))
+    }, [dispatch])
 
     const deleteSpot = async () =>{
         const message = await dispatch(spotsActions.deleteSingleSpot(spotId))
@@ -50,6 +58,25 @@ const SingleSpot = () => {
                     )
                 })
             )}
+            <div>
+            Reviews
+            {reviews.length === 0 && (<h2>There are no reviews for this location</h2>)}
+             {reviews.length > 0 && reviews.map((review, index) => {
+                return (
+                    <div key={index}>
+                        <h2>{review.User.firstName} {review.User.lastName}</h2>
+                        <h3>{review.review}</h3>
+                        {review.ReviewImages.length > 0 && review.ReviewImages.map((img, index) => {
+                            return (
+
+                                <img key={index} src={img.url} alt="review Image" />
+                            )
+                        })}
+                    </div>
+                )
+             })}
+
+            </div>
         </div>
     )
 }
