@@ -418,7 +418,7 @@ router.get('/:spotId', async (req, res, next) => {
 
     
     const spotJson = spot.toJSON()
-    spotJson.avgRating = parseFloat(avg.avgRating)
+    spotJson.avgRating = parseFloat(avg.avgRating.toFixed(2))
     spotJson.numReviews = avg.numReviews
 
     return res.json({

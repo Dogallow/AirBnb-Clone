@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as spotsActions from '../../store/spots'
 import * as reviewsActions from '../../store/reviews'
 import { useEffect } from 'react'
+import CreateReview from '../CreateReview'
+import AddReviewImage from '../AddReviewImage'
+import { useState } from 'react'
 
 
 const SingleSpot = () => {
@@ -12,6 +15,8 @@ const SingleSpot = () => {
     const user = useSelector(state => state.session.user)
     let reviews = useSelector(state => state.reviews.spot)
     const history = useHistory()
+    const [errorValidation, setErrorValidation] = useState([])
+
 
     // All reviews by a spot's Id
     reviews = Object.values(reviews)
@@ -23,24 +28,46 @@ const SingleSpot = () => {
     console.log(smallAuth)
     console.log(reviews)
     
+    const errors = []
     useEffect(()=> {
-        dispatch(spotsActions.getOneSpot(spotId))
-        dispatch(reviewsActions.getSpotReviews(spotId))
-    }, [dispatch])
+        dispatch(spotsActions.getOneSpot(spotId)).catch(async data => {
+            const error = await data.json()
+            console.log(error.message)
+            
+            
+        })
+        dispatch(reviewsActions.getSpotReviews(spotId)).catch(async data => {
+            const error = await data.json()
+            console.log(error)
+            errors.push(error)
 
+        })
+        
+       return () => {
+        dispatch(spotsActions.clear())
+        dispatch(reviewsActions.clear())
+       }
+    }, [dispatch])
+    console.log(errorValidation)
     const deleteSpot = async () =>{
         const message = await dispatch(spotsActions.deleteSingleSpot(spotId))
         alert(message)
         history.push('/')
     }
 
+    const deleteReview = async (id) => {
+        dispatch(reviewsActions.deleteSingleReview(id))
+    }
+
     // const deleteImage = () => {
     //    console.log('Finish CRUD for Reviews first')
     //     { smallAuth && <button onClick={deleteImage}>Delete Image</button> }
     // }
-    console.log(spot.SpotImages)
+    console.log(spot)
+
     
-    if(!spot.Owner)return <div>Loading...</div>
+    
+    if(!spot.address)return null
     return (
         <div>
             <h3>Address: {spot.address}</h3>
@@ -61,21 +88,24 @@ const SingleSpot = () => {
             <div>
             Reviews
             {reviews.length === 0 && (<h2>There are no reviews for this location</h2>)}
-             {reviews.length > 0 && reviews.map((review, index) => {
+             {reviews.length > 0  && reviews.map((review, index) => {
                 return (
                     <div key={index}>
                         <h2>{review.User.firstName} {review.User.lastName}</h2>
                         <h3>{review.review}</h3>
                         {review.ReviewImages.length > 0 && review.ReviewImages.map((img, index) => {
                             return (
-
-                                <img key={index} src={img.url} alt="review Image" />
-                            )
-                        })}
+                                
+                                <img style={{height:'100px', width:'100px'}} key={index} src={img.url} alt="review Image" />
+                                )
+                            })}
+                        {review.userId === user.id && <AddReviewImage id={review.id} spotId={spotId}/>}
+                        {review.userId === user.id && <button onClick={()=>deleteReview(review.id)}>Delete Review</button>}
                     </div>
                 )
              })}
-
+             <CreateReview spotId={spotId} />
+                
             </div>
         </div>
     )
