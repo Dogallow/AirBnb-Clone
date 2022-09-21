@@ -122,7 +122,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
             "statusCode": err.status
         })
 
-        next(err);
+        return next(err);
     }
 
 

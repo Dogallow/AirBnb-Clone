@@ -7,8 +7,13 @@ const EDIT_SPOT = 'spots/EDIT_SPOT'
 const DELETE_SPOT = 'spots/DELETE_SPOT'
 const ADD_IMAGE = 'spots/ADD_IMAGE'
 const MY_SPOTS = 'spots/MY_SPOTS'
+const CLEAR = 'spots/CLEAR'
 
-
+export const clear = () => {
+    return {
+        type: CLEAR
+    }
+}
 const deleteSpot = (id) => {
     return {
         type: DELETE_SPOT,
@@ -188,6 +193,8 @@ const initialState = {
 const spotsReducer = (state=initialState, action) => {
     let newState
     switch (action.type){
+        case CLEAR:
+            return initialState
         case ALL_SPOTS: 
             newState = {...state, allSpots:{...state.allSpots}}
             action.spots.forEach((spot) => {
@@ -229,7 +236,9 @@ const spotsReducer = (state=initialState, action) => {
             newState.singleSpot.SpotImages = [...state.singleSpot.SpotImages, action.img]
             console.log('how is code reaching here')
             return newState
+
         default: 
+        console.log("default case reducer", state)
         return state
     }
 }

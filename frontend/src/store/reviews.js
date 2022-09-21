@@ -1,7 +1,39 @@
+
 import { csrfFetch } from "./csrf"
 
 const GET_USER_REVIEWS = 'reviews/GET_USER_REVIEWS'
 const GET_SPOT_REVIEWS = 'reviews/GET_SPOT_REVIEWS'
+const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
+const ADD_REVIEWIMAGE = 'reviews/ADD_REVIEWIMAGE'
+const DELETE_REVIEW = 'reviews/DELETE_REVIEW'
+const CLEAR = 'reviews/CLEAR'
+
+export const clear = () => {
+    return {
+        type: CLEAR
+    }
+}
+
+const deleteReview = (id) => {
+    return {
+        type: DELETE_REVIEW,
+        id
+    }
+}
+
+const addReviewImage = () => {
+    return {
+        type: ADD_REVIEWIMAGE,
+
+    }
+}
+
+const createReview = (review) => {
+    return {
+        type: CREATE_REVIEW,
+        review
+    }
+}
 
 
 const userReviews = (reviews) => {
@@ -15,6 +47,49 @@ const spotReviews = (reviews) => {
     return {
         type: GET_SPOT_REVIEWS,
         reviews
+    }
+}
+
+export const deleteSingleReview = (reviewId) => async dispatch => {
+    const res = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'DELETE',
+    })
+
+    if (res.ok) {
+        const message = await res.json()
+        console.log("deleteSingleReview", message)
+        dispatch(deleteReview(reviewId))
+    }
+}
+
+export const addSingleReviewImage = ({reviewId, url}) => async dispatch => {
+        const res = await csrfFetch(`/api/reviews/${reviewId}/images`, {
+            method: "POST",
+            body: JSON.stringify({
+                url
+            })
+        })
+
+        if(res.ok){
+            const result = await res.json()
+            console.log("addSingleReviewImage",result)
+        }
+}
+
+export const createSingleReview = (id, dataObj) => async dispatch => {
+    const {review, stars} = dataObj
+    const res = await csrfFetch(`/api/spots/${id}/reviews`, {
+        method: "POST",
+        body: JSON.stringify({
+            review,
+            stars
+        })
+    })
+
+    if(res.ok) {
+        const review = await res.json()
+        console.log("createSingleReview", review)
+        // dispatch(createReview(review))
     }
 }
 
@@ -51,6 +126,8 @@ const initialState = {
 const reviewReducer = (state = initialState, action) => {
     let newState 
     switch(action.type){
+        case CLEAR:
+            return initialState
         case GET_USER_REVIEWS:
             newState = {...state, user:{}}
             action.reviews.forEach(review => {
@@ -71,6 +148,10 @@ const reviewReducer = (state = initialState, action) => {
                     ...review
                 }
             })
+            return newState
+        case DELETE_REVIEW: 
+            newState = {...state, spot: {...state.spot}}
+            delete newState.spot[action.id]
             return newState
         default:
             return state

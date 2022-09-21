@@ -12,6 +12,8 @@ const Home = () => {
     
     useEffect(() => {
          dispatch(spotsActions.getAllSpots())
+
+         
     }, [dispatch])
     
     // const singleSpot = () => {

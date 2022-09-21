@@ -1,14 +1,16 @@
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { NavLink } from "react-router-dom"
 import  ProfileButton  from "./ProfileButton"
 import "./Navigation.css"
 import LoginFormModal from "../LoginFormModal"
 import SignUpFormModal from "../SignupFormModal"
 import { useEffect } from "react"
+import * as sessionActions from "../../store/session"
 
 
 const Navigation = ({ isLoaded }) => {
     const userSession = useSelector(state => state.session.user)
+    const dispatch = useDispatch()
    
     console.log('UserSession',userSession)
     useEffect(()=> {
@@ -24,6 +26,15 @@ const Navigation = ({ isLoaded }) => {
         )
     }
 
+    const loginDemo = () => {
+        dispatch(sessionActions.getLoggedIn({
+            credential: "Demo1",
+            password: "demo1password"
+        }))
+    }
+
+
+
     return isLoaded && (
         <div className="main-container">
             <div className="link-container">
@@ -36,6 +47,9 @@ const Navigation = ({ isLoaded }) => {
                     </li>
                     <li className="link-item">
                         <SignUpFormModal />
+                    </li>
+                    <li className="link-item">
+                        <button onClick={loginDemo}>Demo User</button>
                     </li>
 
                 </ul>

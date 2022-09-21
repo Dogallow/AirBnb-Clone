@@ -35,6 +35,7 @@ const ProfileButton = ({ user }) => {
     const logout = (e) => {
         e.preventDefault()
         dispatch(sessionActions.getLoggedOut())
+        history.push('/')
     }
 
     const goToMySpots = () => {
