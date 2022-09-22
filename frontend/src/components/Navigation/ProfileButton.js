@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import * as sessionActions from '../../store/session'
 import './Navigation.css';
 import { NavLink, Redirect, useHistory } from 'react-router-dom'
+import image from '../../image/logo.png'
 
 const ProfileButton = ({ user }) => {
     const [showMenu, setShowMenu] = useState(false)
@@ -48,43 +49,58 @@ const ProfileButton = ({ user }) => {
     
     
     return (
-        <div className="profile-button-container">
-        
-            <div className='icon-button-container'>
+        <div className="outer-nav-container">
+        <div className="navbar-main-container">
+            <div className="navbar-icon-container">
+                
+                    <img src={image} alt="spaceship"/>
+                
+                <div className="navbar-icon-text">
+                    <h1 >Aerobnb</h1>
+                </div>
+            </div>
+
+            <div className='navbar-menu-container'>
                 <span>
-                    <NavLink style={{ textDecoration: "none" }} exact to='/'>Home</NavLink>
+                    <NavLink className={"navbar-menu-links"} style={{ textDecoration: "none" }} exact to='/'>Home</NavLink>
                 </span>
                 <span>
-                    <NavLink to="/newSpot">Create New Spot</NavLink>
+                    <NavLink className={"navbar-menu-links"} to="/newSpot">Create New Spot</NavLink>
                 </span>
-                <button onClick={openMenu}>
+                
+                    <div className="navbar-menu-button">
+                <button onClick={openMenu} >
                     <span>
                         <i className="fa-solid fa-bars"></i>
                     </span>
                     <span className="user-icon">
                         <i className="fa-solid fa-user"></i>
                     </span>
+
+                    <div className="menu-position">
+                    
+                            {showMenu && currentUser && (
+                                <ul className='profile-button-list'>
+                                    <li className='profile-button-list-item'>{currentUser.username}</li>
+                                    <li className='profile-button-list-item'>{currentUser.email}</li>
+                                    <li className='profile-button-list-item special' onClick={logout}>
+                                        Logout
+                                    </li>
+                                    <li className='profile-button-list-item special' onClick={goToMySpots}>
+                                        My Spots
+                                    </li>
+                                    <li className='profile-button-list-item special' onClick={goToMyReviews}>
+                                        My Reviews
+                                    </li>
+                                </ul>
+                            )}
+                            
+                    </div>
                 </button>
-                <div className="menu">
-                {showMenu && currentUser && (
-                    <ul className='profile-button-list'>
-                        <li className='profile-button-list-item'>{currentUser.username}</li>
-                        <li className='profile-button-list-item'>{currentUser.email}</li>
-                        <li className='profile-button-list-item' onClick={logout}>
-                            Logout
-                        </li>
-                        <li className='profile-button-list-item' onClick={goToMySpots}>
-                            My Spots
-                        </li>
-                        <li className='profile-button-list-item' onClick={goToMyReviews}>
-                            My Reviews
-                        </li>
-                    </ul>
-                )}
                     </div>
                 </div>
             </div>
-            
+        </div>
        
     )
 }

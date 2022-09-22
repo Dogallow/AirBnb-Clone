@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import * as spotsActions from '../../store/spots'
 
@@ -25,9 +25,16 @@ const EditSpot = () => {
     const history = useHistory()
 
     if (goHome) {
-        setGoHome(false)
+        // setGoHome(false)
         history.push(`/${spotId}`)
     }
+
+    console.log('edit page', Object.keys(spot))
+    
+    useEffect(() => {
+
+        return () => dispatch(spotsActions.clear())
+    },[])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -53,15 +60,15 @@ const EditSpot = () => {
             preview: Boolean(preview)
         }
 
-        dispatch(spotsActions.editSingleSpot(spotId, editObj)).catch(async err => {
+     let fetch =  await dispatch(spotsActions.editSingleSpot(spotId, editObj)).catch(async err => {
             const error = await err.json()
             console.log(error)
             validate.push(error.message)
             setErrorValidation(validate)
         })
-        
+        let fetch2
         if (imgObj.url && preview.toString()) {
-             dispatch(spotsActions.addSingleImage(spotId, imgObj)).catch(async err => {
+        fetch2 = await  dispatch(spotsActions.addSingleImage(spotId, imgObj)).catch(async err => {
                 const error = await err.json()
                 console.log(error)
                 validate.push(error.message)
@@ -69,10 +76,10 @@ const EditSpot = () => {
             })
         }
         
-       
-            setGoHome(true)
-        
+        if(!!errorValidation.length){
 
+            history.push(`/${spotId}`)
+        }
 
     }
     console.log(errorValidation)

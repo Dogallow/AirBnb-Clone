@@ -1,83 +1,158 @@
-.profile-button-container{
-    position: relative;
-    width: 100%;
+.outer-nav-container{
+    width:100%;
     border-bottom: 1px solid #DDDDDD;
+    display: flex;
+    justify-content: center;
+    height: 80px;
 }
 
-/* .profile-button-list{
-    position: absolute;
-    
-} */
+.navbar-main-container{
+    position: relative;
+    width: 80%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+ 
+}
+/* ---------- Left Side Nav Bar ----------------------- */
+.navbar-icon-container{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: red;
+}
 
-.icon-button-container{
+.navbar-icon-container img {
+    height: 60%;
+    
+}
+
+.navbar-icon-text{
+    font-family: "Mitr";
+}
+.navbar-icon-text h1{
+    font-size: 20px;
+    margin: 0;
+}
+
+
+/* -------------------- Right Side NavBar ------------------------------------ */
+.navbar-menu-container{
 
     display: flex;
     justify-content: right;
     align-items: center;
-    width: 60%;
+    width: 50%;
     position: relative;
     margin: 0 auto;
     height: 80px;
-    padding: 0 80px;
+    
     color: #222222;
    
 }
 
-.icon-button-container button{
-    padding: 5px 5px 5px 12px;
+.navbar-menu-button{
+    position: relative;
     border-radius: 21px;
-    cursor: pointer;
-    height: 42px;
-    width: 58px;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    border: 1px solid #DDDDDD
 }
+.navbar-menu-button button{
+    border-radius: 21px;
+    padding: 5px 5px 5px 12px;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    transition: box-shadow 0.2s ease;
+    height: 42px;
+}
+
 
 .user-icon{
     margin-left: 12px;
     color: #222222;
+    height: 100%;
+    margin-left: 12px;
     
 }
 
-.menu{
+.navbar-menu-links{
+    color:#222222;
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    margin: 0;
+    text-align: inherit;
+    padding: 12px;
+    font-weight: 500;
+}
+
+/* ------------------navbar popup menu ---------------------------------- */
+.menu-position{
+    color:#222222;
     position: absolute;
-    min-width: 240px;
+    background: #FFFFFF;
+    right: 0;
     top: 50%;
-    /* right:0px; */
-   
     border-radius: 12px;
-    overflow-y: scroll;
-    z-index: 2;
-    /* display: block; */
-    padding: 0px 8px;
+    box-shadow: 0 2px 16px rgba(0,0,0,.12);
     margin-top: 34px;
+    /* margin-top: 34px;
+    padding: 8px 0; */
     max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    z-index: 2;
+    min-width: 240px;
+}
+.profile-button-list{
+    height: 100%;
+    margin: 0;
+    padding-left: 10px;
+    text-align: left;
+    cursor: default;
+    background: transparent;
     
-    /* border: 1px solid #DDDDDD */
+    list-style-type: none;
+}
+    .profile-button-list-item{
+    line-height: 35px;
+    font-size: 14px;
+    padding: 12px 14px;
+    outline: 0;
+        overflow: visible;
 }
 
-
-
-.profile-button-list-item{
-    list-style-type: none;
+.profile-button-list-item.special{
     cursor: pointer;
 }
 
+/* ------------------Not Logged In NavBar */
 .link-item{
     list-style-type: none;
     padding: 0 5px;
-    
+    cursor: pointer;
+    font-family:  sans-serif;
+    display: flex;
+    align-items: center;
+}
+.link{
+    padding: 1px 6px;
+}
+.link-item button{
+    background: transparent;
+    border: none;
+    font-weight: 500;
+    font-size: 16px;
+    font-family: "Raleway", sans-serif;
+    cursor: pointer;
 }
 
 .link-container{
-    width: 80%;
+    width: 100%;
 
     height: 80px;
-    padding: 0 80px;
+    
     display: flex;
     align-items: center;
     justify-content: right;
@@ -94,3 +169,68 @@
     width: 100%;
     border-bottom: 1px solid #DDDDDD;
 }
+
+    /* these were the settings for the links in the menu */
+        /* background: transparent;
+        border: 0;
+        cursor: pointer;
+        margin: 0;
+        text-align: inherit;
+        padding: 12px 16px; */
+
+                        /* -webkit-appearance: none;
+                        appearance: none;
+                        color: inherit;
+                        display: inline-block;
+                        font-family: inherit;
+                        font-size: inherit;
+                        font-weight: inherit;
+                        line-height: inherit;
+                        outline: 0;
+                        overflow: visible;
+                        padding: 0;
+                        -webkit-text-decoration: none;
+                        text-decoration: none;
+                        -webkit-user-select: auto;
+                        user-select: auto;
+                        outline: none;
+                        font-size: var(--c-zdwk-p);
+                        line-height: var(--j-p-z-kco);
+                        color: var(--f-k-smk-x);
+                        display: flex;
+                        white-space: nowrap;
+                        width: 100%;
+                        font-weight: var(--jx-zk-pv);
+                        display: flex;
+                        align-items: center; */
+        
+/* .icon-button-container button{
+    padding: 5px 5px 5px 12px;
+    border-radius: 21px;
+    cursor: pointer;
+    height: 42px;
+    width: 58px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    border: 1px solid #DDDDDD
+} */
+
+
+/* .menu{
+    position: absolute;
+    min-width: 240px;
+    top: 50%;
+    /* right:0px; */
+   
+    /* border-radius: 12px;
+    overflow-y: scroll;
+    z-index: 2; */
+    /* display: block; */
+    /* padding: 0px 8px;
+    margin-top: 34px;
+    max-height: calc(100vh - 100px); */
+    
+    /* border: 1px solid #DDDDDD */

@@ -186,8 +186,7 @@ export const createNewSpot = (formData) => async dispatch => {
 const initialState = {
     allSpots: {},
     singleSpot: {
-        SpotImages:[],
-        Owner: {}
+        
     }
 }
 const spotsReducer = (state=initialState, action) => {
@@ -198,6 +197,9 @@ const spotsReducer = (state=initialState, action) => {
         case ALL_SPOTS: 
             newState = {...state, allSpots:{...state.allSpots}}
             action.spots.forEach((spot) => {
+                if(spot.avgRating){
+               spot.avgRating = spot.avgRating.toFixed(2)
+            }
                 newState.allSpots[spot.id] = spot
             })
             console.log(newState)
@@ -216,8 +218,12 @@ const spotsReducer = (state=initialState, action) => {
             return newState
         case ONE_SPOT:
             newState = {...state, singleSpot:{...state.singleSpot}}
+            if(action.spot.avgRating){
+                action.spot.avgRating = action.spot.avgRating.toFixed(2)
+            }
             newState.singleSpot = action.spot
             console.log('state of single spot',newState.singleSpot)
+            
             return newState
         case EDIT_SPOT:
             newState = {...state, singleSpot: {...state.singleSpot, ...action.spot}}
