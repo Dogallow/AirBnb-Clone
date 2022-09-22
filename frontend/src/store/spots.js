@@ -218,6 +218,7 @@ const spotsReducer = (state=initialState, action) => {
             return newState
         case ONE_SPOT:
             newState = {...state, singleSpot:{...state.singleSpot}}
+            console.log('action.spot, getOneSpot',action.spot)
             if(action.spot.avgRating){
                 action.spot.avgRating = action.spot.avgRating.toFixed(2)
             }

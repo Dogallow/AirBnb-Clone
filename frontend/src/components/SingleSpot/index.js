@@ -24,8 +24,6 @@ const SingleSpot = () => {
     console.log('selector user',user)
     console.log('selector spot',spot)
 
-    const smallAuth = user.id === spot.ownerId
-    console.log(smallAuth)
     console.log(reviews)
     
     const errors = []
@@ -41,37 +39,45 @@ const SingleSpot = () => {
             const error = await data.json()
             console.log(error)
             errors.push(error)
-
+            
         })
         
-       return () => {
-        dispatch(spotsActions.clear())
-        dispatch(reviewsActions.clear())
-       }
+        return () => {
+            dispatch(spotsActions.clear())
+            dispatch(reviewsActions.clear())
+        }
     }, [dispatch])
-
+    
     console.log(errors)
     const deleteSpot = async () =>{
         const message = await dispatch(spotsActions.deleteSingleSpot(spotId))
         alert(message)
         history.push('/')
     }
-
+    
     const deleteReview = async (id) => {
         dispatch(reviewsActions.deleteSingleReview(id))
     }
-
+    
     // const deleteImage = () => {
-    //    console.log('Finish CRUD for Reviews first')
-    //     { smallAuth && <button onClick={deleteImage}>Delete Image</button> }
-    // }
-    console.log('single spot',spot)
+        //    console.log('Finish CRUD for Reviews first')
+        //     { smallAuth && <button onClick={deleteImage}>Delete Image</button> }
+        // }
+        console.log('single spot',spot)
+        
+        
+        
+        if(!spot.Owner)return null
+        let smallAuth
+        if(!user){
+            smallAuth = false
+        }else{
 
-    
-    
-    if(!spot.Owner)return null
-    return (
-        <div>
+            smallAuth = (user.id === spot.ownerId) ? true : false
+        }
+        console.log(smallAuth)
+        return (
+            <div>
             <h3>Address: {spot.address}</h3>
             <h2>Owner: {spot.Owner.firstName}  {spot.Owner.lastName}</h2>
             <h4>Average Rating: {spot.avgRating}</h4>
@@ -101,12 +107,12 @@ const SingleSpot = () => {
                                 <img style={{height:'100px', width:'100px'}} key={index} src={img.url} alt="review Image" />
                                 )
                             })}
-                        {review.userId === user.id && <AddReviewImage id={review.id} spotId={spotId}/>}
-                        {review.userId === user.id && <button onClick={()=>deleteReview(review.id)}>Delete Review</button>}
+                        {user && review.userId === user.id && <AddReviewImage id={review.id} spotId={spotId}/>}
+                        {user && review.userId === user.id && <button onClick={()=>deleteReview(review.id)}>Delete Review</button>}
                     </div>
                 )
              })}
-             <CreateReview spotId={spotId} />
+             {user && <CreateReview spotId={spotId} />}
                 
             </div>
         </div>
