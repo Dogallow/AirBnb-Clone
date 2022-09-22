@@ -48,7 +48,7 @@ const SingleSpot = () => {
         dispatch(reviewsActions.clear())
        }
     }, [dispatch])
-    console.log(errorValidation)
+    console.log(errors)
     const deleteSpot = async () =>{
         const message = await dispatch(spotsActions.deleteSingleSpot(spotId))
         alert(message)
@@ -79,7 +79,7 @@ const SingleSpot = () => {
                 spot.SpotImages.map((spotImage, index) => {
                     return (
                         <div key={index}>
-                        <img src={spotImage.url} alt="No Image" />
+                        <img style={{height:'100px', width:'100px'}} src={spotImage.url} alt="No Image" />
                         
                         </div>
                     )

@@ -17,7 +17,7 @@ const CreateReview = ({ spotId }) => {
 
         const obj = {
             review,
-            stars: parseInt(stars)
+            stars: Number(stars)
         }
         
         dispatch(reviewsActions.createSingleReview(spotId, obj)).catch(async (data) =>{
