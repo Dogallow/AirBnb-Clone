@@ -33,7 +33,7 @@ const EditSpot = () => {
         e.preventDefault()
 
         setErrorValidation([])
-        let err = []
+        let validate = []
 
         const editObj = {
             address,
@@ -56,18 +56,23 @@ const EditSpot = () => {
         dispatch(spotsActions.editSingleSpot(spotId, editObj)).catch(async err => {
             const error = await err.json()
             console.log(error)
-            err = ([...error.errors])
+            validate.push(error.message)
+            setErrorValidation(validate)
         })
+        
         if (imgObj.url && preview.toString()) {
-            dispatch(spotsActions.addSingleImage(spotId, imgObj)).catch(async err => {
+             dispatch(spotsActions.addSingleImage(spotId, imgObj)).catch(async err => {
                 const error = await err.json()
                 console.log(error)
-                err = ([...error.errors])
+                validate.push(error.message)
+                setErrorValidation(validate)
             })
         }
-        setErrorValidation(err)
-        // console.log('error Validation', errorValidation)
-        // setGoHome(true)
+        
+       
+            setGoHome(true)
+        
+
 
     }
     console.log(errorValidation)

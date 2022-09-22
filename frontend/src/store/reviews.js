@@ -140,7 +140,7 @@ const reviewReducer = (state = initialState, action) => {
             console.log('GET_USER_REVIEWS REDUCER', newState)
             return newState
         case GET_SPOT_REVIEWS:
-            newState = {...state, spot: {}}
+            newState = {...state, spot: {...state.spot}}
             action.reviews.forEach(review => {
                 newState.spot[review.id] = {
                     User: review.User,
