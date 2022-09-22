@@ -53,3 +53,4 @@ const AddReviewImage = ({ id, spotId }) => {
     )
 }
 export default AddReviewImage
+
