@@ -171,10 +171,10 @@ export const createNewSpot = (formData) => async dispatch => {
             price
         })
     })
-
+    console.log(res)
     if(res.ok){
         const spot = await res.json()
-        dispatch(createSpot(spot))
+        // dispatch(createSpot(spot))
         console.log(spot)
         return spot
     }
@@ -211,8 +211,8 @@ const spotsReducer = (state=initialState, action) => {
             console.log(newState)
             return newState
         case CREATE_SPOT:
-            newState = {...state}
-            newState.allSpots = [...state.allSpots, action.spot]
+            newState = {...state, ...state.allSpots}
+            // newState.allSpots = [...state.allSpots, action.spot]
             return newState
         case ONE_SPOT:
             newState = {...state, singleSpot:{...state.singleSpot}}

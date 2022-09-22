@@ -19,14 +19,14 @@ const NewSpot = () => {
     const history = useHistory()
     const spots = useSelector(state => state.spots.allSpots)
     
-    console.log(spots)
+    // console.log(spots)
     
     if (isSubmitted) {
         setIsSubmitted(false)
         history.push('/')
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
             setErrors([])
         // if (password === confirmPassword) {
@@ -44,20 +44,25 @@ const NewSpot = () => {
             state,
             country,
             lat: parseFloat(lat),
-            lng: parseInt(lng),
+            lng: parseFloat(lng),
             name,
             description,
-            price: parseInt(price)
+            price: parseFloat(price)
         }
-
-        setIsSubmitted(true)
+        console.log(newSpot)
+    
         
-            return dispatch(spotsActions.createNewSpot(newSpot)).catch(async err => {
+        const success = await dispatch(spotsActions.createNewSpot(newSpot)).catch(async err => {
                 const error = await err.json()
+                console.log(error.errors)
                 if (error && error.errors) setErrors(error.errors)
 
             })
-            return setErrors(['password and confirm password must match'])
+            console.log('success', success)
+            
+            if (success){
+                setIsSubmitted(true)
+            }
         }
     
 
