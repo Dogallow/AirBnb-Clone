@@ -29,6 +29,7 @@ const SingleSpot = () => {
     console.log(reviews)
     
     const errors = []
+
     useEffect(()=> {
         dispatch(spotsActions.getOneSpot(spotId)).catch(async data => {
             const error = await data.json()
@@ -48,6 +49,7 @@ const SingleSpot = () => {
         dispatch(reviewsActions.clear())
        }
     }, [dispatch])
+
     console.log(errors)
     const deleteSpot = async () =>{
         const message = await dispatch(spotsActions.deleteSingleSpot(spotId))
@@ -63,11 +65,11 @@ const SingleSpot = () => {
     //    console.log('Finish CRUD for Reviews first')
     //     { smallAuth && <button onClick={deleteImage}>Delete Image</button> }
     // }
-    console.log(spot)
+    console.log('single spot',spot)
 
     
     
-    if(!spot.address)return null
+    if(!spot.Owner)return null
     return (
         <div>
             <h3>Address: {spot.address}</h3>
@@ -87,7 +89,7 @@ const SingleSpot = () => {
             )}
             <div>
             Reviews
-            {reviews.length === 0 && (<h2>There are no reviews for this location</h2>)}
+            {reviews.length === 0 && (null)}
              {reviews.length > 0  && reviews.map((review, index) => {
                 return (
                     <div key={index}>

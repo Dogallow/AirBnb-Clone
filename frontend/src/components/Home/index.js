@@ -46,8 +46,15 @@ const Home = () => {
                             )}
                         <div className="spot-details-container">
                             <NavLink to={`/${spot.id}`}>
-                                <h3>{spot.address}</h3>
-                                <h3>{spot.city}, {spot.state}</h3>
+                                <div className="spot-details-address-rating">
+                                <h4>{spot.city}, {spot.state}</h4>
+                                    <h4><i className="fa-solid fa-star"></i>{spot.avgRating ? spot.avgRating : 'New'}</h4>
+                                </div>
+                                <div className='spot-details'>
+                                <h4 className='spot-details-inner-text'>{parseInt(Math.random() *1000)} miles</h4>
+                                    <h4 className='spot-details-inner-text'>Available</h4>
+                                <h4>${spot.price} night</h4>
+                                </div>
                             </NavLink>
                         </div>
                         

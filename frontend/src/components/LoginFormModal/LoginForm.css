@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&family=Montserrat:wght@100;400&display=swap');
+html{
+    height: 100%;
+}
+
 body{
     height: 100vh;
     font-family: Raleway, sans-serif;

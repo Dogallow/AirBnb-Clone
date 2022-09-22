@@ -6,7 +6,7 @@ import LoginFormModal from "../LoginFormModal"
 import SignUpFormModal from "../SignupFormModal"
 import { useEffect } from "react"
 import * as sessionActions from "../../store/session"
-
+import image from '../../image/logo.png'
 
 const Navigation = ({ isLoaded }) => {
     const userSession = useSelector(state => state.session.user)
@@ -36,11 +36,22 @@ const Navigation = ({ isLoaded }) => {
 
 
     return isLoaded && (
-        <div className="main-container">
+        <div className="outer-nav-container">
+            <div className="navbar-main-container">
+                <div className="navbar-icon-container">
+
+                    <img src={image} alt="spaceship" />
+
+                    <div className="navbar-icon-text">
+                        <h1 >Aerobnb</h1>
+                    </div>
+                </div>
+            
+        <div className="navbar-menu-links">
             <div className="link-container">
                 <ul>
                     <li className="link-item">
-                        <NavLink style={{ textDecoration: "none" }} exact to='/'>Home</NavLink>
+                        <NavLink className={"navbar-menu-links link"} style={{ textDecoration: "none" }} exact to='/'>Home</NavLink>
                     </li>
                     <li className="link-item">
                         <LoginFormModal />
@@ -53,6 +64,8 @@ const Navigation = ({ isLoaded }) => {
                     </li>
 
                 </ul>
+            </div>
+        </div>
             </div>
         </div>
     )
