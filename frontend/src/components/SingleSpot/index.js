@@ -117,7 +117,7 @@ const SingleSpot = () => {
                         </div>
 
                         <div className='details-body-2'>
-                            <img src='https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg' alt='airco'/>
+                            <img style={{height: '26px', width: '123px'}} src='https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg' alt='airco'/>
                             <h4>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</h4>                            
                         </div>
 
