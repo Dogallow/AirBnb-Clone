@@ -24,17 +24,14 @@ const EditSpot = () => {
 
     const history = useHistory()
 
-    if (goHome) {
-        // setGoHome(false)
-        history.push(`/${spotId}`)
-    }
+   
 
     console.log('edit page', Object.keys(spot))
     
     useEffect(() => {
 
         return () => dispatch(spotsActions.clear())
-    },[])
+    },[dispatch])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -75,8 +72,8 @@ const EditSpot = () => {
                 setErrorValidation(validate)
             })
         }
-        
-        if(!!errorValidation.length){
+        console.log(errorValidation.length)
+        if(!!errorValidation.length || errorValidation.length === 0){
 
             history.push(`/${spotId}`)
         }

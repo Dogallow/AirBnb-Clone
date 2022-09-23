@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import CreateReview from '../CreateReview'
 import AddReviewImage from '../AddReviewImage'
 import { useState } from 'react'
-
+import './SingleSpot.css'
 
 const SingleSpot = () => {
     const { spotId } = useParams()
@@ -77,44 +77,110 @@ const SingleSpot = () => {
         }
         console.log(smallAuth)
         return (
-            <div>
-            <h3>Address: {spot.address}</h3>
-            <h2>Owner: {spot.Owner.firstName}  {spot.Owner.lastName}</h2>
-            <h4>Average Rating: {spot.avgRating}</h4>
-            {smallAuth && <button onClick={() => history.push(`/edit/${spot.id}`)}>Edit Spot</button>}
-            {smallAuth && <button onClick={deleteSpot}>Delete Spot</button>}
-            { spot.SpotImages.length > 0 && (
-                spot.SpotImages.map((spotImage, index) => {
-                    return (
-                        <div key={index}>
-                        <img style={{height:'100px', width:'100px'}} src={spotImage.url} alt="No Image" />
-                        
-                        </div>
-                    )
-                })
-            )}
-            <div>
-            Reviews
-            {reviews.length === 0 && (null)}
-             {reviews.length > 0  && reviews.map((review, index) => {
-                return (
-                    <div key={index}>
-                        <h2>{review.User.firstName} {review.User.lastName}</h2>
-                        <h3>{review.review}</h3>
-                        {review.ReviewImages.length > 0 && review.ReviewImages.map((img, index) => {
-                            return (
-                                
-                                <img style={{height:'100px', width:'100px'}} key={index} src={img.url} alt="review Image" />
+            <div className='single-spot-outer-container'>
+                <div className='main-header-container'></div>
+                <div className='main-image-container'>
+                    { spot.SpotImages.length > 0 && (
+                        spot.SpotImages.map((spotImage, index) => {
+                            if(index > 5) return
+                            if(index === 0){
+                                return (
+                                    <div className='left-image-container-main' key={index}>
+                                        <img   src={spotImage.url} alt="No Image" />
+
+                                    </div>
                                 )
-                            })}
-                        {user && review.userId === user.id && <AddReviewImage id={review.id} spotId={spotId}/>}
-                        {user && review.userId === user.id && <button onClick={()=>deleteReview(review.id)}>Delete Review</button>}
+                            }
+                            return (
+                                <div className={`right-image-container-quad index${index}`} key={index}>
+                                    <img src={spotImage.url} alt="No Image" />
+                                
+                                </div>
+                            )
+                        })
+                    )}
+                </div>
+                <div className='main-details-container'>
+                    <div className='left-details-container'>
+                        <div className='details-header'>
+                            <h3>{spot.name} hosted by {spot.Owner.firstName}</h3>
+                            
+                        </div>
+                        <div className='details-body'>
+                            <p>{spot.description}</p>
+
+                            <p>Average Rating:<i className="fa-solid fa-star"></i> {spot.avgRating}</p>
+
+                            <p>Location: {spot.city}, {spot.state} {spot.country}</p>
+
+                            <p>Free Cancellation before Booking Starts</p>
+                        </div>
+
+                        <div className='details-body-2'>
+                            <img src='https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg' alt='airco'/>
+                            <h4>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</h4>                            
+                        </div>
+
+                        <div className='details-body-3'>
+                            <p>{spot.description}</p>
+                        </div>
+                        <h4></h4>
+                        {smallAuth && <button onClick={() => history.push(`/edit/${spot.id}`)}>Edit Spot</button>}
+                        {smallAuth && <button onClick={deleteSpot}>Delete Spot</button>}
                     </div>
-                )
-             })}
-             {user && <CreateReview spotId={spotId} />}
+                    <div className='right-details-container'>
+                        <div className="card-container">
+                            <div className='form'>
+                                <div className='form-details'>
+                                    <h3>${spot.price}night</h3>
+                                    <div className='form-details-right'>
+                                        <p><i className="fa-solid fa-star"></i>{spot.avgRating}</p>
+                                        •
+                                    <p>{spot.numReviews}</p>
+                                    </div>
+                                </div>
+                                <div className='form-body'>
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                    
+                <div className='main-reviews-container'>
+                    <div className='review-title'>
+                        
+                        <h1><i className="fa-solid fa-star"></i>{spot.avgRating} • {spot.numReviews} Reviews</h1>
+                    </div>
+                    {reviews.length === 0 && (null)}
+                    <div className='review-grid-container'>
+                        {reviews.length > 0  && reviews.map((review, index) => {
+                            return (
+                                <div key={index}>
+                                    <div className='review-header'>
+                                        <h2>{review.User.firstName} {review.User.lastName}</h2>
+                                        <p>{review.updatedAt}</p>
+                                    </div>
+                                    <div className='review-body'>
+                                        <h3>{review.review}</h3>
+                                        {review.ReviewImages.length > 0 && review.ReviewImages.map((img, index) => {
+                                            return (
+                                                
+                                                <img style={{height:'100px', width:'100px'}} key={index} src={img.url} alt="review Image" />
+                                                )
+                                            })}
+                                    </div>
+                                    {user && review.userId === user.id && <AddReviewImage id={review.id} spotId={spotId}/>}
+                                    {user && review.userId === user.id && <button onClick={()=>deleteReview(review.id)}>Delete Review</button>}
+                                </div>
+                            )
+                        })}
+                    </div>
+                    {user && <CreateReview spotId={spotId} />}
+                </div>
+                    
                 
-            </div>
         </div>
     )
 }
