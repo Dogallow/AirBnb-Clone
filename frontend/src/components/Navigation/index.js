@@ -1,27 +1,40 @@
 import { useSelector, useDispatch } from "react-redux"
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation, useParams } from "react-router-dom"
 import  ProfileButton  from "./ProfileButton"
 import "./Navigation.css"
 import LoginFormModal from "../LoginFormModal"
 import SignUpFormModal from "../SignupFormModal"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import * as sessionActions from "../../store/session"
 import image from '../../image/logo.png'
+import DefaultProfileButton from "./DefaultProfileButton"
+
 
 const Navigation = ({ isLoaded }) => {
     const userSession = useSelector(state => state.session.user)
     const dispatch = useDispatch()
+    const location = useLocation()
+    const [navBarWidth, setNavbarWidth] =  useState()
+    const [flag, setFlag] = useState(false)
+    
+    
+    
    
     console.log('UserSession',userSession)
     useEffect(()=> {
-
-    },[userSession])
+      
+        if(!(location.pathname === '/')){
+            setNavbarWidth('narrow')
+        } else {
+            setNavbarWidth('')
+        }
+    },[userSession, location])
     
     if (userSession){
         return isLoaded && (
             <>
                 
-                <ProfileButton user={userSession} />
+                <ProfileButton navBarWidth={navBarWidth} user={userSession} />
             </>
         )
     }
@@ -33,11 +46,15 @@ const Navigation = ({ isLoaded }) => {
         }))
     }
 
-
+    const changeFlag= () => {
+        setFlag(!flag)
+    }
+    
+    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   FLAG %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ',flag)
 
     return isLoaded && (
         <div className="outer-nav-container">
-            <div className="navbar-main-container">
+            <div className={`navbar-main-container ${navBarWidth}`}>
                 <div className="navbar-icon-container">
 
                     <img src={image} alt="spaceship" />
@@ -54,16 +71,11 @@ const Navigation = ({ isLoaded }) => {
                         <NavLink className={"navbar-menu-links link"} style={{ textDecoration: "none" }} exact to='/'>Home</NavLink>
                     </li>
                     <li className="link-item">
-                        <LoginFormModal />
-                    </li>
-                    <li className="link-item">
-                        <SignUpFormModal />
-                    </li>
-                    <li className="link-item">
-                        <button onClick={loginDemo}>Demo User</button>
+                                <LoginFormModal flag={flag}  flagFunc={changeFlag}/>
                     </li>
 
                 </ul>
+                        <DefaultProfileButton flag={flag}  flagFunc={changeFlag}/>
             </div>
         </div>
             </div>

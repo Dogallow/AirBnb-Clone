@@ -5,7 +5,7 @@ import './Navigation.css';
 import { NavLink, Redirect, useHistory } from 'react-router-dom'
 import image from '../../image/logo.png'
 
-const ProfileButton = ({ user }) => {
+const ProfileButton = ({ user, navBarWidth }) => {
     const [showMenu, setShowMenu] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory()
@@ -18,6 +18,7 @@ const ProfileButton = ({ user }) => {
  
     console.log('profile button user', user)
     // console.log('current User',currentUser.user)
+    
     
 
     useEffect(() => {
@@ -50,7 +51,7 @@ const ProfileButton = ({ user }) => {
     
     return (
         <div className="outer-nav-container">
-        <div className="navbar-main-container">
+        <div className={`navbar-main-container ${navBarWidth}`}>
             <div className="navbar-icon-container">
                 
                     <img src={image} alt="spaceship"/>

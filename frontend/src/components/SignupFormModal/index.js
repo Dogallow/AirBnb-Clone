@@ -5,12 +5,17 @@ import { Modal } from '../../context/Modal'
 
 const SignUpFormModal = () => {
     const [showModal, setShowModal] = useState(false)
-
+    console.log('signupForm fired')
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Sign Up</button>
+            <button onClick={() =>{
+                console.log('setShowModal to true')
+                return setShowModal(true)}}>Sign Up</button>
             {showModal && (
-                <Modal onClose={()=> setShowModal(false)}>
+                <Modal onClose={()=>{ 
+                    console.log('set show modal to false fired')
+                    setShowModal(false)}}>
+
                     <SignUpForm />
                 </Modal>
         )}

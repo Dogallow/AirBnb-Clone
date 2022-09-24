@@ -29,6 +29,10 @@ const SingleSpot = () => {
     const errors = []
 
     useEffect(()=> {
+
+        let navbarWidth = document.querySelector('.navbar-main-container')
+        console.log(navbarWidth)
+        
         dispatch(spotsActions.getOneSpot(spotId)).catch(async data => {
             const error = await data.json()
             console.log(error.message)
@@ -41,6 +45,8 @@ const SingleSpot = () => {
             errors.push(error)
             
         })
+
+
         
         return () => {
             dispatch(spotsActions.clear())

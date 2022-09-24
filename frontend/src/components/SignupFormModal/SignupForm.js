@@ -43,19 +43,19 @@ const SignUpForm = () => {
 
     return (
         <div className='signup-component-container'>
-
-            <ul>
-                {errors && (errors.map((err, index) => (
-                    <li key={index}>{err}</li>
-                )))}
-            </ul>
-            <div className="signup-form-container">
-                <div className='header-text'>
-                    Sign up
-                </div>
-                <form onSubmit={handleSubmit} >
+        
+        <div className="signup-form-container">
+            <div className='header-text'>
+            Sign up
+            </div>
+             <form onSubmit={handleSubmit} >
                     <div className='welcome-text'>
                         <h3 style={{ textAlign: 'left' }}>Welcome to Airbnb</h3>
+                        <ul>
+                            {errors && (errors.map((err, index) => (
+                                <li key={index}>{err}</li>
+                            )))}
+                        </ul>
                     </div>
                     <div className='input-field-container1'>
                         <label></label>

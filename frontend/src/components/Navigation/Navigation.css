@@ -15,6 +15,10 @@
     justify-content: space-between;
  
 }
+
+.navbar-main-container.narrow{
+    width:45%
+}
 /* ---------- Left Side Nav Bar ----------------------- */
 .navbar-icon-container{
     width: 50%;
@@ -159,8 +163,7 @@
 }
 
 .link-container ul{
-    display: flex;
-    flex-direction: row;
+    
     justify-content: right;
     
 }

@@ -95,8 +95,14 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: 'First Name is required'
         },
-        isAlpha: true,
-        len: [2,30]
+        isAlpha: {
+          args: true,
+          msg: "Only AlphaNumeric Characters allowed"
+        },
+        len: {
+          args: [2,30],
+          msg: "FirstName must be between 2 and 30 characters long"
+        }
       }
     },
     lastName: {
@@ -107,8 +113,14 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: 'Last Name is required'
         },
-        isAlpha: true,
-        len: [2,30]
+        isAlpha: {
+          args: true,
+          msg: "Only AlphaNumeric Characters allowed"
+        },
+        len: {
+          args: [2, 30],
+          msg: "FirstName must be between 2 and 30 characters long"
+        }
       }
     },
     username: {

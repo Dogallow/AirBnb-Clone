@@ -26,17 +26,18 @@ const EditSpot = () => {
 
    
 
-    console.log('edit page', Object.keys(spot))
+    console.log('edit page', spot)
     
     useEffect(() => {
-
+        
         return () => dispatch(spotsActions.clear())
     },[dispatch])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log('################################################ HandleSubmit Begins Running############################################################')
 
-        setErrorValidation([])
+        await setErrorValidation([])
         let validate = []
 
         const editObj = {
@@ -56,30 +57,40 @@ const EditSpot = () => {
             url: imgUrl,
             preview: Boolean(preview)
         }
+        console.log(editObj)
 
      let fetch =  await dispatch(spotsActions.editSingleSpot(spotId, editObj)).catch(async err => {
             const error = await err.json()
-            console.log(error)
+            console.log('********************* Edit Single Spot dispatch this is error *********************************',error)
             validate.push(error.message)
-            setErrorValidation(validate)
+         console.log('********************* Edit Single Spot dispatch this is validate *********************************', validate)
+         
+            console.log('=================After setting errorValidate state ================================',errorValidation)
+        
         })
+        console.log('$$$$$$$$$$$$$$$$$$$$$$$ Fetch variable $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$',fetch)
+        
         let fetch2
         if (imgObj.url && preview.toString()) {
         fetch2 = await  dispatch(spotsActions.addSingleImage(spotId, imgObj)).catch(async err => {
                 const error = await err.json()
                 console.log(error)
                 validate.push(error.message)
-                setErrorValidation(validate)
+                
             })
         }
-        console.log(errorValidation.length)
-        if(!!errorValidation.length || errorValidation.length === 0){
-
+        console.log(validate.length)
+        console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Before if Block error Validation@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@',errorValidation)
+        if(validate.length === 0){
+            console.log('----------------------------------------Inside if Block when there are no errors, but printing out error validations-------------------------',errorValidation)
             history.push(`/${spotId}`)
         }
+        console.log('################################################ HandleSubmit Ends Execution ############################################################')
 
+        setErrorValidation(validate)
     }
     console.log(errorValidation)
+    
     return (
         <form onSubmit={handleSubmit}>
             <div>
