@@ -28,7 +28,8 @@ const CreateReview = ({ spotId }) => {
             setErrors(validate)
         }).then(() => dispatch(reviewsActions.getSpotReviews(spotId)))
 
-
+        setReview('')
+        setStars('')
     }
 
     return (
