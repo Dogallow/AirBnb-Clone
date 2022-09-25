@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import * as sessionActions from "../../store/session"
 import { useDispatch } from "react-redux"
 
-const DefaultProfileButton = ( {flag, flagFunc} ) => {
+const DefaultProfileButton = ( { flagFunc, changeLoginModal} ) => {
     const [showMenu, setShowMenu] = useState(false)
     const dispatch = useDispatch()
     
@@ -64,14 +64,14 @@ console.log('default profile button fired')
                                 {showMenu && (
                                     <ul className='profile-button-list'>
                                         
-                                        <li className='profile-button-list-item link-item' onClick={flagFunc}>
+                            <li className='profile-button-list-item special' onClick= {changeLoginModal}>
                                            Login Form 
                                         </li>
-                                        <li className='profile-button-list-item link-item' onClick={testClick}>
-                                            <SignUpFormModal />
+                            <li className='profile-button-list-item special' onClick={flagFunc}>
+                                            Signup Form
                                         </li>
-                                        <li className='profile-button-list-item link-item'>
-                                            <button onClick={loginDemo}>Demo User</button>
+                            <li className='profile-button-list-item special' onClick={loginDemo}>
+                                            Demo User
                                         </li>
                                     </ul>
                                 )}

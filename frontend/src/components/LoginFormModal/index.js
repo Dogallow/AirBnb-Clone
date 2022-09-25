@@ -7,13 +7,13 @@ import { Modal } from '../../context/Modal'
 
 
 
-const LoginFormModal =({ flag, flagFunc }) => {
+const LoginFormModal =({ loginModal, changeLoginModal }) => {
     const [showModal, setShowModal] = useState(false)
     return(
         <>
-        <button onClick={() => setShowModal(flag)}>Log In</button>
-        {flag && (
-            <Modal onClose={()=>flagFunc()}>
+        
+        {loginModal && (
+            <Modal onClose={()=>changeLoginModal()}>
                 <LoginForm />
             </Modal>
         )}

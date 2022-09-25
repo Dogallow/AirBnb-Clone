@@ -34,7 +34,7 @@
 }
 
 .navbar-icon-text{
-    font-family: "Mitr";
+    font-family: Arial, sans-serif;
 }
 .navbar-icon-text h1{
     font-size: 20px;
@@ -136,7 +136,7 @@
     list-style-type: none;
     padding: 0 5px;
     cursor: pointer;
-    font-family:  sans-serif;
+    font-family: Arial, sans-serif;
     display: flex;
     align-items: center;
 }
@@ -148,7 +148,7 @@
     border: none;
     font-weight: 500;
     font-size: 16px;
-    font-family: "Raleway", sans-serif;
+font-family: Arial, sans-serif;
     cursor: pointer;
 }
 

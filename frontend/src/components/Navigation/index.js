@@ -16,6 +16,7 @@ const Navigation = ({ isLoaded }) => {
     const location = useLocation()
     const [navBarWidth, setNavbarWidth] =  useState()
     const [flag, setFlag] = useState(false)
+    const [loginModal, setLoginModal] = useState(false)
     
     
     
@@ -49,6 +50,10 @@ const Navigation = ({ isLoaded }) => {
     const changeFlag= () => {
         setFlag(!flag)
     }
+
+    const changeLoginModal = () => {
+        setLoginModal(!loginModal)
+    }
     
     console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   FLAG %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ',flag)
 
@@ -71,11 +76,14 @@ const Navigation = ({ isLoaded }) => {
                         <NavLink className={"navbar-menu-links link"} style={{ textDecoration: "none" }} exact to='/'>Home</NavLink>
                     </li>
                     <li className="link-item">
-                                <LoginFormModal flag={flag}  flagFunc={changeFlag}/>
+                                <LoginFormModal loginModal={loginModal} changeLoginModal={changeLoginModal} />
+                    </li>
+                    <li className="link-item">
+                                <SignUpFormModal flag={flag} flagFunc={changeFlag} />
                     </li>
 
                 </ul>
-                        <DefaultProfileButton flag={flag}  flagFunc={changeFlag}/>
+                        <DefaultProfileButton changeLoginModal={changeLoginModal}  flagFunc={changeFlag}/>
             </div>
         </div>
             </div>
