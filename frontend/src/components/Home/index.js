@@ -51,7 +51,7 @@ const Home = () => {
                                     <h4><i className="fa-solid fa-star"></i>{spot.avgRating ? spot.avgRating : 'New'}</h4>
                                 </div>
                                 <div className='spot-details'>
-                                <h4 className='spot-details-inner-text'>{parseInt(Math.random() *1000)} miles</h4>
+                                <h4 className='spot-details-inner-text'>{parseInt(Math.random() *1000)} light years</h4>
                                     <h4 className='spot-details-inner-text'>Available</h4>
                                 <h4>${spot.price} night</h4>
                                 </div>
