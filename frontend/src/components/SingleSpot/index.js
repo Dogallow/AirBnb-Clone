@@ -239,7 +239,7 @@ const SingleSpot = () => {
                                     </div>
                                     <div className='review-body'>
                                         <h3>{review.review}</h3>
-                                        <div className="review-image">
+                                        {review.ReviewImages.length > 0 && <div className="review-image">
                                         
                                             {review.ReviewImages.length > 0 && review.ReviewImages.map((img, index) => {
                                                 if(index > 2) return
@@ -248,7 +248,7 @@ const SingleSpot = () => {
                                                     <img style={{height:'100%', width:'100px'}} key={index} src={img.url} alt="review Image" />
                                                     )
                                             })}
-                                        </div>
+                                        </div>}
                                     </div>
                                     <div className="add-image-delete-review-button">
                                         {user && review.userId === user.id && <AddReviewImage id={review.id} spotId={spotId}/>}

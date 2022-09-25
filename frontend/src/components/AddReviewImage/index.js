@@ -24,7 +24,8 @@ const AddReviewImage = ({ id, spotId }) => {
             setValidateErrors(validate)
             console.log(validateErrors)
         }).then(() => dispatch(reviewsActions.getSpotReviews(spotId)))
-        
+        setShowInput(!showInput)
+        setUrl('')
         // dispatch(reviewsActions.addSingleReviewImage(obj)).catch(async data => {
         //     const errors = await data.json()
         //     validate.push(errors.message)
