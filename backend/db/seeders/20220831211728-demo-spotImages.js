@@ -14,17 +14,32 @@ module.exports = {
    await queryInterface.bulkInsert('SpotImages', [
     {
       spotId: 1,
-       url: 'https://images.unsplash.com/photo-1534371020656-6b85825f2b1a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dHJhbnN5bHZhbmlhfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+       url: 'https://apod.nasa.gov/apod/image/2209/FairyPillar_Hubble_960.jpg',
       preview:true
     },
     {
       spotId: 2,
-      url: 'https://images.unsplash.com/photo-1536125434175-6c5657605fb0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGlnaHRob3VzZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+      url: 'https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/gsfc_20171208_archive_e000226_orig.jpg',
       preview:true
     },
     {
       spotId: 1,
-      url: 'https://images.unsplash.com/photo-1605513512381-74b4f54380e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8dHJhbnN5bHZhbmlhfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+      url: 'https://apod.nasa.gov/apod/image/1402/eagle_kp09_960.jpg',
+      preview:true
+    },
+    {
+      spotId: 3,
+      url: 'https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/hubble_ngc1961_wfc3_1flat_cont_final.jpg',
+      preview:true
+    },
+    {
+      spotId: 4,
+      url: 'https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/stsci-01ga76rm0c11w977jrhgj5j26x.png',
+      preview:true
+    },
+    {
+      spotId: 5,
+      url: 'https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/gsfc_20171208_archive_e000084_orig.jpg',
       preview:true
     },
    ])
