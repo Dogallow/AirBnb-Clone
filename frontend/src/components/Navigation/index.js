@@ -1,27 +1,41 @@
 import { useSelector, useDispatch } from "react-redux"
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation, useParams } from "react-router-dom"
 import  ProfileButton  from "./ProfileButton"
 import "./Navigation.css"
 import LoginFormModal from "../LoginFormModal"
 import SignUpFormModal from "../SignupFormModal"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import * as sessionActions from "../../store/session"
 import image from '../../image/logo.png'
+import DefaultProfileButton from "./DefaultProfileButton"
+
 
 const Navigation = ({ isLoaded }) => {
     const userSession = useSelector(state => state.session.user)
     const dispatch = useDispatch()
+    const location = useLocation()
+    const [navBarWidth, setNavbarWidth] =  useState()
+    const [flag, setFlag] = useState(false)
+    const [loginModal, setLoginModal] = useState(false)
+    
+    
+    
    
     console.log('UserSession',userSession)
     useEffect(()=> {
-
-    },[userSession])
+      
+        if(!(location.pathname === '/')){
+            setNavbarWidth('narrow')
+        } else {
+            setNavbarWidth('')
+        }
+    },[userSession, location])
     
     if (userSession){
         return isLoaded && (
             <>
                 
-                <ProfileButton user={userSession} />
+                <ProfileButton navBarWidth={navBarWidth} user={userSession} />
             </>
         )
     }
@@ -33,19 +47,28 @@ const Navigation = ({ isLoaded }) => {
         }))
     }
 
+    const changeFlag= () => {
+        setFlag(!flag)
+    }
 
+    const changeLoginModal = () => {
+        setLoginModal(!loginModal)
+    }
+    
+    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   FLAG %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ',flag)
 
     return isLoaded && (
         <div className="outer-nav-container">
-            <div className="navbar-main-container">
+            <div className={`navbar-main-container ${navBarWidth}`}>
+            <NavLink className="navbar-icon-container" style={{ textDecoration: "none" }} exact to="/">
                 <div className="navbar-icon-container">
-
-                    <img src={image} alt="spaceship" />
-
-                    <div className="navbar-icon-text">
+                        <img src={image} alt="spaceship" />
+                        
+                        <div className="navbar-icon-text">
                         <h1 >Aerobnb</h1>
-                    </div>
-                </div>
+                        </div>
+                        </div>
+            </NavLink>
             
         <div className="navbar-menu-links">
             <div className="link-container">
@@ -54,16 +77,14 @@ const Navigation = ({ isLoaded }) => {
                         <NavLink className={"navbar-menu-links link"} style={{ textDecoration: "none" }} exact to='/'>Home</NavLink>
                     </li>
                     <li className="link-item">
-                        <LoginFormModal />
+                                <LoginFormModal loginModal={loginModal} changeLoginModal={changeLoginModal} />
                     </li>
                     <li className="link-item">
-                        <SignUpFormModal />
-                    </li>
-                    <li className="link-item">
-                        <button onClick={loginDemo}>Demo User</button>
+                                <SignUpFormModal flag={flag} flagFunc={changeFlag} />
                     </li>
 
                 </ul>
+                        <DefaultProfileButton changeLoginModal={changeLoginModal}  flagFunc={changeFlag}/>
             </div>
         </div>
             </div>

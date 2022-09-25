@@ -1,0 +1,128 @@
+.edit-spot-component-container{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-form-container{
+    height: auto;
+        width: 566px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px 0;
+        border-radius: 12px;
+}
+
+.edit-form-header-text{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+form input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 56px;
+    border: 1px solid black;
+
+}
+
+.edit-spot-beginning-input-field{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.edit-spot-beginning-input-field input{
+    border: 1px solid black;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+    font-size: 16px;
+}
+
+.edit-spot-middle-input-field{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.edit-spot-middle-input-field input{
+    font-size: 16px;
+}
+
+.edit-spot-ending-input-field{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 32px;
+}
+.edit-spot-ending-input-field input{
+    border: 1px solid black;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    font-size: 16px;
+}
+
+
+.add-image-component-container{
+    height: 100%;
+        width: 100%;
+        display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+}
+
+.add-image-beginning-input-field{
+    height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}
+
+.add-image-beginning-input-field input{
+    border: 1px solid black;
+        border-radius: 12px;
+        font-size: 16px;
+}
+
+.add-image-ending-select-field{
+    padding-top: 10px;
+    display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 32px;
+}
+
+.add-image-ending-select-field select{
+    border: 1px solid black;
+        border-radius: 12px;
+        font-size: 16px;
+        width: 100%;
+        height: 100%;
+        justify-content: left;
+}
+
+.edit-spot-button button{
+    background-color: #E61E4D;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: 800;
+    width: 100%;
+    height: 20px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+option{
+}

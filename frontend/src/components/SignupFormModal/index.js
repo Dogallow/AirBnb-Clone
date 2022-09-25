@@ -3,14 +3,15 @@ import { useState } from 'react'
 import { Modal } from '../../context/Modal'
 
 
-const SignUpFormModal = () => {
+const SignUpFormModal = ({flag, flagFunc}) => {
     const [showModal, setShowModal] = useState(false)
-
+    console.log('signupForm fired')
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Sign Up</button>
-            {showModal && (
-                <Modal onClose={()=> setShowModal(false)}>
+            
+            {flag && (
+                <Modal  onClose={()=>flagFunc()}>
+
                     <SignUpForm />
                 </Modal>
         )}

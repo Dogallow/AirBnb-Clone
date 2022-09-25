@@ -1,5 +1,5 @@
 .signup-component-container{
-    height: 100%;
+        height: auto;
         width: 100%;
         display: flex;
         align-items: center;
@@ -7,7 +7,7 @@
 }
 
 .signup-form-container{
-        height: 650px;
+        height: auto;
         width: 566px;
         display: flex;
         align-items: center;

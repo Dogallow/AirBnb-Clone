@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import * as reviewsActions from '../../store/reviews'
+import './CreateReview.css'
 
 const CreateReview = ({ spotId }) => {
     const [showForm, setShowForm] = useState(false)
@@ -31,8 +32,8 @@ const CreateReview = ({ spotId }) => {
     }
 
     return (
-        <div style={{ paddingBottom: '50px' }}>
-            <button onClick={() => setShowForm(!showForm)}>Create Review</button>
+        <div className="create-review-form-container" style={{ paddingBottom: '25px' }}>
+            
             {errors.length > 0 && (
                 errors.map((err, index) => (
                     <ul key={index}>
@@ -40,13 +41,18 @@ const CreateReview = ({ spotId }) => {
                     </ul>
                 ))
             )}
-            {showForm && (
-                <form onSubmit={handleSubmit}>
-                    <textarea style={{ height: '50px', width: '200px' }} placeholder='review' onChange={(e) => setReview(e.target.value)} value={review} />
-                    <input style={{ height: '50px', width: '60px' }} placeholder='stars' type='number' onChange={(e) => setStars(e.target.value)} value={stars} />
-                    <button style={{ height: '30px', width: '200px' }} type='submit'>Submit</button>
+            <div>
+                Leave a Review Here:
+            </div>
+            {
+                <form className='create-review-form' onSubmit={handleSubmit}>
+                    <div className='form-textarea-input'>
+                        <textarea placeholder="Please leave a review" className="create-review-textarea"   onChange={(e) => setReview(e.target.value)} value={review} />
+                        <input  placeholder='stars' type='number' onChange={(e) => setStars(e.target.value)} value={stars} />
+                    </div>
+                    <button className='create-review-button'  type='submit'>Submit</button>
                 </form>
-            )}
+            }
         </div>
     )
 }

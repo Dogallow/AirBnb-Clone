@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import * as reviewsActions from '../../store/reviews'
 import { useDispatch } from 'react-redux'
+import './AddReviewImage.css'
 
 const AddReviewImage = ({ id, spotId }) => {
     const [showInput, setShowInput] = useState(false)
@@ -42,7 +43,7 @@ const AddReviewImage = ({ id, spotId }) => {
                 })}
                 </ul>
             )}
-            <button onClick={() =>setShowInput(!showInput)}>Add Image</button>
+            <button className='add-review-image-button' onClick={() =>setShowInput(!showInput)}>Add Image</button>
             {showInput && (
                 <form onSubmit={handleSubmit}>
                     <input placeholder='url' onChange={(e) => setUrl(e.target.value)} value={url}/>
@@ -53,4 +54,3 @@ const AddReviewImage = ({ id, spotId }) => {
     )
 }
 export default AddReviewImage
-

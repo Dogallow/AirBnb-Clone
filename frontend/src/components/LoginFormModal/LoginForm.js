@@ -41,11 +41,7 @@ const LoginForm = () => {
     }
     return (
         <div className='login-component-container'>
-            <ul>
-                {errorValidation && errorValidation.map((error, index) => (
-                    <li key={index}>{error}</li>
-                ))}
-            </ul>
+            
             <div className="form-container">
                 <div className='header-text'>
                     Log In
@@ -54,6 +50,11 @@ const LoginForm = () => {
 
                     <div className='welcome-text'>
                         <h3 style={{ textAlign: 'left' }}>Welcome to Airbnb</h3>
+                        <ul style={{ listStyleType: 'none', color: 'red' }}>
+                            {errorValidation && errorValidation.map((error, index) => (
+                                <li key={index}>{error}</li>
+                            ))}
+                        </ul>
                     </div>
                     <div className='input-field-container1'>
                         <label htmlFor="credential"></label>
