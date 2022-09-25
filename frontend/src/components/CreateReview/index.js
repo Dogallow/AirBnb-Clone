@@ -34,13 +34,13 @@ const CreateReview = ({ spotId }) => {
     return (
         <div className="create-review-form-container" style={{ paddingBottom: '25px' }}>
             
+        <ul style={{ listStyleType: 'none', color: 'red' }}>
             {errors.length > 0 && (
                 errors.map((err, index) => (
-                    <ul key={index}>
-                        <li>{err}</li>
-                    </ul>
-                ))
-            )}
+                        <li key={index}>{err}</li>
+                        ))
+                        )}
+            </ul>
             <div>
                 Leave a Review Here:
             </div>

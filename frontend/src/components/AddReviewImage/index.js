@@ -35,7 +35,7 @@ const AddReviewImage = ({ id, spotId }) => {
     }
     
     return(
-        <div>
+        <div className='add-review-image-container'>
             {validateErrors.length > 0 && (
                 <ul>
                 {validateErrors.map((err, index) => {
@@ -45,8 +45,8 @@ const AddReviewImage = ({ id, spotId }) => {
             )}
             <button className='add-review-image-button' onClick={() =>setShowInput(!showInput)}>Add Image</button>
             {showInput && (
-                <form onSubmit={handleSubmit}>
-                    <input placeholder='url' onChange={(e) => setUrl(e.target.value)} value={url}/>
+                <form className='add-review-image-form' onSubmit={handleSubmit}>
+                    <input className='add-review-image-input' placeholder='url' onChange={(e) => setUrl(e.target.value)} value={url}/>
                     <button type='submit'>Submit</button>
                 </form>
             )}
