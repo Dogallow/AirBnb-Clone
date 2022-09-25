@@ -10,7 +10,7 @@ const SignUpFormModal = ({flag, flagFunc}) => {
         <>
             
             {flag && (
-                <Modal onClose={()=>flagFunc()}>
+                <Modal  onClose={()=>flagFunc()}>
 
                     <SignUpForm />
                 </Modal>

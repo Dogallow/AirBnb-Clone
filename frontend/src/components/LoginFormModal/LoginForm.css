@@ -1,17 +1,5 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&family=Montserrat:wght@100;400&display=swap');
-html{
-    height: 100%;
-}
-
-body{
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    font-weight: 700;
-}
-#root{
-    height:100%;
-}
 
 .header-text{
     border-bottom: 1px solid rgba(0,0,0,0.5);
@@ -23,7 +11,7 @@ body{
 }
 
 .login-component-container{
-    height:100%;
+    height:auto;
     width: 100%;
     display: flex;
     align-items: center;
@@ -32,7 +20,7 @@ body{
 }
 .form-container{
     
-    height: 380px;
+    height: auto;
     width: 566px;
     display: flex;
     align-items: center;

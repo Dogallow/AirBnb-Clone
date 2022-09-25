@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import * as spotsActions from '../../store/spots'
+import './EditSpot.css'
 
 const EditSpot = () => {
     const { spotId } = useParams()
@@ -92,62 +93,69 @@ const EditSpot = () => {
     console.log(errorValidation)
     
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                {errorValidation.length > 0 && (
-                    <ul>
-                        {errorValidation.map((error, index) => {
-                            return (
-                                <li key={index}>{error}</li>
-                            )
-                        })}
-                    </ul>
-                )}
-            </div>
-            <div >
-                <input style={{ width: '150px', height: '20px' }} onChange={(e) => setAddress(e.target.value)} value={address} />
-            </div>
-            <div >
-                <input style={{ width: '150px', height: '20px' }} onChange={(e) => setCity(e.target.value)} value={city} />
-            </div>
-            <div >
-                <input style={{ width: '150px', height: '20px' }} onChange={(e) => setState(e.target.value)} value={state} />
-            </div>
-            <div >
-                <input style={{ width: '150px', height: '20px' }} onChange={(e) => setCountry(e.target.value)} value={country} />
-            </div>
-            <div >
-                <input style={{ width: '150px', height: '20px' }} onChange={(e) => setLat(e.target.value)} value={lat} />
-            </div>
-            <div >
-                <input style={{ width: '150px', height: '20px' }} onChange={(e) => setLng(e.target.value)} value={lng} />
-            </div>
-            <div >
-                <input style={{ width: '150px', height: '20px' }} onChange={(e) => setName(e.target.value)} value={name} />
-            </div>
-            <div >
-                <input style={{ width: '150px', height: '20px' }} onChange={(e) => setDescription(e.target.value)} value={description} />
-            </div>
-            <div >
-                <input style={{ width: '150px', height: '20px' }} onChange={(e) => setPrice(e.target.value)} value={price} />
-            </div>
-            <div >
-                <input style={{ width: '150px', height: '20px' }} onChange={(e) => setName(e.target.value)} value={name} />
-            </div>
-            <div>
-                Add Image Here:
-                <div >
-                    <input placeholder='Image Url' style={{ width: '150px', height: '20px' }} onChange={(e) => setImgUrl(e.target.value)} value={imgUrl} />
+        <div className='edit-spot-component-container'>
+            <div className='edit-form-container'>
+                <div className='edit-form-header-text'>
+                    <h1>Edit Form</h1>
                 </div>
-                <div >
-                    <select style={{ width: '150px', height: '20px' }} onChange={(e) => setPreview(e.target.value)} value={preview}>
-                        <option value='false'>False</option>
-                        <option value='true'>True</option>
-                    </select>
+                <form onSubmit={handleSubmit}>
+                    <div >
+                        {errorValidation.length > 0 && (
+                            <ul style={{listStyleType: 'none', color:'red'}}>
+                                {errorValidation.map((error, index) => {
+                                    return (
+                                        <li key={index}>{error}</li>
+                                    )
+                                })}
+                            </ul>
+                        )}
+                    </div>
+                    <div className='edit-spot-beginning-input-field'>
+                        <input placeholder='Address' onChange={(e) => setAddress(e.target.value)} value={address} />
+                    </div>
+                    <div className='edit-spot-middle-input-field'>
+                        <input placeholder='City' onChange={(e) => setCity(e.target.value)} value={city} />
+                    </div>
+                    <div className='edit-spot-middle-input-field'>
+                        <input placeholder='State' onChange={(e) => setState(e.target.value)} value={state} />
+                    </div>
+                    <div className='edit-spot-middle-input-field'>
+                        <input placeholder='Country' onChange={(e) => setCountry(e.target.value)} value={country} />
+                    </div>
+                    <div className='edit-spot-middle-input-field'>
+                        <input placeholder='Latitude' onChange={(e) => setLat(e.target.value)} value={lat} />
+                    </div>
+                    <div  className='edit-spot-middle-input-field'>
+                        <input placeholder='Longitude' onChange={(e) => setLng(e.target.value)} value={lng} />
+                    </div>
+                    <div  className='edit-spot-middle-input-field'>
+                        <input placeholder='Name' onChange={(e) => setName(e.target.value)} value={name} />
+                    </div>
+                    <div className='edit-spot-middle-input-field'>
+                        <input placeholder='Description' onChange={(e) => setDescription(e.target.value)} value={description} />
+                    </div>
+                    <div className='edit-spot-middle-input-field'>
+                        <input placeholder='Price' onChange={(e) => setPrice(e.target.value)} value={price} />
+                    </div>
+                <div className='add-image-component-container'>
+                    Add Image Here:
+                    <div className='add-image-beginning-input-field'>
+                        <input placeholder='Image Url' onChange={(e) => setImgUrl(e.target.value)} value={imgUrl} />
+                    </div>
+                    <div className='add-image-ending-select-field'>
+                        <label>Preview:</label>
+                        <select onChange={(e) => setPreview(e.target.value)} value={preview}>
+                            <option value='false'>False</option>
+                            <option value='true'>True</option>
+                        </select>
+                    </div>
                 </div>
+                <div className='edit-spot-button'>
+                    <button type='submit'  >Submit</button>
+                </div>
+                </form>
             </div>
-            <button type='submit' style={{ width: '150px' }} >Submit</button>
-        </form>
+        </div>
     )
 }
 

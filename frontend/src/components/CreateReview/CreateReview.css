@@ -23,7 +23,7 @@ display: flex;
     width: 90%;
 }
 .form-textarea-input  input{
-    width: 12%;
+    width: 10%;
     border: none;
 }
 
@@ -44,6 +44,11 @@ display: flex;
 
 .create-review-textarea{
     border: none;
-    
+    resize: none;
     width: 50%;
+    height: 60px;
+}
+
+.add-image-delete-review-button{
+
 }

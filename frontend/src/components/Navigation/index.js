@@ -60,14 +60,15 @@ const Navigation = ({ isLoaded }) => {
     return isLoaded && (
         <div className="outer-nav-container">
             <div className={`navbar-main-container ${navBarWidth}`}>
+            <NavLink className="navbar-icon-container" style={{ textDecoration: "none" }} exact to="/">
                 <div className="navbar-icon-container">
-
-                    <img src={image} alt="spaceship" />
-
-                    <div className="navbar-icon-text">
+                        <img src={image} alt="spaceship" />
+                        
+                        <div className="navbar-icon-text">
                         <h1 >Aerobnb</h1>
-                    </div>
-                </div>
+                        </div>
+                        </div>
+            </NavLink>
             
         <div className="navbar-menu-links">
             <div className="link-container">

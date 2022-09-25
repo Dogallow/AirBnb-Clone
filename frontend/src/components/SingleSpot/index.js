@@ -28,7 +28,7 @@ const SingleSpot = () => {
     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!! selector spot !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',spot)
    
 
-    console.log(reviews)
+    console.log('@@@@@@@@@@@@@@@@ Reviews @@@@@@@@@@@@@@@@@@@@@@@@@',reviews)
     
     const errors = []
 
@@ -96,7 +96,12 @@ const SingleSpot = () => {
             variant = 'left-main'
             variant2 = 'right-main'
             console.log('################## Spot selector ####################', spot, spot.SpotImages.length)
-        } else {
+        }
+        // else if (spot.SpotImages.length === 3){
+        //     variant = 'left-75-percent'
+        //     variant2 = 'right-half'
+        // } 
+        else {
             variant = 'left-main'
             variant2 = 'right-quad'
             console.log('################## Spot selector ####################', spot, spot.SpotImages.length)
@@ -105,8 +110,25 @@ const SingleSpot = () => {
         console.log(smallAuth)
         return (
             <div className='single-spot-outer-container'>
-                <div className='main-header-container'></div>
+                <div className='main-header-container'>
+                    <div style={{marginBottom: '4px'}} className="header-details">
+                        {spot.name}
+                    </div>
+                    <div className="header-sub-details">
+                        <p><i className="fa-solid fa-star"></i> {spot.avgRating}</p>
+                        <span> ·</span>
+                        <p style={{textDecoration: 'underline'}}>{reviews.length} reviews</p>
+                        <span>·</span>
+                        <p style={{ textDecoration: 'underline' }}>{spot.city}, {spot.state}, {spot.country}</p>
+                    </div>
+                </div>
                 <div className='main-image-container'>
+                    {spot.SpotImages.length === 0 && (
+                        <div className='full' >
+                            <img src='https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80' alt="No Image Provided" />
+
+                        </div>
+                    )}
                     {spot.SpotImages.length > 0  && (
                         
                         spot.SpotImages.map((spotImage, index) => {
@@ -119,6 +141,9 @@ const SingleSpot = () => {
                                     </div>
                                 )
                             }
+
+                            
+                            
                             return (
                                 <div className={`${variant2} index${index}`} key={index}>
                                     <img src={spotImage.url} alt="No Image" />
@@ -135,30 +160,35 @@ const SingleSpot = () => {
                             <span></span>
                         </div>
                         <div className='details-body'>
-                            <p>{spot.description}</p>
+                            <p className="details-body-sub" style={{paddingTop: '32px'}}>{spot.description}</p>
 
-                            <p>Average Rating:<i className="fa-solid fa-star"></i> {spot.avgRating}</p>
+                            <p className="details-body-sub" >Average Rating:<i className="fa-solid fa-star"></i> {spot.avgRating}</p>
 
-                            <p>Location: {spot.city}, {spot.state} {spot.country}</p>
+                            <p className="details-body-sub" >Location: {spot.city}, {spot.state} {spot.country}</p>
 
-                            <p>Free Cancellation before Booking Starts</p>
+                            <p style={{ paddingBottom: '32px' }}>Free Cancellation before Booking Starts</p>
                         </div>
 
                         <div className='details-body-2'>
-                            <img style={{height: '26px', width: '123px'}} src='https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg' alt='airco'/>
-                            <h4>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</h4>                            
+                            <div style={{padding:'32px 0px'}}> 
+                                <img style={{height: '26px', width: '123px'}} src='https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg' alt='airco'/>
+                                <h4>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</h4>                            
+                            </div>
                         </div>
 
                         <div className='details-body-3'>
+                            <div style={{ padding: '32px 0px 48px' }}> 
                             <p>{spot.description}</p>
                             <div className="body-button">
-                                {smallAuth && <button onClick={() => history.push(`/edit/${spot.id}`)}>Edit Spot</button>}
-                                {smallAuth && <button onClick={deleteSpot}>Delete Spot</button>}
+                                    {smallAuth && <button onClick={() => history.push(`/edit/${spot.id}`)}>Edit Spot</button>}
+                                    {smallAuth && <button onClick={deleteSpot}>Delete Spot</button>}
+                            </div>
                             </div>
                         </div>
                         <h4></h4>
                     </div>
                     <div className='right-details-container'>
+                        <div style={{padding: '32px 0 24px'}}> </div>
                         <div className="card-container">
                             <div className='card-form'>
                                 <div className='form-details'>
@@ -202,7 +232,7 @@ const SingleSpot = () => {
                     <div className='review-grid-container'>
                         {reviews.length > 0  && reviews.map((review, index) => {
                             return (
-                                <div key={index}>
+                                <div className="review-main-body" key={index}>
                                     <div className='review-header'>
                                         <h2>{review.User.firstName} {review.User.lastName}</h2>
                                         <p>{new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(review.updatedAt))}, {new Date(review.updatedAt).getFullYear()} </p>
@@ -220,9 +250,9 @@ const SingleSpot = () => {
                                             })}
                                         </div>
                                     </div>
-                                    <div>
+                                    <div className="add-image-delete-review-button">
                                         {user && review.userId === user.id && <AddReviewImage id={review.id} spotId={spotId}/>}
-                                        {user && review.userId === user.id && <button onClick={()=>deleteReview(review.id)}>Delete Review</button>}
+                                        {user && review.userId === user.id && <button className="delete-review-button" onClick={()=>deleteReview(review.id)}>Delete Review</button>}
                                     </div>
                                 </div>
                             )

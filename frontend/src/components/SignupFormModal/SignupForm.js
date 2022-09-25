@@ -51,7 +51,7 @@ const SignUpForm = () => {
              <form onSubmit={handleSubmit} >
                     <div className='welcome-text'>
                         <h3 style={{ textAlign: 'left' }}>Welcome to Airbnb</h3>
-                        <ul>
+                        <ul style={{ listStyleType: 'none', color: 'red' }}>
                             {errors && (errors.map((err, index) => (
                                 <li key={index}>{err}</li>
                             )))}

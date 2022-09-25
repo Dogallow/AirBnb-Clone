@@ -52,6 +52,7 @@ const ProfileButton = ({ user, navBarWidth }) => {
     return (
         <div className="outer-nav-container">
         <div className={`navbar-main-container ${navBarWidth}`}>
+                <NavLink style={{textDecoration: 'none'}} exact to="/" className="navbar-icon-container">
             <div className="navbar-icon-container">
                 
                     <img src={image} alt="spaceship"/>
@@ -60,6 +61,7 @@ const ProfileButton = ({ user, navBarWidth }) => {
                     <h1 >Aerobnb</h1>
                 </div>
             </div>
+                </NavLink>
 
             <div className='navbar-menu-container'>
                 <span>

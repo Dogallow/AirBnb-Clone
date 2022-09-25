@@ -50,7 +50,7 @@ const LoginForm = () => {
 
                     <div className='welcome-text'>
                         <h3 style={{ textAlign: 'left' }}>Welcome to Airbnb</h3>
-                        <ul>
+                        <ul style={{ listStyleType: 'none', color: 'red' }}>
                             {errorValidation && errorValidation.map((error, index) => (
                                 <li key={index}>{error}</li>
                             ))}

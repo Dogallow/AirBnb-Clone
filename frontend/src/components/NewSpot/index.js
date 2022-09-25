@@ -69,19 +69,19 @@ const NewSpot = () => {
     return (
         <div className='signup-component-container'>
 
-            <ul>
-                {errors && (errors.map((err, index) => (
-                    <li key={index}>{err}</li>
-                )))}
-            </ul>
-            <div className="signup-form-container">
-                <div className='header-text'>
-                    Sign up
-                </div>
-                <form onSubmit={handleSubmit} >
-                    <div className='welcome-text'>
-                        <h3 style={{ textAlign: 'left' }}>Welcome to Airbnb</h3>
-                    </div>
+        <ul style={{ listStyleType: 'none', color: 'red' }}>
+            {errors && (errors.map((err, index) => (
+                <li key={index}>{err}</li>
+            )))}
+        </ul>
+        <div className="signup-form-container">
+        <div className='header-text'>
+        Create Spot
+        </div>
+        <form onSubmit={handleSubmit} >
+        <div className='welcome-text'>
+        <h3 style={{ textAlign: 'left' }}>Welcome to Airbnb</h3>
+        </div>
                     <div className='input-field-container1'>
                         <label></label>
                         <input placeholder='Address' onChange={(e) => setAddress(e.target.value)} value={address} />
