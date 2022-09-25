@@ -20,7 +20,7 @@ module.exports = {
     lat: 40.05342,
     lng: -111.224233,
     name:"The Fairy of Eagle Nebula",
-    description: "Featured here is one of several striking dust pillars of the Eagle Nebula that might be described as a gigantic alien fairy.",
+    description: "The Eagle Nebula that might be described as a gigantic alien fairy.",
     price: 444
    },
   {
@@ -56,7 +56,7 @@ module.exports = {
    lat: 59.7635,
    lng: 300.444,
     name: "30 Doradus",
-    description: "Nicknamed the Tarantula Nebula for the appearance of its dusty filaments in previous telescope images, the nebula has long been a favorite for astronomers studying star formation. In addition to young stars, Webb reveals distant background galaxies, as well as the detailed structure and composition of the nebula’s gas and dust.",
+    description: "Nicknamed the Tarantula Nebula",
    price: 100000
   },
   {
@@ -70,7 +70,7 @@ module.exports = {
     name: "TYC 3203-450-1",
     description: "The star is much closer than the much more distant galaxy.",
    price: 100000
-  },
+  }
   ])
   },
 
