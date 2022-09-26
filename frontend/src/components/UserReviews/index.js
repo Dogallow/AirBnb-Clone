@@ -6,7 +6,7 @@ const UserReviews = () => {
     const dispatch = useDispatch()
     let reviews = useSelector(state => state.reviews.user)
     reviews = Object.values(reviews)
-    console.log(reviews)
+    
     useEffect(() => {
         dispatch(reviewsActions.getUserReviews())
     },[dispatch])

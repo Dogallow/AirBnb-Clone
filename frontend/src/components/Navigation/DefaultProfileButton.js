@@ -22,7 +22,7 @@ const DefaultProfileButton = ( { flagFunc, changeLoginModal} ) => {
         if (!showMenu) return
 
         const closeMenu = () => {
-            console.log('closeMenu function fired')
+            
               setShowMenu(false)
         }
         
@@ -45,7 +45,7 @@ const DefaultProfileButton = ( { flagFunc, changeLoginModal} ) => {
   }
   
     
-console.log('default profile button fired')
+
 
     return (
        

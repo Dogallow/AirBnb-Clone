@@ -49,16 +49,16 @@ const NewSpot = () => {
             description,
             price: parseFloat(price)
         }
-        console.log(newSpot)
+        
     
         
         const success = await dispatch(spotsActions.createNewSpot(newSpot)).catch(async err => {
                 const error = await err.json()
-                console.log(error.errors)
+                
                 if (error && error.errors) setErrors(error.errors)
 
             })
-            console.log('success', success)
+            
             
             if (success){
                 setIsSubmitted(true)

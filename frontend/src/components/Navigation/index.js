@@ -21,7 +21,7 @@ const Navigation = ({ isLoaded }) => {
     
     
    
-    console.log('UserSession',userSession)
+   
     useEffect(()=> {
       
         if(!(location.pathname === '/')){
@@ -55,7 +55,7 @@ const Navigation = ({ isLoaded }) => {
         setLoginModal(!loginModal)
     }
     
-    console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   FLAG %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ',flag)
+   
 
     return isLoaded && (
         <div className="outer-nav-container">

@@ -23,7 +23,7 @@ const Home = () => {
     
     
     if(!spotValues) return (<p>Loading...</p>)
-    console.log('Spot Values ./Home/index.js',spotValues)
+    
     return (
         <div className="images-main-container">
             
