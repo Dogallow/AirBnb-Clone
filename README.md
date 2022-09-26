@@ -30,6 +30,13 @@ You will be able to tesst the features without sign up by clicking on the "Demo 
 
 ## Single Spot Details
 The majority of the functionality can be found inside a specific spot.
+Here is where you can:
+- view a spot by its specified Id.
+- view reviews by its specified Id.
+- edit a spot by its specified Id.
+- delete a spot by its specified Id.
+- edit a review by its specified review Id.
+- delete a review by its specified review Id.
 ![GIF single spot details](https://user-images.githubusercontent.com/95613961/192171391-64a3959b-bacc-4d72-9f20-f62d20077237.gif)
 
 ## Reviews
