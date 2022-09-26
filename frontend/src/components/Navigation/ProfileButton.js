@@ -16,7 +16,7 @@ const ProfileButton = ({ user, navBarWidth }) => {
     }
     let currentUser = user.user || user
  
-    console.log('profile button user', user)
+    
     // console.log('current User',currentUser.user)
     
     

@@ -22,7 +22,7 @@ const AddReviewImage = ({ id, spotId }) => {
             const errors = await data.json()
             validate.push(errors.message)
             setValidateErrors(validate)
-            console.log(validateErrors)
+            
         }).then(() => dispatch(reviewsActions.getSpotReviews(spotId)))
         setShowInput(!showInput)
         setUrl('')

@@ -57,7 +57,7 @@ export const deleteSingleReview = (reviewId) => async dispatch => {
 
     if (res.ok) {
         const message = await res.json()
-        console.log("deleteSingleReview", message)
+        
         dispatch(deleteReview(reviewId))
     }
 }
@@ -72,7 +72,7 @@ export const addSingleReviewImage = ({reviewId, url}) => async dispatch => {
 
         if(res.ok){
             const result = await res.json()
-            console.log("addSingleReviewImage",result)
+            
         }
 }
 
@@ -88,7 +88,7 @@ export const createSingleReview = (id, dataObj) => async dispatch => {
 
     if(res.ok) {
         const review = await res.json()
-        console.log("createSingleReview", review)
+        
         // dispatch(createReview(review))
     }
 }
@@ -98,7 +98,7 @@ export const getUserReviews = () => async dispatch => {
 
     if (res.ok) {
         const {Reviews} = await res.json()
-        console.log(Reviews)
+        
         dispatch(userReviews(Reviews))
         
     }
@@ -109,7 +109,7 @@ export const getSpotReviews = (id) => async dispatch => {
 
     if (res.ok) {
         const { Reviews } = await res.json()
-        console.log('reviews based on spot', Reviews)
+        
         dispatch(spotReviews(Reviews))
     }
 }
@@ -137,7 +137,7 @@ const reviewReducer = (state = initialState, action) => {
                     ...review
                 }
             })
-            console.log('GET_USER_REVIEWS REDUCER', newState)
+            
             return newState
         case GET_SPOT_REVIEWS:
             newState = {...state, spot: {...state.spot}}

@@ -24,7 +24,7 @@ const CreateReview = ({ spotId }) => {
         dispatch(reviewsActions.createSingleReview(spotId, obj)).catch(async (data) => {
             const error = await data.json()
             validate.push(error.message)
-            console.log(validate)
+            
             setErrors(validate)
         }).then(() => dispatch(reviewsActions.getSpotReviews(spotId)))
 

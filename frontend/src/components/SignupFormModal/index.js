@@ -5,7 +5,7 @@ import { Modal } from '../../context/Modal'
 
 const SignUpFormModal = ({flag, flagFunc}) => {
     const [showModal, setShowModal] = useState(false)
-    console.log('signupForm fired')
+    
     return (
         <>
             

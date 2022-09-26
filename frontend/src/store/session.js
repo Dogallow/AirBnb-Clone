@@ -32,7 +32,7 @@ export const getLoggedIn = (user) => async dispatch => {
 
     if(res.ok){
         const currentUser = await res.json()
-        console.log('current User',currentUser)
+        
         dispatch(useLogin(currentUser))
         return currentUser
     }
@@ -47,11 +47,11 @@ export const restoreUser = () => async dispatch => {
     if(res.ok){
         const user = await res.json();
         if(user === null){
-            console.log('user',user)
+            
             dispatch(useLogin(user))
 
         }else{
-            console.log('user', user)
+            
             dispatch(useLogin(user.user))
         }
         
@@ -99,7 +99,7 @@ const sessionReducer = (state = initialState, action) => {
         case LOGIN:
             newState = {...state, user: {...state.user}}
             
-            console.log(newState, action.user)
+            
             newState.user = action.user
             return newState
         case LOGOUT:
