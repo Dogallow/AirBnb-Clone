@@ -95,6 +95,7 @@ Able to add Images to your own reviews.
 - [ ] Improve my responsive design for adding images
 - [ ] Integrate NASA API for a more educational experience
 
-## Getting Started
+## Contact
 
 [Link to the Live Site](https://airbnb-clone-dg.herokuapp.com/)
+[My Github](https://github.com/)
