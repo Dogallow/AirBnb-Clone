@@ -29,4 +29,10 @@ You will be able to tesst the features without sign up by clicking on the "Demo 
 ![Splash Page](https://user-images.githubusercontent.com/95613961/192171360-a389d742-ca8c-4b49-9504-175d7a38e1b1.jpg)
 
 ## Single Spot Details
+The majority of the functionality can be found inside a specific spot.
 ![GIF single spot details](https://user-images.githubusercontent.com/95613961/192171391-64a3959b-bacc-4d72-9f20-f62d20077237.gif)
+
+## Reviews
+Reviews can be read, edited, and deleted at the bottom of the specific spot details page.
+![Example of Reading, creating, and deleting Review](https://user-images.githubusercontent.com/95613961/192171674-2d6600a6-ffda-4847-83c2-3615caf7e367.gif)
+
