@@ -41,6 +41,17 @@ Here is where you can:
 
 ![GIF single spot details](https://user-images.githubusercontent.com/95613961/192171391-64a3959b-bacc-4d72-9f20-f62d20077237.gif)
 
+## Spots
+Spots are able to be viewed by all visitors of the site.
+Users have the bonus of being able to upload, edit, and delete their own spot.
+![Example of Creating, reading, updating, and deleteing Spot](https://user-images.githubusercontent.com/95613961/192196964-a76c201b-00d7-4e7a-bc28-9ccee6bcb5da.gif)
+6f6e48c6bd0d1b08d8f8009f)
+
+
+
+
+
+
 ## Reviews
 Reviews can be read, edited, and deleted at the bottom of the specific spot details page.
 ![Example of Reading, creating, and deleting Review](https://user-images.githubusercontent.com/95613961/192171674-2d6600a6-ffda-4847-83c2-3615caf7e367.gif)
