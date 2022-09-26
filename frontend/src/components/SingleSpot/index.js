@@ -164,7 +164,7 @@ const SingleSpot = () => {
 
                             <p className="details-body-sub" >Average Rating:<i className="fa-solid fa-star"></i> {spot.avgRating}</p>
 
-                            <p className="details-body-sub" >Location: {spot.city}, {spot.state} {spot.country}</p>
+                            <p className="details-body-sub" >Location: {spot.address} {spot.city}, {spot.state} {spot.country}</p>
 
                             <p style={{ paddingBottom: '32px' }}>Free Cancellation before Booking Starts</p>
                         </div>
