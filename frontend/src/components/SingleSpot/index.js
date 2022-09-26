@@ -60,7 +60,9 @@ const SingleSpot = () => {
     }
     
     const deleteReview = async (id) => {
-        dispatch(reviewsActions.deleteSingleReview(id))
+        dispatch(reviewsActions.deleteSingleReview(id)).then(() => {
+            dispatch(spotsActions.getOneSpot(spotId))
+        })
     }
     
     // const deleteImage = () => {
@@ -105,7 +107,7 @@ const SingleSpot = () => {
             
         }
 
-       
+       console.log(reviews)
         return (
             <div className='single-spot-outer-container'>
                 <div className='main-header-container'>
@@ -237,6 +239,7 @@ const SingleSpot = () => {
                                     </div>
                                     <div className='review-body'>
                                         <h3>{review.review}</h3>
+                                        
                                         {review.ReviewImages.length > 0 && <div className="review-image">
                                         
                                             {review.ReviewImages.length > 0 && review.ReviewImages.map((img, index) => {
