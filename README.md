@@ -22,7 +22,27 @@ This project is built with:
 - React
 - Redux
 
-# Features Directions:
+## Getting Started
+
+To get a local copy up and running follow these simple example steps.
+
+
+### Installation
+
+
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/Dogallow/AirBnb-Clone.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Run on https://localhost:3000
+
+
+# Usage:
 
 ## Home Page Demo User:
 You will be able to test the features without sign up by clicking on the "Demo User" button in the dropdown menu on the upper right corner of the page.
@@ -47,6 +67,9 @@ Users have the bonus of being able to upload, edit, and delete their own spot.
 ![Example of Creating, reading, updating, and deleteing Spot](https://user-images.githubusercontent.com/95613961/192196964-a76c201b-00d7-4e7a-bc28-9ccee6bcb5da.gif)
 6f6e48c6bd0d1b08d8f8009f)
 
+Responsive Design for adding Images
+![Example of responsive design](https://user-images.githubusercontent.com/95613961/192200544-58dde950-2706-47da-915f-62f31eb4a0d1.gif)
+
 
 
 
@@ -56,5 +79,22 @@ Users have the bonus of being able to upload, edit, and delete their own spot.
 Reviews can be read, edited, and deleted at the bottom of the specific spot details page.
 ![Example of Reading, creating, and deleting Review](https://user-images.githubusercontent.com/95613961/192171674-2d6600a6-ffda-4847-83c2-3615caf7e367.gif)
 
-[Link to the Live Site](https://airbnb-clone-dg.herokuapp.com/)
 
+
+Able to add Images to your own reviews.
+![Example of adding Images to reviews](https://user-images.githubusercontent.com/95613961/192200721-ef61b878-af3e-4412-9296-a8b78bd32894.gif)
+
+
+## Roadmap
+
+- [x] Create CRUD features for Spots
+- [x] CRD features for reviews
+- [ ] Create Update feature for reviews
+- [ ] Finish the styling for the mySpots and myReviews routes
+- [ ] Align my data set more accurately with space metrics and terminology
+- [ ] Improve my responsive design for adding images
+- [ ] Integrate NASA API for a more educational experience
+
+## Getting Started
+
+[Link to the Live Site](https://airbnb-clone-dg.herokuapp.com/)
