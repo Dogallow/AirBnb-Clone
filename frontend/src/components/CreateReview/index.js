@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import * as reviewsActions from '../../store/reviews'
+import * as spotsActions from '../../store/spots'
 import './CreateReview.css'
 
 const CreateReview = ({ spotId }) => {
@@ -24,9 +25,10 @@ const CreateReview = ({ spotId }) => {
         dispatch(reviewsActions.createSingleReview(spotId, obj)).catch(async (data) => {
             const error = await data.json()
             validate.push(error.message)
-            
+        
             setErrors(validate)
-        }).then(() => dispatch(reviewsActions.getSpotReviews(spotId)))
+        }).then(() => dispatch(reviewsActions.getSpotReviews(spotId))).then(() => dispatch(spotsActions.getOneSpot(spotId)))
+        
 
         setReview('')
         setStars('')
