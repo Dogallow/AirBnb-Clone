@@ -98,4 +98,5 @@ Able to add Images to your own reviews.
 ## Contact
 
 [Link to the Live Site](https://airbnb-clone-dg.herokuapp.com/)
-[My Github](https://github.com/)
+
+[My Github](https://github.com/dogallow)
