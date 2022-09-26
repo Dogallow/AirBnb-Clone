@@ -37,6 +37,8 @@ Here is where you can:
 - delete a spot by its specified Id.
 - edit a review by its specified review Id.
 - delete a review by its specified review Id.
+
+
 ![GIF single spot details](https://user-images.githubusercontent.com/95613961/192171391-64a3959b-bacc-4d72-9f20-f62d20077237.gif)
 
 ## Reviews
