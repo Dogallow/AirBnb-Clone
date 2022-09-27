@@ -46,11 +46,11 @@ const EditSpot = () => {
             city,
             state,
             country,
-            lat,
-            lng,
+            lat: parseFloat(lat),
+            lng: parseFloat(lng),
             name,
             description,
-            price
+            price: parseFloat(price)
         }
 
         const imgObj = {
