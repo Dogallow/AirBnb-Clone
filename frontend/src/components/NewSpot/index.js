@@ -18,9 +18,12 @@ const NewSpot = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const spots = useSelector(state => state.spots.allSpots)
-    
+
+    const [imgUrl, setImgUrl] = useState('')
+    const [preview, setPreview] = useState(true)
+
     // console.log(spots)
-    
+
     if (isSubmitted) {
         setIsSubmitted(false)
         history.push('/')
@@ -28,7 +31,9 @@ const NewSpot = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-            setErrors([])
+        setErrors([])
+
+        let validate = []
         // if (password === confirmPassword) {
         //     const newUser = {
         //         firstName,
@@ -49,39 +54,54 @@ const NewSpot = () => {
             description,
             price: parseFloat(price)
         }
-        
-    
-        
+        console.log(newSpot)
+
+        let imgObj = {}
+
         const success = await dispatch(spotsActions.createNewSpot(newSpot)).catch(async err => {
+            const error = await err.json()
+            console.log(error.errors)
+            if (error && error.errors) setErrors(error.errors)
+
+        })
+        console.log('success', success)
+
+        imgObj = {
+
+            url: imgUrl,
+            preview: Boolean(preview)
+        }
+        if (imgObj.url) {
+            await dispatch(spotsActions.addSingleImage(success.id, imgObj)).catch(async err => {
                 const error = await err.json()
-                
-                if (error && error.errors) setErrors(error.errors)
+                console.log('', error)
+                validate = [...error.errors]
 
             })
-            
-            
-            if (success){
-                setIsSubmitted(true)
-            }
         }
-    
+
+        if (success && validate.length === 0) {
+            setIsSubmitted(true)
+        }
+    }
+
 
     return (
         <div className='signup-component-container'>
 
-        <ul style={{ listStyleType: 'none', color: 'red' }}>
-            {errors && (errors.map((err, index) => (
-                <li key={index}>{err}</li>
-            )))}
-        </ul>
-        <div className="signup-form-container">
-        <div className='header-text'>
-        Create Spot
-        </div>
-        <form onSubmit={handleSubmit} >
-        <div className='welcome-text'>
-        <h3 style={{ textAlign: 'left' }}>Welcome to Airbnb</h3>
-        </div>
+            <ul style={{ listStyleType: 'none', color: 'red' }}>
+                {errors && (errors.map((err, index) => (
+                    <li key={index}>{err}</li>
+                )))}
+            </ul>
+            <div className="signup-form-container">
+                <div className='header-text'>
+                    Create Spot
+                </div>
+                <form onSubmit={handleSubmit} >
+                    <div className='welcome-text'>
+                        <h3 style={{ textAlign: 'left' }}>Welcome to Airbnb</h3>
+                    </div>
                     <div className='input-field-container1'>
                         <label></label>
                         <input placeholder='Address' onChange={(e) => setAddress(e.target.value)} value={address} />
@@ -111,11 +131,20 @@ const NewSpot = () => {
                         <input placeholder='Name' onChange={(e) => setName(e.target.value)} value={name} />
                     </div>
                     <div className='additional-input-field'>
-                        <input placeholder='Enter a description' onChange={(e) => setDescription(e.target.value)} value={description}/>
+                        <input placeholder='Enter a description' onChange={(e) => setDescription(e.target.value)} value={description} />
                     </div>
                     <div className='input-field-container2'>
-                        <input type={'number'} placeholder='Price' onChange={(e) => setPrice(e.target.value)} value={price}/>
+                        <input type={'number'} placeholder='Price' onChange={(e) => setPrice(e.target.value)} value={price} />
                     </div>
+
+                    <div className='add-image-component-container'>
+                        Add Image Here:
+                        <div className='add-image-beginning-input-field'>
+                            <input placeholder='Image Url' onChange={(e) => setImgUrl(e.target.value)} value={imgUrl} />
+                        </div>
+
+                    </div>
+
                     <button type='submit'>Continue</button>
                 </form>
             </div>
