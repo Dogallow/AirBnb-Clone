@@ -1,39 +1,41 @@
-.single-spot-outer-container{
+.single-spot-outer-container {
     /* background-color: red; */
-    width:45%;
+    width: 45%;
     display: flex;
     flex-direction: column;
     height: 100dvh;
 }
 
 /* --------------------- Header Container ----------------------------------------- */
-.main-header-container{
-padding-bottom: 24px;
-padding-top: 24px;
+.main-header-container {
+    padding-bottom: 24px;
+    padding-top: 24px;
 }
 
-.header-details{
+.header-details {
     font-size: 26px;
 }
 
-.header-sub-details{
+.header-sub-details {
     display: flex;
     align-items: center;
     font-size: 14px;
     font-weight: 500;
 }
 
-.header-sub-details span{
+.header-sub-details span {
     padding: 0px 5px;
 }
-.header-sub-details span, p{
+
+.header-sub-details span,
+p {
     margin: 0;
 }
 
 
 
 /* ----------------Display Images Container --------------------------------- */
-.main-image-container{
+.main-image-container {
     width: 100%;
     /* background-color: blue; */
     display: flex;
@@ -42,15 +44,16 @@ padding-top: 24px;
     max-height: 560px;
     border-radius: 24px;
     position: relative;
-    
+
 }
 
-.left-image-container-main{
+.left-image-container-main {
     width: 50%;
     background-color: green;
     height: 100%;
 }
-.left-image-container-main img{
+
+.left-image-container-main img {
     width: 100%;
     height: 100%;
     object-fit: fill;
@@ -58,9 +61,9 @@ padding-top: 24px;
     border-top-left-radius: 24px
 }
 
-.right-image-container-quad{
-    width:50%;
-   
+.right-image-container-quad {
+    width: 50%;
+
 }
 
 /* .right-image-container-quad img{
@@ -89,25 +92,27 @@ padding-top: 24px;
     top:0;
     left:0;
 } */
-/* -------------------------- Image Variant 1 --------------------------------- */
+/* -------------------------- Image Variant 1 ================= 1 Image --------------------------------- */
 
-.full{
+.full {
     width: 100%;
     height: 100%;
 }
-.full img{
+
+.full img {
     object-fit: cover;
     width: 100%;
     height: 100%;
     border-radius: 24px;
 }
 
-/* -----------------Image Variant 2 --------------------------------- */
-.left-main{
+/* -----------------Image Variant 2 ================= 2 Images --------------------------------- */
+.left-main {
     width: 50%;
     /* background-color: green; */
     height: 100%;
 }
+
 .left-main img {
     width: 100%;
     height: 100%;
@@ -116,7 +121,7 @@ padding-top: 24px;
     border-top-left-radius: 24px
 }
 
-.right-main{
+.right-main {
     width: 50%;
     height: 100%;
 }
@@ -130,40 +135,108 @@ padding-top: 24px;
 }
 
 
-/* ------------------ Image Variant 3 -------------------------------------- */
-.left-75-percent{
+/* ------------------ Image Variant 3 ================= 3 Images -------------------------------------- */
+.right-top-half {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    padding-left: 8px;
+    padding-bottom: 8px;
+    width: 50%;
+    height: 50%;
+    box-sizing: border-box;
+}
+
+.right-top-half img {
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: 24px;
+}
+
+.right-bottom-half {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding-left: 8px;
+    padding-bottom: 8px;
+    width: 50%;
+    height: 50%;
+    box-sizing: border-box;
+}
+
+.right-bottom-half img {
+    width: 100%;
+    height: 100%;
+    border-bottom-right-radius: 24px;
+
+}
+
+.left-75-percent {
     width: 75%;
     height: 100%;
 }
 
-.left-75-percent img{
+.left-75-percent img {
     width: 100%;
     height: 100%;
     object-fit: fill;
 }
 
-.right-half{
+.right-half {
     width: 25%;
     height: 50%
 }
+
 /* .right-half img{
     width: 100%;
     height: 100%;
 } */
 
-/* ------------------ Image Variant 4 ------------------------------------ */
-.left-main{}
-.right-quad{
+/* ---------------------- Image Variant 4 ================== 4 Images ---------------------- */
+.bottom-left-split {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding-left: 8px;
     width: 25%;
     height: 50%;
     box-sizing: border-box;
 }
 
-.right-quad img{
-    
+.bottom-left-split img {
+    width: 100%;
+    height: 100%;
 }
 
-.index1{
+.bottom-right-split {
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    padding-left: 8px;
+    width: 25%;
+    height: 50%;
+    box-sizing: border-box;
+}
+
+.bottom-right-split img {
+    width: 100%;
+    height: 100%;
+    border-bottom-right-radius: 24px;
+}
+
+
+/* ------------------ Image Variant 5 ------------------------------------ */
+.left-main {}
+
+.right-quad {
+    width: 25%;
+    height: 50%;
+    box-sizing: border-box;
+}
+
+.right-quad img {}
+
+.index1 {
     position: absolute;
     top: 0%;
     left: 50%;
@@ -172,7 +245,7 @@ padding-top: 24px;
 }
 
 .index1 img {
-    
+
     width: 100%;
     height: 100%;
 }
@@ -183,14 +256,16 @@ padding-top: 24px;
     right: 0%;
     padding-left: 8px;
     padding-bottom: 8px;
-    
+
 }
+
 .index2 img {
     border-top-right-radius: 24px;
     width: 100%;
     height: 100%;
-    
+
 }
+
 .index3 {
     position: absolute;
     top: 50%;
@@ -198,31 +273,32 @@ padding-top: 24px;
     padding-left: 8px;
 }
 
-.index3 img{
+.index3 img {
     width: 100%;
     height: 100%;
-    
-    
+
+
 }
-.index4{
+
+.index4 {
     position: absolute;
-    bottom:0%;
-    right:0%;
+    bottom: 0%;
+    right: 0%;
     padding-left: 8px;
 }
 
-.index4 img{
+.index4 img {
     border-bottom-right-radius: 24px;
     width: 100%;
     height: 100%;
-    
+
 }
 
 
 /* Can use the .index class to control the absolute positioning */
 
 /* ------------------------     Main Details Container           ----------------------------------------------- */
-.main-details-container{
+.main-details-container {
     display: flex;
     height: 100%;
     position: relative;
@@ -232,76 +308,78 @@ padding-top: 24px;
 
 /* -------------------- Left Side Container ----------------------------------------- */
 
-.left-details-container{
+.left-details-container {
     width: 60%;
     height: 100%;
     /* background-color: orange; */
 }
 
-.details-header{
+.details-header {
     border-bottom: 1px solid #DDDDDD;
     padding: 48px 0px 24px;
 }
 
-.details-header h2{
-    margin: 0px ;
+.details-header h2 {
+    margin: 0px;
     font-size: 22px;
 }
 
-.details-body{
+.details-body {
     border-bottom: 1px solid #DDDDDD;
     font-weight: 500;
 }
-.details-body-sub{
+
+.details-body-sub {
     margin-bottom: 24px;
 }
-.details-body-2{
+
+.details-body-2 {
     border-bottom: 1px solid #DDDDDD;
-    
+
 }
 
-.details-body-2 h4{
+.details-body-2 h4 {
     font-weight: 500;
 }
 
 
-.details-body-3{
+.details-body-3 {
     font-weight: 500;
 }
 
-.body-button{
+.body-button {
     display: flex;
     padding: 32px 0px;
 }
 
-.details-body-3 button{
+.details-body-3 button {
     background-color: #E61E4D;
-        border: none;
-        border-radius: 5px;
-        color: white;
-        font-weight: 800;
-        width: 100%;
-        height: 20px;
-        padding: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: 800;
+    width: 100%;
+    height: 20px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: 5px;
 }
 
 /* --------------------------------------------------------- Card Container ------------------------- */
 
-.right-details-container{
-    display:flex;
-    
+.right-details-container {
+    display: flex;
+
     justify-content: center;
     width: 40%;
     position: relative;
     padding-bottom: 20px;
 }
 
-.card-container{
+.card-container {
     box-sizing: border-box;
     margin-top: 48px;
     width: 80%;
@@ -317,23 +395,23 @@ padding-top: 24px;
     top: 60px;
 }
 
-.form{
-width:90%;
-height: 90%;
+.form {
+    width: 90%;
+    height: 90%;
 }
 
-.form-details{
+.form-details {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.form-details span{
+.form-details span {
     font-size: 16px;
     font-weight: 300;
 }
 
-.form-details-right{
+.form-details-right {
     display: flex;
     align-items: center;
 }
@@ -346,84 +424,90 @@ height: 90%;
     width: 90%;
 }
 
-.form-body p{
+.form-body p {
     margin: 5px 0px 5px;
 }
 
-.price-per-night{
+.price-per-night {
     display: flex;
     justify-content: space-between;
     font-weight: 300;
 }
-.cleaning-fee{
+
+.cleaning-fee {
     display: flex;
     justify-content: space-between;
     font-weight: 300;
 }
-.service-fee{
+
+.service-fee {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #DDDDDD;
     font-weight: 300;
 }
+
 .total-before-taxes {
     display: flex;
     justify-content: space-between;
 }
 
 /* --------------------    Reviews Conteiner      ---------------------------- */
-.main-reviews-container{
+.main-reviews-container {
     width: 100%;
     font-family: Arial, sans-serif;
 }
 
 
 
-.review-title{
+.review-title {
     font-size: 22px;
     margin-bottom: 32px;
     display: flex;
     align-items: center;
 }
 
-.review-title h1{
+.review-title h1 {
     font-size: 16px;
 }
 
-.review-grid-container{
+.review-grid-container {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-auto-rows:auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: auto;
     width: 100%;
-    
+
 }
 
-.review-header h2{
+.review-header h2 {
     font-size: 16px;
     font-family: Arial, sans-serif;
-    
+
 }
-.review-header p{
+
+.review-header p {
     font-size: 14px;
     font-family: Arial, sans-serif;
     font-weight: 100;
-    
+
 }
 
 .review-body::-webkit-scrollbar {
     display: none;
 }
-.review-body{
+
+.review-body {
     overflow-y: scroll;
     scrollbar-width: none;
 }
-    .review-body h3{
-        font-size: 16px;
-        font-weight: 500;
-        margin: 0;
-    }
 
-.review-image{
+.review-body h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.review-image {
     height: 100px;
     width: 100%;
 }
