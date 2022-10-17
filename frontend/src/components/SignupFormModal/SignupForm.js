@@ -4,7 +4,7 @@ import * as sessionActions from '../../store/session'
 import { useHistory } from 'react-router-dom'
 import './SignupForm.css'
 
-const SignUpForm = () => {
+const SignUpForm = ({ signupSetter }) => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
@@ -31,7 +31,7 @@ const SignUpForm = () => {
                 username,
                 password
             }
-
+            signupSetter(false)
             return dispatch(sessionActions.newUser(newUser)).catch(async err => {
                 const error = await err.json()
                 if (error && error.errors) setErrors(error.errors)

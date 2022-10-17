@@ -1,17 +1,20 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Modal } from '../../context/Modal'
+
 import * as reviewsActions from '../../store/reviews'
 import * as spotsActions from '../../store/spots'
+
 import './CreateReview.css'
 
-const CreateReview = ({ spotId }) => {
+const CreateReview = ({ spotId, setReviewModal }) => {
     const [showForm, setShowForm] = useState(false)
     const [review, setReview] = useState('')
     const [stars, setStars] = useState('')
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
 
-    const handleSubmit = (e) => {
+    const handleSubmit =async (e) => {
         e.preventDefault()
 
         setErrors([])
@@ -21,23 +24,27 @@ const CreateReview = ({ spotId }) => {
             review,
             stars: Number(stars)
         }
-
-        dispatch(reviewsActions.createSingleReview(spotId, obj)).catch(async (data) => {
+        await dispatch(reviewsActions.createSingleReview(spotId, obj)).catch(async (data) => {
             const error = await data.json()
             validate.push(error.message)
-        
+            
             setErrors(validate)
         }).then(() => dispatch(reviewsActions.getSpotReviews(spotId))).then(() => dispatch(spotsActions.getOneSpot(spotId)))
         
+        console.log('validate array((((((((((())))))))))))))', validate)
+        if(validate.length === 0){
+            setReviewModal(false)
 
-        setReview('')
-        setStars('')
+            setReview('')
+            setStars('')
+        }
+        
     }
 
     return (
         <div className="create-review-form-container" style={{ paddingBottom: '25px' }}>
             
-        <ul style={{ listStyleType: 'none', color: 'red' }}>
+        <ul style={{ listStyleType: 'none', color: 'red',width: '80%' }}>
             {errors.length > 0 && (
                 errors.map((err, index) => (
                         <li key={index}>{err}</li>
@@ -60,4 +67,21 @@ const CreateReview = ({ spotId }) => {
     )
 }
 
-export default CreateReview
+
+
+export const CreateReviewModal = ({spotId, reviewModal, setReviewModal }) => {
+    const [showModal, setShowModal] = useState(false)
+    
+    return (
+        <>
+        {reviewModal && (
+            <Modal onClose={()=>setReviewModal(false)}>
+            <CreateReview  spotId={spotId} setReviewModal={setReviewModal}/>
+            </Modal>
+            )}
+        </> 
+            )
+}
+
+export default CreateReviewModal
+        

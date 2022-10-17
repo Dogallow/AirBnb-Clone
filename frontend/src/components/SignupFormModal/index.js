@@ -3,16 +3,16 @@ import { useState } from 'react'
 import { Modal } from '../../context/Modal'
 
 
-const SignUpFormModal = ({flag, flagFunc}) => {
+const SignUpFormModal = ({signupSetter, signupModal, changeSignupModal}) => {
     const [showModal, setShowModal] = useState(false)
-    
+    console.log('!!!!!!!!! signupModal boolean !!!!!!!!!!', signupModal)
     return (
         <>
             
-            {flag && (
-                <Modal  onClose={()=>flagFunc()}>
+            {signupModal && (
+                <Modal onClose={()=>changeSignupModal()}>
 
-                    <SignUpForm />
+                    <SignUpForm signupSetter={signupSetter}/>
                 </Modal>
         )}
         </>

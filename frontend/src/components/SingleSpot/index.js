@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as spotsActions from '../../store/spots'
 import * as reviewsActions from '../../store/reviews'
 import { useEffect } from 'react'
-import CreateReview from '../CreateReview'
+import {CreateReviewModal} from '../CreateReview'
 import AddReviewImage from '../AddReviewImage'
 import { useState } from 'react'
 import './SingleSpot.css'
@@ -18,6 +18,7 @@ const SingleSpot = () => {
     const [errorValidation, setErrorValidation] = useState([])
     const [img1, setImg1] = useState('')
     const [img2, setImg2] = useState('')
+    const [reviewModal, setReviewModal] = useState(false)
 
 
 
@@ -352,7 +353,8 @@ const SingleSpot = () => {
                 </div>
                 <div className="create-review">
 
-                    {user && <CreateReview spotId={spotId} />}
+                    {user && <button className='delete-review-button' onClick={() => setReviewModal(true)}>Create Review</button>}
+                    <CreateReviewModal spotId={spotId} reviewModal={reviewModal} setReviewModal={setReviewModal} />
                 </div>
             </div>
 

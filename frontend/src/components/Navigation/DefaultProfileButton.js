@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import * as sessionActions from "../../store/session"
 import { useDispatch } from "react-redux"
 
-const DefaultProfileButton = ( { flagFunc, changeLoginModal} ) => {
+const DefaultProfileButton = ( { changeSignupModal, changeLoginModal} ) => {
     const [showMenu, setShowMenu] = useState(false)
     const dispatch = useDispatch()
     
@@ -40,9 +40,7 @@ const DefaultProfileButton = ( { flagFunc, changeLoginModal} ) => {
         }))
     }
 
-  const testClick = () => {
-    
-  }
+
   
     
 
@@ -67,7 +65,7 @@ const DefaultProfileButton = ( { flagFunc, changeLoginModal} ) => {
                             <li className='profile-button-list-item special' onClick= {changeLoginModal}>
                                            Login Form 
                                         </li>
-                            <li className='profile-button-list-item special' onClick={flagFunc}>
+                            <li className='profile-button-list-item special' onClick={changeSignupModal}>
                                             Signup Form
                                         </li>
                             <li className='profile-button-list-item special' onClick={loginDemo}>

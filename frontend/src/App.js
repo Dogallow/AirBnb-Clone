@@ -34,7 +34,12 @@ function App() {
             <Route path="/edit/:spotId">
               <EditSpot />
             </Route>
-            
+            <Route path={"/mySpots"}>
+              <MySpots />
+            </Route>
+            <Route path={"/myReviews"}>
+              <UserReviews />
+            </Route>
             <Route path="/:spotId">
               <SingleSpot />
             </Route>

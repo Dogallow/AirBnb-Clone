@@ -1,5 +1,7 @@
 .create-review-form-container{
     width: 100%;
+    height: auto;
+    max-width: 440px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -7,7 +9,7 @@
     padding-top: 25px;
 }
 .create-review-form{
-    width: 50%;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,10 +22,10 @@ display: flex;
     width: 100%;
 }
 .form-textarea-input  textarea{
-    width: 90%;
+    width: 80%;
 }
 .form-textarea-input  input{
-    width: 10%;
+    width: 20%;
     border: none;
 }
 

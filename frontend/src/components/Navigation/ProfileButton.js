@@ -89,6 +89,12 @@ const ProfileButton = ({ user, navBarWidth }) => {
                                     <li className='profile-button-list-item special' onClick={logout}>
                                         Logout
                                     </li>
+                                    <li className='profile-button-list-item special' onClick={goToMySpots}>
+                                        MySpots
+                                    </li>
+                                    <li className='profile-button-list-item special' onClick={goToMyReviews}>
+                                        MyReviews
+                                    </li>
                                    
                                 </ul>
                             )}
