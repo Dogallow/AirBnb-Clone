@@ -86,14 +86,14 @@ const ProfileButton = ({ user, navBarWidth }) => {
                                 <ul className='profile-button-list'>
                                     <li className='profile-button-list-item'>{currentUser.username}</li>
                                     <li className='profile-button-list-item'>{currentUser.email}</li>
-                                    <li className='profile-button-list-item special' onClick={logout}>
-                                        Logout
-                                    </li>
                                     <li className='profile-button-list-item special' onClick={goToMySpots}>
-                                        MySpots
+                                    MySpots
                                     </li>
                                     <li className='profile-button-list-item special' onClick={goToMyReviews}>
-                                        MyReviews
+                                    MyReviews
+                                    </li>
+                                    <li className='profile-button-list-item special' onClick={logout}>
+                                        Logout
                                     </li>
                                    
                                 </ul>

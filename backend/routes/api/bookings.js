@@ -5,6 +5,7 @@ const {requireAuth} = require('../../utils/auth')
 
 const router = express.Router()
 
+// Get all spots based on current User
 router.get('/current', requireAuth, async (req,res,next) => {
 
     const bookings = await Booking.findAll({

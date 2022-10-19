@@ -2,11 +2,13 @@ import { Link, Redirect, useParams, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import * as spotsActions from '../../store/spots'
 import * as reviewsActions from '../../store/reviews'
+import * as bookingsActions from '../../store/bookings'
 import { useEffect } from 'react'
 import {CreateReviewModal} from '../CreateReview'
 import AddReviewImage from '../AddReviewImage'
 import { useState } from 'react'
 import './SingleSpot.css'
+import Bookings from '../Bookings'
 
 const SingleSpot = () => {
     const { spotId } = useParams()
@@ -14,6 +16,7 @@ const SingleSpot = () => {
     const spot = useSelector(state => state.spots.singleSpot)
     const user = useSelector(state => state.session.user)
     let reviews = useSelector(state => state.reviews.spot)
+    const bookings = useSelector(state => state.bookings.spot)
     const history = useHistory()
     const [errorValidation, setErrorValidation] = useState([])
     const [img1, setImg1] = useState('')
@@ -27,8 +30,35 @@ const SingleSpot = () => {
 
     console.log('selector user', user)
     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!! selector spot !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', spot)
+    console.log('%%%%%%%%%%%%%%%%%%%%%%%%% Bookings %%%%%%%%%%%%%%%%%%%%%%%%%%', bookings)
 
+    let arrOfBookings = Object.values(bookings)
+    let formattedBookings = arrOfBookings.map(booking => {
+        const months = ["January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October", "November", "December"]
+        let startDate = booking.startDate.split(' ')[0]
+        let endDate = booking.endDate.split(' ')[0]
 
+        let startDateSplitDate = startDate.split('-')
+        let startMonth = months[parseInt(startDateSplitDate[1]) - 1]
+        let startYear = startDateSplitDate[0]
+        let startDay = startDateSplitDate[2]
+
+        let formattedStartDate = [startMonth, ' ', startDay, ', ', startYear].join('')
+        console.log(formattedStartDate)
+
+        let endDateSplitDate = endDate.split('-')
+        let endMonth = months[parseInt(endDateSplitDate[1]) - 1]
+        let endYear = endDateSplitDate[0]
+        let endDay = endDateSplitDate[2]
+
+        let formattedEndDate = [endMonth, ' ', endDay, ', ', endYear].join('')
+        console.log(formattedEndDate)
+        return {
+            startDate: formattedStartDate,
+            endDate: formattedEndDate
+        }
+    })
     console.log('@@@@@@@@@@@@@@@@ Reviews @@@@@@@@@@@@@@@@@@@@@@@@@', reviews)
 
     const errors = []
@@ -47,7 +77,15 @@ const SingleSpot = () => {
             errors.push(error)
 
         })
+        dispatch(bookingsActions.thunk_spotBookings(spotId)).catch(async data => {
+            const error = await data.json()
+            console.log(error)
+            errors.push(error)
 
+        })
+
+       
+        
         return () => {
             dispatch(spotsActions.clear())
             dispatch(reviewsActions.clear())
@@ -353,11 +391,21 @@ const SingleSpot = () => {
                 </div>
                 <div className="create-review">
 
-                    {user && <button className='delete-review-button' onClick={() => setReviewModal(true)}>Create Review</button>}
+                    {user && <button style={{marginTop: '50px'}} className='create-review-button' onClick={() => setReviewModal(true)}>Create Review</button>}
                     <CreateReviewModal spotId={spotId} reviewModal={reviewModal} setReviewModal={setReviewModal} />
                 </div>
             </div>
-
+                {user && <Bookings spotId={spotId} userId={user.id}/>}
+                {arrOfBookings.length > 0 && formattedBookings.map(booking =>{
+                    return (
+                        <div key={booking.id}>
+                            <p>{booking.startDate} - {booking.endDate}</p>
+                            
+                        
+                        </div>
+                       
+                    )
+                }) }
 
         </div>
     )

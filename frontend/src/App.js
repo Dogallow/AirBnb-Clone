@@ -11,6 +11,7 @@ import SingleSpot from "./components/SingleSpot";
 import EditSpot from "./components/EditSpot";
 import MySpots from "./components/MySpots"
 import UserReviews from "./components/UserReviews";
+import Bookings from './components/Bookings'
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -23,6 +24,7 @@ function App() {
     return (
       <>
       <Navigation isLoaded={isLoaded}/>
+      
       {isLoaded && (
         <Switch>
             <Route exact path="/">

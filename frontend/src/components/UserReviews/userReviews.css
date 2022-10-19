@@ -1,0 +1,9 @@
+/* .user-review-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+} */
+
+.user-review-link{
+    text-decoration: none;
+    color: #222;
+}
