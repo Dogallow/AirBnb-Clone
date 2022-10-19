@@ -48,8 +48,8 @@ const NewSpot = () => {
             city,
             state,
             country,
-            lat: parseFloat(lat),
-            lng: parseFloat(lng),
+            lat: parseFloat(lat) || '',
+            lng: parseFloat(lng) || '',
             name,
             description,
             price: parseFloat(price)
