@@ -62,8 +62,8 @@ const EditSpot = () => {
 
      let fetch =  await dispatch(spotsActions.editSingleSpot(spotId, editObj)).catch(async err => {
             const error = await err.json()
-            
-            validate.push(error.message)
+            console.log('&&&&&&& edit form error &&&&&&&&&&&',error)
+            validate = [...error.errors]
          
          
             
@@ -76,7 +76,7 @@ const EditSpot = () => {
         fetch2 = await  dispatch(spotsActions.addSingleImage(spotId, imgObj)).catch(async err => {
                 const error = await err.json()
                 
-                validate.push(error.message)
+                validate = [...error.errors]
                 
             })
         }

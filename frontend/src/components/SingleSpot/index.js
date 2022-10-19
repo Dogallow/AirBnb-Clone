@@ -15,7 +15,7 @@ const SingleSpot = () => {
     const dispatch = useDispatch()
     const spot = useSelector(state => state.spots.singleSpot)
     const user = useSelector(state => state.session.user)
-    let reviews = useSelector(state => state.reviews.spot)
+    let stateReviews = useSelector(state => state.reviews.spot)
     const bookings = useSelector(state => state.bookings.spot)
     const history = useHistory()
     const [errorValidation, setErrorValidation] = useState([])
@@ -26,7 +26,7 @@ const SingleSpot = () => {
 
 
     // All reviews by a spot's Id
-    reviews = Object.values(reviews)
+    let reviews = Object.values(stateReviews)
 
     console.log('selector user', user)
     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!! selector spot !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', spot)
@@ -113,6 +113,12 @@ const SingleSpot = () => {
 
     const deleteReview = async (id) => {
         dispatch(reviewsActions.deleteSingleReview(id))
+        dispatch(spotsActions.getOneSpot(spotId)).catch(async data => {
+            const error = await data.json()
+            console.log(error.message)
+
+
+        })
     }
 
     // const deleteImage = () => {

@@ -20,10 +20,11 @@ const SignUpForm = ({ signupSetter }) => {
     //     history.push('/')
     // }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         if (password === confirmPassword) {
             setErrors([])
+            let validate = []
             const newUser = {
                 firstName,
                 lastName,
@@ -31,12 +32,20 @@ const SignUpForm = ({ signupSetter }) => {
                 username,
                 password
             }
-            signupSetter(false)
-            return dispatch(sessionActions.newUser(newUser)).catch(async err => {
+            
+            await dispatch(sessionActions.newUser(newUser)).catch(async err => {
                 const error = await err.json()
-                if (error && error.errors) setErrors(error.errors)
+                if (error && error.errors) {
+                    
+                    validate = [...error.errors]
+                }
 
             })
+            if (validate.length === 0){
+                signupSetter(false)
+            }
+            setErrors(validate)
+            return
         }
         return setErrors(['password and confirm password must match'])
     }
@@ -75,11 +84,11 @@ const SignUpForm = ({ signupSetter }) => {
                     </div>
                     <div className='additional-input-field'>
                         <label></label>
-                        <input placeholder='Password' onChange={(e) => setPassword(e.target.value)} value={password} />
+                        <input type={'password'} placeholder='Password' onChange={(e) => setPassword(e.target.value)} value={password} />
                     </div>
                     <div className='input-field-container2'>
                         <label></label>
-                        <input placeholder='Confirm Password' onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} />
+                        <input type={'password'} placeholder='Confirm Password' onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} />
                     </div>
                     <button type='submit'>Continue</button>
                 </form>
