@@ -33,31 +33,42 @@ const SingleSpot = () => {
     console.log('%%%%%%%%%%%%%%%%%%%%%%%%% Bookings %%%%%%%%%%%%%%%%%%%%%%%%%%', bookings)
 
     let arrOfBookings = Object.values(bookings)
+
+
+    
     let formattedBookings = arrOfBookings.map(booking => {
         const months = ["January", "February", "March", "April", "May", "June", "July",
             "August", "September", "October", "November", "December"]
-        let startDate = booking.startDate.split(' ')[0]
-        let endDate = booking.endDate.split(' ')[0]
 
-        let startDateSplitDate = startDate.split('-')
-        let startMonth = months[parseInt(startDateSplitDate[1]) - 1]
-        let startYear = startDateSplitDate[0]
-        let startDay = startDateSplitDate[2]
+        if (booking.startDate.includes('T') || booking.endDate.includes('T')){
+            booking.startDate = booking.startDate.split('T').join(' ')
+            booking.endDate = booking.endDate.split('T').join(' ')
+            
+        } 
 
-        let formattedStartDate = [startMonth, ' ', startDay, ', ', startYear].join('')
-        console.log(formattedStartDate)
-
-        let endDateSplitDate = endDate.split('-')
-        let endMonth = months[parseInt(endDateSplitDate[1]) - 1]
-        let endYear = endDateSplitDate[0]
-        let endDay = endDateSplitDate[2]
-
-        let formattedEndDate = [endMonth, ' ', endDay, ', ', endYear].join('')
-        console.log(formattedEndDate)
-        return {
-            startDate: formattedStartDate,
-            endDate: formattedEndDate
-        }
+            let startDate = booking.startDate.split(' ')[0]
+            let endDate = booking.endDate.split(' ')[0]
+    
+            let startDateSplitDate = startDate.split('-')
+            let startMonth = months[parseInt(startDateSplitDate[1]) - 1]
+            let startYear = startDateSplitDate[0]
+            let startDay = startDateSplitDate[2]
+    
+            let formattedStartDate = [startMonth, ' ', startDay, ', ', startYear].join('')
+            console.log(formattedStartDate)
+            
+            let endDateSplitDate = endDate.split('-')
+            let endMonth = months[parseInt(endDateSplitDate[1]) - 1]
+            let endYear = endDateSplitDate[0]
+            let endDay = endDateSplitDate[2]
+    
+            let formattedEndDate = [endMonth, ' ', endDay, ', ', endYear].join('')
+            console.log(formattedEndDate)
+            return {
+                startDate: formattedStartDate,
+                endDate: formattedEndDate
+            }
+        
     })
     console.log('@@@@@@@@@@@@@@@@ Reviews @@@@@@@@@@@@@@@@@@@@@@@@@', reviews)
 
