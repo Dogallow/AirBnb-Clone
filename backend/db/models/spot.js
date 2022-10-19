@@ -84,7 +84,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     lat: {
       type: DataTypes.FLOAT,
-      allowNull: false,
+     
       validate: {
         notEmpty: {
           args: true,
@@ -104,7 +104,7 @@ module.exports = (sequelize, DataTypes) => {
   },
     lng: {
       type: DataTypes.FLOAT,
-      allowNull: false,
+      
       validate: {
         notEmpty: {
           args: true,

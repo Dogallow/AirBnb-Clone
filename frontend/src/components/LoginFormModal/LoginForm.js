@@ -18,26 +18,34 @@ const LoginForm = ({ loginSetter }) => {
 
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         setErrorValidation([])
+        const errors = []
 
         const userInfo = {
             credential,
             password
         }
 
-        loginSetter(false)
-        return dispatch(sessionActions.getLoggedIn(userInfo))
-            .catch(async res => {
-                const data = await res.json()
+        await dispatch(sessionActions.getLoggedIn(userInfo))
+        .catch(async res => {
+            const data = await res.json()
+            
+            if (data && data.errors) {
+                setErrorValidation(data.errors)
+                errors = [...data.errors]
+            }
+            
+        })
 
-                if (data && data.errors) {
-                    setErrorValidation(data.errors)
-                }
+        if(errors.length === 0){
 
-            })
+            loginSetter(false)
+        }
+
+        setErrorValidation(errors)
     }
     return (
         <div className='login-component-container'>
