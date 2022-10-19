@@ -11,14 +11,14 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-  //  await queryInterface.bulkInsert('Bookings',[
-  //   {
-  //     spotId: 1,
-  //     userId: 2,
-  //     startDate: new Date('September 20, 2022'),
-  //      endDate: new Date('September 25, 2022')
-  //   },
-  //  ])
+   await queryInterface.bulkInsert('Bookings',[
+    {
+      spotId: 1,
+      userId: 2,
+      startDate: new Date('September 20, 2022'),
+       endDate: new Date('September 25, 2022')
+    },
+   ])
   },
 
   async down (queryInterface, Sequelize) {
