@@ -4,7 +4,7 @@ import * as sessionActions from '../../store/session';
 import { useHistory } from 'react-router-dom'
 import './LoginForm.css';
 
-const LoginForm = () => {
+const LoginForm = ({ loginSetter }) => {
     const [credential, setCredential] = useState('')
     const [password, setPassword] = useState('')
     const [errorValidation, setErrorValidation] = useState([])
@@ -28,6 +28,7 @@ const LoginForm = () => {
             password
         }
 
+        loginSetter(false)
         return dispatch(sessionActions.getLoggedIn(userInfo))
             .catch(async res => {
                 const data = await res.json()
@@ -37,7 +38,6 @@ const LoginForm = () => {
                 }
 
             })
-
     }
     return (
         <div className='login-component-container'>
@@ -65,7 +65,7 @@ const LoginForm = () => {
                         <input placeholder='Password' id="password" onChange={(e) => setPassword(e.target.value)} value={password} />
                     </div>
                     <div>
-                        <button type='submit'><span>Continue</span></button>
+                        <button type='submit' ><span>Continue</span></button>
                     </div>
                 </form>
             </div>

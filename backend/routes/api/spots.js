@@ -632,6 +632,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
     })
 })
 
+
 router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
     const { spotId } = req.params
 
@@ -668,6 +669,8 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
         for (let booking of bookings) {
 
             const obj = {}
+            
+            obj.id = booking.id
             obj.spotId = booking.spotId
             obj.startDate = booking.startDate
             obj.endDate = booking.endDate
