@@ -112,13 +112,15 @@ const SingleSpot = () => {
     }
 
     const deleteReview = async (id) => {
-        dispatch(reviewsActions.deleteSingleReview(id))
+    dispatch(reviewsActions.deleteSingleReview(id)).then(()=> {
         dispatch(spotsActions.getOneSpot(spotId)).catch(async data => {
             const error = await data.json()
             console.log(error.message)
 
 
         })
+    })
+        
     }
 
     // const deleteImage = () => {
