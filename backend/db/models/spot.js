@@ -84,42 +84,42 @@ module.exports = (sequelize, DataTypes) => {
     },
     lat: {
       type: DataTypes.FLOAT,
-     
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: "Latitude is required"
-        },
-        isDecimal: {
-          args: true,
-          msg: "Latitude is not valid"
-        },
-        customValidate(value){
-          if(typeof value !== 'number'){
-            throw new Error('Latitude is not valid')
-          }
-        }
+      
+    //   validate: {
+    //     notEmpty: {
+    //       args: true,
+    //       msg: "Latitude is required"
+    //     },
+    //     isDecimal: {
+    //       args: true,
+    //       msg: "Latitude is not valid"
+    //     },
+    //     customValidate(value){
+    //       if(typeof value !== 'number'){
+    //         throw new Error('Latitude is not valid')
+    //       }
+    //     }
         
-    }
+    // }
   },
     lng: {
       type: DataTypes.FLOAT,
       
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: "Longitude is required"
-        },
-        isDecimal: {
-          args: true,
-          msg: "Longitude is not valid"
-        },
-        customValidate(value){
-          if (typeof value !== 'number'){
-            throw new Error('Longitude is not valid')
-          }
-        },
-      }
+      // validate: {
+      //   notEmpty: {
+      //     args: true,
+      //     msg: "Longitude is required"
+      //   },
+      //   isDecimal: {
+      //     args: true,
+      //     msg: "Longitude is not valid"
+      //   },
+      //   customValidate(value){
+      //     if (typeof value !== 'number'){
+      //       throw new Error('Longitude is not valid')
+      //     }
+      //   },
+      // }
     },
     name: {
       type: DataTypes.STRING,

@@ -10,7 +10,7 @@ const SignUpFormModal = ({signupSetter, signupModal, changeSignupModal}) => {
         <>
             
             {signupModal && (
-                <Modal onClose={()=>changeSignupModal()}>
+                <Modal onClose={()=>changeSignupModal()} >
 
                     <SignUpForm signupSetter={signupSetter}/>
                 </Modal>

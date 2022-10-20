@@ -48,8 +48,8 @@ const NewSpot = () => {
             city,
             state,
             country,
-            lat: parseFloat(lat),
-            lng: parseFloat(lng),
+            lat: parseFloat(lat) || '',
+            lng: parseFloat(lng) || '',
             name,
             description,
             price: parseFloat(price)
@@ -64,7 +64,7 @@ const NewSpot = () => {
             if (error && error.errors) setErrors(error.errors)
 
         })
-        console.log('success', success)
+        
 
         imgObj = {
 
