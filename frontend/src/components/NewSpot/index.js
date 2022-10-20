@@ -54,7 +54,8 @@ const NewSpot = () => {
             description,
             price: parseFloat(price)
         }
-        console.log(newSpot)
+        
+        
 
         let imgObj = {}
 
