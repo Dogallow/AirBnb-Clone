@@ -414,20 +414,24 @@ const SingleSpot = () => {
                     <CreateReviewModal spotId={spotId} reviewModal={reviewModal} setReviewModal={setReviewModal} />
                 </div>
             </div>
-                {user && <Bookings spotId={spotId} userId={user.id}/>}
-                {arrOfBookings.length > 0 && formattedBookings.map(booking =>{
-                    return (
-                        <div key={booking.id}>
-                            <p>{booking.startDate} - {booking.endDate}</p>
-                            
-                        
-                        </div>
-                       
-                    )
-                }) }
+                
 
         </div>
     )
 }
 
 export default SingleSpot
+
+// { user && <Bookings spotId={spotId} userId={user.id} /> }
+// {
+//     arrOfBookings.length > 0 && formattedBookings.map(booking => {
+//         return (
+//             <div key={booking.id}>
+//                 <p>{booking.startDate} - {booking.endDate}</p>
+
+
+//             </div>
+
+//         )
+//     })
+// }
