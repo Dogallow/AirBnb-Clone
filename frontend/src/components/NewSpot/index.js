@@ -64,7 +64,7 @@ const NewSpot = () => {
             if (error && error.errors) setErrors(error.errors)
 
         })
-        console.log('success', success)
+        
 
         imgObj = {
 
