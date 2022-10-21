@@ -43,6 +43,9 @@ const NewSpot = () => {
         //         password
         //     }
 
+
+      
+        
         const newSpot = {
             address,
             city,
@@ -56,13 +59,16 @@ const NewSpot = () => {
         }
         
         
-
+        
         let imgObj = {}
 
         const success = await dispatch(spotsActions.createNewSpot(newSpot)).catch(async err => {
             const error = await err.json()
-            console.log(error.errors)
-            if (error && error.errors) setErrors(error.errors)
+            // console.log(error.errors)
+            if (error && error.errors) {
+                
+                validate = [...validate, ...error.errors]
+            }
 
         })
         
@@ -75,8 +81,8 @@ const NewSpot = () => {
         if (imgObj.url) {
             await dispatch(spotsActions.addSingleImage(success.id, imgObj)).catch(async err => {
                 const error = await err.json()
-                console.log('', error)
-                validate = [...error.errors]
+                // console.log('', error)
+                validate = [...validate, ...error.errors]
 
             })
         }
@@ -84,6 +90,8 @@ const NewSpot = () => {
         if (success && validate.length === 0) {
             setIsSubmitted(true)
         }
+
+        setErrors(validate)
     }
 
 

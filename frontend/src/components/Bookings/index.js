@@ -25,7 +25,7 @@ const Bookings = ({spotId}) => {
         let startDay = startDateSplitDate[2]
 
         let formattedStartDate = [startMonth,' ', startDay,', ', startYear].join('')
-        console.log(formattedStartDate)
+        // console.log(formattedStartDate)
         
         let endDateSplitDate = endDate.split('-')
         let endMonth = months[parseInt(endDateSplitDate[1]) - 1]
@@ -33,7 +33,7 @@ const Bookings = ({spotId}) => {
         let endDay = endDateSplitDate[2]
 
         let formattedEndDate = [endMonth, ' ', endDay, ', ', endYear].join('')
-        console.log(formattedEndDate)
+        // console.log(formattedEndDate)
         
         const obj = {
             spotId: Number(spotId),

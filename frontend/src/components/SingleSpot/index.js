@@ -28,9 +28,9 @@ const SingleSpot = () => {
     // All reviews by a spot's Id
     let reviews = Object.values(stateReviews)
 
-    console.log('selector user', user)
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!! selector spot !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', spot)
-    console.log('%%%%%%%%%%%%%%%%%%%%%%%%% Bookings %%%%%%%%%%%%%%%%%%%%%%%%%%', bookings)
+    // console.log('selector user', user)
+    // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!! selector spot !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', spot)
+    // console.log('%%%%%%%%%%%%%%%%%%%%%%%%% Bookings %%%%%%%%%%%%%%%%%%%%%%%%%%', bookings)
 
     let arrOfBookings = Object.values(bookings)
 
@@ -55,7 +55,7 @@ const SingleSpot = () => {
             let startDay = startDateSplitDate[2]
     
             let formattedStartDate = [startMonth, ' ', startDay, ', ', startYear].join('')
-            console.log(formattedStartDate)
+            // console.log(formattedStartDate)
             
             let endDateSplitDate = endDate.split('-')
             let endMonth = months[parseInt(endDateSplitDate[1]) - 1]
@@ -63,14 +63,14 @@ const SingleSpot = () => {
             let endDay = endDateSplitDate[2]
     
             let formattedEndDate = [endMonth, ' ', endDay, ', ', endYear].join('')
-            console.log(formattedEndDate)
+            // console.log(formattedEndDate)
             return {
                 startDate: formattedStartDate,
                 endDate: formattedEndDate
             }
         
     })
-    console.log('@@@@@@@@@@@@@@@@ Reviews @@@@@@@@@@@@@@@@@@@@@@@@@', reviews)
+    // console.log('@@@@@@@@@@@@@@@@ Reviews @@@@@@@@@@@@@@@@@@@@@@@@@', reviews)
 
     const errors = []
 
@@ -78,19 +78,19 @@ const SingleSpot = () => {
 
         dispatch(spotsActions.getOneSpot(spotId)).catch(async data => {
             const error = await data.json()
-            console.log(error.message)
+            // console.log(error.message)
 
 
         })
         dispatch(reviewsActions.getSpotReviews(spotId)).catch(async data => {
             const error = await data.json()
-            console.log(error)
+            // console.log(error)
             errors.push(error)
 
         })
         dispatch(bookingsActions.thunk_spotBookings(spotId)).catch(async data => {
             const error = await data.json()
-            console.log(error)
+            // console.log(error)
             errors.push(error)
 
         })
@@ -104,7 +104,7 @@ const SingleSpot = () => {
     }, [dispatch])
 
 
-    console.log(errors)
+    // console.log(errors)
     const deleteSpot = async () => {
         const message = await dispatch(spotsActions.deleteSingleSpot(spotId))
         alert(message)
@@ -115,7 +115,7 @@ const SingleSpot = () => {
     dispatch(reviewsActions.deleteSingleReview(id)).then(()=> {
         dispatch(spotsActions.getOneSpot(spotId)).catch(async data => {
             const error = await data.json()
-            console.log(error.message)
+            // console.log(error.message)
 
 
         })
@@ -127,7 +127,7 @@ const SingleSpot = () => {
     //    console.log('Finish CRUD for Reviews first')
     //     { smallAuth && <button onClick={deleteImage}>Delete Image</button> }
     // }
-    console.log('single spot', spot)
+    // console.log('single spot', spot)
 
 
 
@@ -150,16 +150,16 @@ const SingleSpot = () => {
     let variant4
     let imageCount = spot.SpotImages.length
     if (!spot.SpotImages.length) {
-        console.log('################## Spot selector ####################', spot)
+        // console.log('################## Spot selector ####################', spot)
     }
     else
         if (spot.SpotImages.length === 1) {
             variant = 'full'
-            console.log('################## Spot selector ####################', spot, spot.SpotImages.length)
+            // console.log('################## Spot selector ####################', spot, spot.SpotImages.length)
         } else if (spot.SpotImages.length === 2) {
             variant = 'left-main'
             variant2 = 'right-main'
-            console.log('################## Spot selector ####################', spot, spot.SpotImages.length)
+            // console.log('################## Spot selector ####################', spot, spot.SpotImages.length)
         }
         else if (spot.SpotImages.length === 3) {
             variant = 'left-main'
@@ -174,10 +174,10 @@ const SingleSpot = () => {
         else {
             variant = 'left-main'
             variant2 = 'right-quad'
-            console.log('################## Spot selector ####################', spot, spot.SpotImages.length)
+            // console.log('################## Spot selector ####################', spot, spot.SpotImages.length)
         }
 
-    console.log(smallAuth)
+    // console.log(smallAuth)
     return (
         <div className='single-spot-outer-container'>
             <div className='main-header-container'>

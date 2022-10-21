@@ -9,7 +9,7 @@ import { Modal } from '../../context/Modal'
 
 const LoginFormModal =({ loginModal, changeLoginModal, loginSetter }) => {
     const [showModal, setShowModal] = useState(false)
-    console.log('value for loginModal slice of state',loginModal)
+    // console.log('value for loginModal slice of state',loginModal)
     return(
         <>
         

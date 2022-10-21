@@ -5,7 +5,7 @@ import { Modal } from '../../context/Modal'
 
 const SignUpFormModal = ({signupSetter, signupModal, changeSignupModal}) => {
     const [showModal, setShowModal] = useState(false)
-    console.log('!!!!!!!!! signupModal boolean !!!!!!!!!!', signupModal)
+    // console.log('!!!!!!!!! signupModal boolean !!!!!!!!!!', signupModal)
     return (
         <>
             
