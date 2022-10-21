@@ -31,7 +31,7 @@ const CreateReview = ({ spotId, setReviewModal }) => {
             setErrors(validate)
         }).then(() => dispatch(reviewsActions.getSpotReviews(spotId))).then(() => dispatch(spotsActions.getOneSpot(spotId)))
         
-        console.log('validate array((((((((((())))))))))))))', validate)
+        // console.log('validate array((((((((((())))))))))))))', validate)
         if(validate.length === 0){
             setReviewModal(false)
 

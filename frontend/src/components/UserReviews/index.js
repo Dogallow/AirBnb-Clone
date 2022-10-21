@@ -7,7 +7,7 @@ import './userReviews.css'
 const UserReviews = () => {
     const dispatch = useDispatch()
     let reviews = useSelector(state => state.reviews.user)
-    console.log(reviews)
+    // console.log(reviews)
     reviews = Object.values(reviews)
     
     useEffect(() => {

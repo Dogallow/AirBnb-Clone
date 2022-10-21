@@ -141,6 +141,11 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: "Description is required"
+        },
+        stringCount(value){
+          if (value.length > 240){
+            throw new Error('Description cannot be greater than 240 characters')
+          }
         }
       }
     },
@@ -161,6 +166,12 @@ module.exports = (sequelize, DataTypes) => {
             throw new Error("Price must be a number")
           }
         },
+        priceValidate(value) {
+          if ( value < 1 || value >5000) {
+            throw new Error("Price must be between $1 and $5000")
+          }
+        },
+        
       }
     }
   }, {

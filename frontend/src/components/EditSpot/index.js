@@ -62,7 +62,7 @@ const EditSpot = () => {
 
      let fetch =  await dispatch(spotsActions.editSingleSpot(spotId, editObj)).catch(async err => {
             const error = await err.json()
-            console.log('&&&&&&& edit form error &&&&&&&&&&&',error)
+            // console.log('&&&&&&& edit form error &&&&&&&&&&&',error)
             validate = [...error.errors]
          
          
