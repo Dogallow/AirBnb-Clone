@@ -12,6 +12,7 @@ import EditSpot from "./components/EditSpot";
 import MySpots from "./components/MySpots"
 import UserReviews from "./components/UserReviews";
 import Bookings from './components/Bookings'
+import Footer from "./Footer";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -47,7 +48,7 @@ function App() {
             </Route>
         </Switch>
       )}
-      
+      <Footer />
       </>
     );
 }
