@@ -179,7 +179,7 @@ const SingleSpot = () => {
 
     // console.log(smallAuth)
     return (
-        <div className='single-spot-outer-container'>
+        <div className='single-spot-outer-container' style={{marginBottom:'30px'}}>
             <div className='main-header-container'>
                 <div style={{ marginBottom: '4px' }} className="header-details">
                     {spot.name}
