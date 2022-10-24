@@ -93,7 +93,7 @@ const EditSpot = () => {
     
     
     return (
-        <div className='edit-spot-component-container'>
+        <div className='edit-spot-component-container' style={{height: '100%'}}>
             <div className='edit-form-container'>
                 <div className='edit-form-header-text'>
                     <h1>Edit Form</h1>

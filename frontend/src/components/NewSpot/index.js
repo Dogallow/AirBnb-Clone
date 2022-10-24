@@ -96,7 +96,7 @@ const NewSpot = () => {
 
 
     return (
-        <div className='signup-component-container'>
+        <div className='signup-component-container' style={{height: '100%'}}>
 
             <ul style={{ listStyleType: 'none', color: 'red' }}>
                 {errors && (errors.map((err, index) => (
