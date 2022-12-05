@@ -72,7 +72,7 @@ const SignUpForm = ({ signupSetter }) => {
                     </div>
                     <div className='additional-input-field'>
                         <label></label>
-                        <input placeholder='LastName' onChange={(e) => setLastName(e.target.value)} value={lastName} />
+                        <input  placeholder='LastName' onChange={(e) => setLastName(e.target.value)} value={lastName} />
                     </div>
                     <div className='additional-input-field'>
                         <label></label>

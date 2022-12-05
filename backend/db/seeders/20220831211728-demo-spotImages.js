@@ -1,4 +1,12 @@
+// EVERY seeder file
 'use strict';
+
+// NEW: add this code to each migration file
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+// END of new code
 
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -11,7 +19,8 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   await queryInterface.bulkInsert('SpotImages', [
+   options.tableName = 'SpotImages'
+   await queryInterface.bulkInsert(options, [
     {
       spotId: 1,
        url: 'https://apod.nasa.gov/apod/image/2209/FairyPillar_Hubble_960.jpg',
@@ -52,6 +61,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('SpotImages',null, {})
+    await queryInterface.bulkDelete(options)
+    // await queryInterface.bulkDelete('SpotImages',null, {})
   }
 };

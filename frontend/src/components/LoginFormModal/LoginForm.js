@@ -70,7 +70,7 @@ const LoginForm = ({ loginSetter }) => {
                     </div>
                     <div className='input-field-container2'>
                         <label htmlFor='password'></label>
-                        <input placeholder='Password' id="password" onChange={(e) => setPassword(e.target.value)} value={password} />
+                        <input type='password' placeholder='Password' id="password" onChange={(e) => setPassword(e.target.value)} value={password} />
                     </div>
                     <div>
                         <button type='submit' ><span>Continue</span></button>

@@ -1,4 +1,12 @@
+// EVERY seeder file
 'use strict';
+
+// NEW: add this code to each migration file
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+// END of new code
 
 
 const bcrypt = require("bcryptjs")
@@ -14,7 +22,8 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-     await queryInterface.bulkInsert('Users',[
+   options.tableName = 'Users'
+     await queryInterface.bulkInsert(options,[
     {
       firstName: 'Candy',
       lastName: 'Crush',
@@ -50,16 +59,20 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     // const Op = Sequelize.Op
+    options.tableName = 'Users'
     const { Op } = require("sequelize");
-      await queryInterface.bulkDelete('Users', {
-      username: {
-        [Op.in]:['candyCrush', 'Demo1', 'Demo2']
-      },
-      email:{
-        [Op.in]: ['c4ndyCrush@gmail.com', 'demoMan1@gmail.com', 'demoMan2@gmail.com']
-      }
-    })
+      await queryInterface.bulkDelete(options)
   }
 
 
 };
+
+// , {
+//   username: {
+//     [Op.in]: ['candyCrush', 'Demo1', 'Demo2']
+//   },
+//   email: {
+//     [Op.in]: ['c4ndyCrush@gmail.com', 'demoMan1@gmail.com', 'demoMan2@gmail.com']
+//   }
+// }
+//  Not sure if this is needed. Took it out of the bulk delete and replaced it with the options object

@@ -15,7 +15,7 @@ const UserReviews = () => {
     },[dispatch])
     
     return (
-        <div className="single-spot-outer-container user-review-container">
+        <div className="single-spot-outer-container user-review-container" style={{height: '100%'}}>
             <div className="main-reviews-container">
                 <div className="review-grid-container">
                     {reviews.length > 0 && reviews.map((review, index) => {

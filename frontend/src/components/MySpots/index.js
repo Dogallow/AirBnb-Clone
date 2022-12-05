@@ -16,7 +16,7 @@ let spots = useSelector(state => state.spots.allSpots)
     
     if(!spotValues) return null
     return (
-        <div className="images-main-container">
+        <div className="images-main-container" style={{height: '100%'}}>
 
             {spotValues.map((spot, index) => {
                 return (
