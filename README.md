@@ -1,7 +1,7 @@
 #  <img src="https://user-images.githubusercontent.com/95613961/192190997-f1a3b9fd-6eac-49de-b5f7-c836d008d2e4.png" alt="Logo" height=50px /> Aerobnb
 
 Aerobnb is a fun web application inspired by Airbnb. This application is a creative way to interact with the universe and spur your curiosity for things outside of our own planet.
-Click here to view [Aerobnb Live Site](https://airbnb-clone-dg.herokuapp.com/).
+Click here to view [Aerobnb Live Site](https://aerobnb.onrender.com).
 
 Links to project Wiki:
 
