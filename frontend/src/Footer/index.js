@@ -8,6 +8,9 @@ const Footer = () => {
                 <a href="https://github.com/Dogallow" target="_blank">
                     <img style={{height: '20px', width: '20px', marginLeft: '5px'}} src="https://cdns.iconmonstr.com/wp-content/releases/preview/2012/240/iconmonstr-github-1.png" alt="Github Logo" />
                 </a>
+                <a href="https://github.com/Dogallow" target="_blank" style={{paddingLeft: '5px'}}>
+                    <i class="fa-brands fa-linkedin fa-xl"></i>
+                </a>
             </div>
         </div>
     )

@@ -38,6 +38,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     // await queryInterface.bulkDelete('Bookings', null, {})
+    options.tableName = 'Bookings'
     await queryInterface.bulkDelete(options)
   }
 };

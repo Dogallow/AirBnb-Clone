@@ -23,32 +23,37 @@ module.exports = {
    await queryInterface.bulkInsert(options, [
     {
       spotId: 1,
-       url: 'https://apod.nasa.gov/apod/image/2209/FairyPillar_Hubble_960.jpg',
+       url: 'https://res.cloudinary.com/dpbd7etx9/image/upload/v1671556318/cloudinary-example-1_nlapq9.webp',
       preview:true
     },
     {
       spotId: 2,
-      url: 'https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/gsfc_20171208_archive_e000226_orig.jpg',
+      url: 'https://res.cloudinary.com/dpbd7etx9/image/upload/v1671559486/cloudinary-example-4_rjwuvc.webp',
       preview:true
     },
     {
+      spotId: 2,
+      url: 'https://res.cloudinary.com/dpbd7etx9/image/upload/v1671559484/cloudinary-example-3_b3ng75.webp',
+      preview:false
+    },
+    {
       spotId: 1,
-      url: 'https://apod.nasa.gov/apod/image/1402/eagle_kp09_960.jpg',
+      url: 'https://res.cloudinary.com/dpbd7etx9/image/upload/v1671559251/cloudinary-example-2_wcqaro.webp',
       preview:true
     },
     {
       spotId: 3,
-      url: 'https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/hubble_ngc1961_wfc3_1flat_cont_final.jpg',
+      url: 'https://res.cloudinary.com/dpbd7etx9/image/upload/v1671559595/cloudinary-example-5_xsdhzn.webp',
       preview:true
     },
     {
       spotId: 4,
-      url: 'https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/stsci-01ga76rm0c11w977jrhgj5j26x.png',
+      url: 'https://res.cloudinary.com/dpbd7etx9/image/upload/v1671559641/cloudinary-example-6_pwgr0s.webp',
       preview:true
     },
     {
       spotId: 5,
-      url: 'https://www.nasa.gov/sites/default/files/styles/full_width_feature/public/thumbnails/image/gsfc_20171208_archive_e000084_orig.jpg',
+      url: 'https://res.cloudinary.com/dpbd7etx9/image/upload/v1671559688/cloudinary-example-7webp_qn69gh.webp',
       preview:true
     },
    ])
@@ -61,6 +66,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    options.tableName = 'SpotImages'
     await queryInterface.bulkDelete(options)
     // await queryInterface.bulkDelete('SpotImages',null, {})
   }

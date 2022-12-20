@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as spotsActions from '../../store/spots'
 import { NavLink, Redirect } from 'react-router-dom'
 import './Home.css'
+import Footer from '../../Footer'
 
 
 const Home = () => {
@@ -25,6 +26,7 @@ const Home = () => {
     if(!spotValues) return (<p>Loading...</p>)
     
     return (
+        <>
         <div className="images-main-container">
             
             {spotValues.map((spot, index) => {
@@ -61,8 +63,9 @@ const Home = () => {
                 </div>
                 )
             })}
-            
-        </div>
+            </div>
+            <Footer />
+        </>
     )
 }
 

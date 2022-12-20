@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/Dogallow/AirBnb-Clone/issues"
   },
-  "homepage": "https://github.com/Dogallow/AirBnb-Clone#readme"
+  "homepage": "https://github.com/Dogallow/AirBnb-Clone#readme",
+  "dependencies": {
+    "cloudinary": "^1.33.0"
+  }
 }
