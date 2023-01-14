@@ -7,10 +7,10 @@ import * as spotsActions from '../../store/spots'
 
 import './CreateReview.css'
 
-const CreateReview = ({ spotId, setReviewModal }) => {
+const CreateReview = ({ spotId, setReviewModal, stars, setStars, review, setReview }) => {
     const [showForm, setShowForm] = useState(false)
-    const [review, setReview] = useState('')
-    const [stars, setStars] = useState(1)
+    // const [review, setReview] = useState('')
+    // const [stars, setStars] = useState(1)
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
 
@@ -36,7 +36,7 @@ const CreateReview = ({ spotId, setReviewModal }) => {
             setReviewModal(false)
 
             setReview('')
-            setStars('')
+            setStars(1)
         }
         
     }
@@ -135,14 +135,14 @@ const CreateReview = ({ spotId, setReviewModal }) => {
 
 
 
-export const CreateReviewModal = ({spotId, reviewModal, setReviewModal }) => {
+export const CreateReviewModal = ({ spotId, reviewModal, setReviewModal, stars, setStars, review, setReview }) => {
     const [showModal, setShowModal] = useState(false)
     
     return (
         <>
         {reviewModal && (
             <Modal onClose={()=>setReviewModal(false)}>
-            <CreateReview  spotId={spotId} setReviewModal={setReviewModal}/>
+                    <CreateReview spotId={spotId} setReviewModal={setReviewModal} review={review} setReview={setReview} setStars={setStars} stars={stars} />
             </Modal>
             )}
         </> 

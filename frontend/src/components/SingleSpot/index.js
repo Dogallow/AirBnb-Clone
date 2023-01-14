@@ -9,6 +9,7 @@ import AddReviewImage from '../AddReviewImage'
 import { useState } from 'react'
 import './SingleSpot.css'
 import Bookings from '../Bookings'
+import EditReview from '../EditReview'
 
 const SingleSpot = () => {
     const { spotId } = useParams()
@@ -23,7 +24,12 @@ const SingleSpot = () => {
     const [img1, setImg1] = useState('')
     const [img2, setImg2] = useState('')
     const [reviewModal, setReviewModal] = useState(false)
-
+    const [showEditForm, setShowEditForm] = useState(false)
+    const [review, setReview] = useState('')
+    const [stars, setStars] = useState(1)
+    const [reviewId, setReviewId] = useState(null)
+    
+    
 
 
     // All reviews by a spot's Id
@@ -113,6 +119,8 @@ const SingleSpot = () => {
         history.push('/')
     }
 
+    
+
     const deleteReview = async (id) => {
     dispatch(reviewsActions.deleteSingleReview(id)).then(()=> {
         dispatch(spotsActions.getOneSpot(spotId)).catch(async data => {
@@ -124,6 +132,8 @@ const SingleSpot = () => {
     })
         
     }
+
+
 
     // const deleteImage = () => {
     //    console.log('Finish CRUD for Reviews first')
@@ -190,6 +200,10 @@ const SingleSpot = () => {
                 }
             })
         }
+
+
+    
+
 
     console.log(reviewBool)
     return (
@@ -389,6 +403,9 @@ const SingleSpot = () => {
                 {reviews.length === 0 && (null)}
                 <div className='review-grid-container'>
                     {reviews.length > 0 && reviews.map((review, index) => {
+                        
+                        const text = review.review
+                        
                         return (
                             <div className="review-main-body" key={index}>
                                 <div className='review-header'>
@@ -396,7 +413,9 @@ const SingleSpot = () => {
                                     <p>{new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(review.updatedAt))}, {new Date(review.updatedAt).getFullYear()} </p>
                                 </div>
                                 <div className='review-body'>
-                                    <h3>{review.review}</h3>
+                                    {showEditForm && review.id === reviewId ? (
+                                        <EditReview spotId={spotId} setShowEditForm={setShowEditForm} id={review.id} review={review.review} stars={review.stars}/>
+                                        ) :<h3>{review.review}</h3>}
                                     {review.ReviewImages.length > 0 && <div className="review-image">
 
                                         {review.ReviewImages.length > 0 && review.ReviewImages.map((img, index) => {
@@ -411,6 +430,10 @@ const SingleSpot = () => {
                                 <div className="add-image-delete-review-button">
                                     {user && review.userId === user.id && <AddReviewImage id={review.id} spotId={spotId} />}
                                     {user && review.userId === user.id && <button className="delete-review-button" onClick={() => deleteReview(review.id)}>Delete Review</button>}
+                                    {user && review.userId === user.id && <button className="delete-review-button" onClick={() =>{ 
+                                    setShowEditForm(!showEditForm)
+                                    setReviewId(review.id)
+                                    }}>Edit Review</button>}
                                 </div>
                             </div>
                         )
@@ -419,7 +442,7 @@ const SingleSpot = () => {
                 <div className="create-review">
 
                     {user && <button disabled={reviewBool} style={{ marginTop: '50px' }} className={reviewBool ? 'create-review-button-disabled' : 'create-review-button'} onClick={() => setReviewModal(true)}>Create Review</button>}
-                    <CreateReviewModal spotId={spotId} reviewModal={reviewModal} setReviewModal={setReviewModal} />
+                    <CreateReviewModal review={review} setReview={setReview} setStars={setStars} stars={stars} spotId={spotId} reviewModal={reviewModal} setReviewModal={setReviewModal} />
                 </div>
             </div>
                 

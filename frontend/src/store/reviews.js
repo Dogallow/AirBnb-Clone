@@ -6,6 +6,7 @@ const GET_SPOT_REVIEWS = 'reviews/GET_SPOT_REVIEWS'
 const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
 const ADD_REVIEWIMAGE = 'reviews/ADD_REVIEWIMAGE'
 const DELETE_REVIEW = 'reviews/DELETE_REVIEW'
+const EDIT_REVIEW = 'reviews/EDIT_REVIEW'
 const CLEAR = 'reviews/CLEAR'
 
 export const clear = () => {
@@ -13,6 +14,13 @@ export const clear = () => {
         type: CLEAR
     }
 }
+
+    const editReviewActionCreator = (payload) => {
+        return {
+            type: EDIT_REVIEW,
+            payload
+        }
+    }
 
 const deleteReview = (id) => {
     return {
@@ -59,6 +67,19 @@ export const deleteSingleReview = (reviewId) => async dispatch => {
         const message = await res.json()
         
         dispatch(deleteReview(reviewId))
+    }
+}
+
+export const editReviewThunk = (reviewId, obj) => async dispatch => {
+    const res = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'PUT',
+        body: JSON.stringify(obj)
+    })
+
+    if (res.ok){
+        const newReview = await res.json()
+        console.log('NEW REVIEW FROM THE BACKEND', newReview)
+        dispatch(editReviewActionCreator(newReview))
     }
 }
 
@@ -148,6 +169,11 @@ const reviewReducer = (state = initialState, action) => {
                     ...review
                 }
             })
+            return newState
+        case EDIT_REVIEW:
+            
+            newState = {...state}
+            newState.spot[action.payload.id] = {...state.spot[action.payload.id], ...action.payload}
             return newState
         case DELETE_REVIEW: 
             newState = {...state, spot: {...state.spot}}
