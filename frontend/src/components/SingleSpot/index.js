@@ -428,12 +428,12 @@ const SingleSpot = () => {
                                     </div>}
                                 </div>
                                 <div className="add-image-delete-review-button">
-                                    {user && review.userId === user.id && <AddReviewImage id={review.id} spotId={spotId} />}
-                                    {user && review.userId === user.id && <button className="delete-review-button" onClick={() => deleteReview(review.id)}>Delete Review</button>}
+                                    {user && review.userId === user.id && !showEditForm && <AddReviewImage id={review.id} spotId={spotId} />}
+                                    {user && review.userId === user.id && !showEditForm && <button className="delete-review-button" onClick={() => deleteReview(review.id)}>Delete Review</button>}
                                     {user && review.userId === user.id && <button className="delete-review-button" onClick={() =>{ 
                                     setShowEditForm(!showEditForm)
                                     setReviewId(review.id)
-                                    }}>Edit Review</button>}
+                                    }}>{!showEditForm ? 'Edit Review' : 'Cancel Edit'}</button>}
                                 </div>
                             </div>
                         )
