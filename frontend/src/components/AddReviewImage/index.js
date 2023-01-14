@@ -3,8 +3,8 @@ import * as reviewsActions from '../../store/reviews'
 import { useDispatch } from 'react-redux'
 import './AddReviewImage.css'
 
-const AddReviewImage = ({ id, spotId }) => {
-    const [showInput, setShowInput] = useState(false)
+const AddReviewImage = ({ id, spotId, showInput, setShowInput }) => {
+    
     const [url, setUrl] = useState('')
     const [validateErrors, setValidateErrors] = useState([])
     const dispatch = useDispatch()
@@ -36,7 +36,7 @@ const AddReviewImage = ({ id, spotId }) => {
     }
     
     return(
-        <div className='add-review-image-container'>
+        <div className={showInput ? 'add-review-image-container-full' :'add-review-image-container'}>
             {validateErrors.length > 0 && (
                 <ul>
                 {validateErrors.map((err, index) => {
@@ -44,7 +44,7 @@ const AddReviewImage = ({ id, spotId }) => {
                 })}
                 </ul>
             )}
-            <button className='add-review-image-button' onClick={() =>setShowInput(!showInput)}>Add Image</button>
+            <button className='add-review-image-button' onClick={() =>setShowInput(!showInput)}>{showInput ? 'Cancel':'Add Image'}</button>
             {showInput && (
                 <form className='add-review-image-form' onSubmit={handleSubmit}>
                     <input className='add-review-image-input' placeholder='url' onChange={(e) => setUrl(e.target.value)} value={url}/>
