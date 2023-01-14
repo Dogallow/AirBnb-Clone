@@ -77,7 +77,7 @@ const ProfileButton = ({ user, navBarWidth }) => {
                         <i className="fa-solid fa-bars"></i>
                     </span>
                     <span className="user-icon">
-                        <i className="fa-solid fa-user"></i>
+                        <i style={{color: 'red'}} className="fa-solid fa-user fa-lg"></i>
                     </span>
 
                     <div className="menu-position">

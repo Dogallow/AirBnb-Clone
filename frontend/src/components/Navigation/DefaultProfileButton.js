@@ -54,7 +54,7 @@ const DefaultProfileButton = ( { changeSignupModal, changeLoginModal} ) => {
                                 <i className="fa-solid fa-bars"></i>
                             </span>
                             <span className="user-icon">
-                                <i className="fa-solid fa-user"></i>
+                                <i className="fa-solid fa-user fa-lg"></i>
                             </span>
 
                             <div className="menu-position">
