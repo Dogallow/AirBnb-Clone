@@ -12,7 +12,6 @@ router.get('/current', requireAuth, async (req,res,next) => {
         where: {
             userId: req.user.id,
         },
-        
         raw: true
     })
 

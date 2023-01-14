@@ -41,7 +41,7 @@ const Bookings = ({spotId}) => {
             endDate: new Date(formattedEndDate)
         }
 
-        await dispatch(bookingsActions.thunk_createBookings(obj))
+        await dispatch(bookingsActions.thunkCreateBookings(obj)).then(() => bookingsActions.thunk_spotBookings(spotId))
 
         
 

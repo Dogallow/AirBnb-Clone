@@ -63,13 +63,13 @@ const DefaultProfileButton = ( { changeSignupModal, changeLoginModal} ) => {
                                     <ul className='profile-button-list'>
                                         
                             <li className='profile-button-list-item special' onClick= {changeLoginModal}>
-                                           Login Form 
+                                           Login 
                                         </li>
                             <li className='profile-button-list-item special' onClick={changeSignupModal}>
-                                            Signup Form
+                                            Signup
                                         </li>
                             <li className='profile-button-list-item special' onClick={loginDemo}>
-                                            Demo User
+                                            Demo Login
                                         </li>
                                     </ul>
                                 )}

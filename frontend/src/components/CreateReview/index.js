@@ -10,7 +10,7 @@ import './CreateReview.css'
 const CreateReview = ({ spotId, setReviewModal }) => {
     const [showForm, setShowForm] = useState(false)
     const [review, setReview] = useState('')
-    const [stars, setStars] = useState('')
+    const [stars, setStars] = useState(1)
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
 
@@ -41,6 +41,64 @@ const CreateReview = ({ spotId, setReviewModal }) => {
         
     }
 
+    let starCount
+    if (stars == 1){
+        starCount = (
+            <>
+                
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
+                <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
+                <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
+                <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
+            </>
+        )
+    } else if (stars == 2) {
+        starCount = (
+            <>
+
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
+                <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
+                <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
+            </>
+        )
+    } else if (stars == 3) {
+        starCount = (
+            <>
+
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
+                <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
+            </>
+        )
+    } else if (stars == 4) {
+        starCount = (
+            <>
+
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
+            </>
+        )
+    } else if (stars == 5) {
+        starCount = (
+            <>
+
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+                <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
+            </>
+        )
+    }
+
     return (
         <div className="create-review-form-container" style={{ paddingBottom: '25px' }}>
             
@@ -58,7 +116,15 @@ const CreateReview = ({ spotId, setReviewModal }) => {
                 <form className='create-review-form' onSubmit={handleSubmit}>
                     <div className='form-textarea-input'>
                         <textarea placeholder="Please leave a review" className="create-review-textarea"   onChange={(e) => setReview(e.target.value)} value={review} />
-                        <input  placeholder='stars' type='number' onChange={(e) => setStars(e.target.value)} value={stars} />
+                    </div>
+                    <div className='textarea-and-count-container'>
+                    
+                        <div className="star-count-container">
+                            {starCount}
+                        </div>
+                        <div className='form-textarea-input'>
+                            <input step={1} min={1} max={5} placeholder='stars' type='range' onChange={(e) => setStars(e.target.value)} value={stars} />
+                        </div>
                     </div>
                     <button className='create-review-button'  type='submit'>Submit</button>
                 </form>

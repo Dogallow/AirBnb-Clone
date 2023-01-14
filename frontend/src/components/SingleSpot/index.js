@@ -15,6 +15,7 @@ const SingleSpot = () => {
     const dispatch = useDispatch()
     const spot = useSelector(state => state.spots.singleSpot)
     const user = useSelector(state => state.session.user)
+    
     let stateReviews = useSelector(state => state.reviews.spot)
     const bookings = useSelector(state => state.bookings.spot)
     const history = useHistory()
@@ -28,9 +29,10 @@ const SingleSpot = () => {
     // All reviews by a spot's Id
     let reviews = Object.values(stateReviews)
 
-    // console.log('selector user', user)
+    console.log('selector user', user)
     // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!! selector spot !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', spot)
     // console.log('%%%%%%%%%%%%%%%%%%%%%%%%% Bookings %%%%%%%%%%%%%%%%%%%%%%%%%%', bookings)
+    console.log('%%%%%%%%%%%%%%%%%%%%%%%%% reviews %%%%%%%%%%%%%%%%%%%%%%%%%%', reviews)
 
     let arrOfBookings = Object.values(bookings)
 
@@ -175,9 +177,21 @@ const SingleSpot = () => {
             variant = 'left-main'
             variant2 = 'right-quad'
             // console.log('################## Spot selector ####################', spot, spot.SpotImages.length)
+
         }
 
-    // console.log(smallAuth)
+    let reviewBool = false
+        
+        if (user){
+
+            reviews.forEach(review => {
+                if (review.User.firstName === user.firstName && review.User.lastName === user.lastName){
+                    reviewBool = true
+                }
+            })
+        }
+
+    console.log(reviewBool)
     return (
         <div className='single-spot-outer-container' style={{marginBottom:'30px'}}>
             <div className='main-header-container'>
@@ -303,6 +317,14 @@ const SingleSpot = () => {
                     })
                 )}
             </div>
+            <div>
+                {!!formattedBookings.length && formattedBookings.map(booking => (
+                        
+                    <p>{booking.startDate} - {booking.endDate}</p>
+                            
+                    
+                        ))}
+            </div>
             <div className='main-details-container'>
                 <div className='left-details-container'>
                     <div className='details-header'>
@@ -318,6 +340,7 @@ const SingleSpot = () => {
 
                         <p style={{ paddingBottom: '32px' }}>Free Cancellation before Booking Starts</p>
                     </div>
+                    
 
                     <div className='details-body-2'>
                         <div style={{ padding: '32px 0px' }}>
@@ -345,27 +368,12 @@ const SingleSpot = () => {
                                 <h3>${spot.price} <span>night</span></h3>
                                 <div className='form-details-right'>
                                     <p><i className="fa-solid fa-star"></i>{spot.avgRating}</p>
-                                    •
+                                    <div style={{padding: '0px 5px'}}>•</div>
                                     <p>{spot.numReviews}</p>
                                 </div>
                             </div>
                             <div className='form-body'>
-                                <div className='price-per-night'>
-                                    <p>${spot.price} x 5 nights</p>
-                                    <p>${spot.price * 5}</p>
-                                </div>
-                                <div className='cleaning-fee'>
-                                    <p>Cleaning Fee:</p>
-                                    <p>$100</p>
-                                </div>
-                                <div className='service-fee'>
-                                    <p>Service Fee:</p>
-                                    <p>$100</p>
-                                </div>
-                                <div className='total-before-taxes'>
-                                    <p>Total:</p>
-                                    <p>${spot.price * 5 + 200}</p>
-                                </div>
+                                <Bookings spotId={spot.id}/>
                             </div>
                         </div>
 
@@ -410,7 +418,7 @@ const SingleSpot = () => {
                 </div>
                 <div className="create-review">
 
-                    {user && <button style={{marginTop: '50px'}} className='create-review-button' onClick={() => setReviewModal(true)}>Create Review</button>}
+                    {user && <button disabled={reviewBool} style={{ marginTop: '50px' }} className={reviewBool ? 'create-review-button-disabled' : 'create-review-button'} onClick={() => setReviewModal(true)}>Create Review</button>}
                     <CreateReviewModal spotId={spotId} reviewModal={reviewModal} setReviewModal={setReviewModal} />
                 </div>
             </div>
