@@ -28,6 +28,7 @@ const SingleSpot = () => {
     const [review, setReview] = useState('')
     const [stars, setStars] = useState(1)
     const [reviewId, setReviewId] = useState(null)
+    const [showInput, setShowInput] = useState(false)
     
     
 
@@ -234,10 +235,16 @@ const SingleSpot = () => {
                         if (imageCount <= 2) {
                             if (index === 0) {
                                 return (
-                                    <div className={`${variant}`} key={index}>
+                                    
+                                    <div className={`${variant}`} key={index} onClick={(e) => console.log(spotImage.id)}>
                                         <img src={spotImage.url} alt="No Image" />
-
+                                        <div  className='delete-logo-container'>
+                                            <div className='position-logo-container'>
+                                                <i style={{ color: '#E61E4D'}} class="fa-solid fa-trash fa-lg"></i>
+                                            </div>
+                                        </div>
                                     </div>
+                                    
                                 )
                             }
 
@@ -246,7 +253,11 @@ const SingleSpot = () => {
                             return (
                                 <div className={`${variant2} index${index}`} key={index}>
                                     <img src={spotImage.url} alt="No Image" />
-
+                                    <div style={{ marginLeft: '-8px',paddingLeft:'8px'}} className='delete-logo-container'>
+                                        <div className='position-logo-container'>
+                                            <i style={{ color: '#E61E4D' }} class="fa-solid fa-trash fa-lg"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             )
 
@@ -428,9 +439,9 @@ const SingleSpot = () => {
                                     </div>}
                                 </div>
                                 <div className="add-image-delete-review-button">
-                                    {user && review.userId === user.id && !showEditForm && <AddReviewImage id={review.id} spotId={spotId} />}
-                                    {user && review.userId === user.id && !showEditForm && <button className="delete-review-button" onClick={() => deleteReview(review.id)}>Delete Review</button>}
-                                    {user && review.userId === user.id && <button className="delete-review-button" onClick={() =>{ 
+                                    {user && review.userId === user.id && !showEditForm && <AddReviewImage showInput={showInput} setShowInput={setShowInput} id={review.id} spotId={spotId} />}
+                                    {user && review.userId === user.id && !showInput &&  !showEditForm && <button className="delete-review-button" onClick={() => deleteReview(review.id)}>Delete Review</button>}
+                                    {user && review.userId === user.id && !showInput && <button className="delete-review-button" onClick={() =>{ 
                                     setShowEditForm(!showEditForm)
                                     setReviewId(review.id)
                                     }}>{!showEditForm ? 'Edit Review' : 'Cancel Edit'}</button>}
