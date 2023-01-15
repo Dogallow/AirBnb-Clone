@@ -79,7 +79,42 @@ module.exports = {
     name: "TYC 3203-450-1",
     description: "The star is much closer than the much more distant galaxy.",
    price: 100000
-  }
+  }, {
+    ownerId: 1,
+    address: "Zmudosowski State Beach",
+    city: "Watsonville",
+    state: "California",
+    country: "United States of America",
+    lat: 0,
+    lng: 0,
+    name: "SPECTACULAR OCEAN-FRONT HOME IN MONTEREY BAY",
+    description: "California is known for some of the most beautiful beaches in the world and Pajaro Dunes is no exception. Positioned on the oceanfront, this 3,000+ sq. ft home has one of the most spectacular views along the coastline and is situated on one of the most private stretches of beach in Monterey Bay. Just like us, you will be captivated by the daily views of birds, dolphins, whales, sea otters and other wildlife and your breath taken away by the incredibly beautiful evening sunsets.",
+    price: 886
+       }, 
+       {
+         ownerId: 2,
+         address: "Moss Beach",
+         city: "Moss Beach",
+         state: "California",
+         country: "United States of America",
+         lat: 0,
+         lng: 0,
+         name: "Walk to the Beach from this Ocean Front Home",
+         description: "Your beachfront escape awaits you.Come immerse yourself in the serenity of this Pacific Ocean retreat gracefully set in a secluded beach just 25 mins south of San Francisco. This 2 bed / 2 bath home features breathtaking ocean views and direct beach access just a few steps down.The hot tub overlooking the ocean, fire pits and a putting green complete this idyllic space.",
+         price: 800
+       },
+       {
+         ownerId: 3,
+         address: "Joshua Tree National Park ",
+         city: "Joshua Tree",
+         state: "California",
+         country: "United States of America",
+         lat: 0,
+         lng: 0,
+         name: "Invisible House Joshua Tree | Modern Masterpiece",
+         description: "We invite guests to experience the most unique desert home on the planet, and one of the best-known homes in the world: the Invisible House.This one of a kind masterpiece was designed by veteran film producer Chris Hanley.Featured in countless music videos, television shows and dozens of publications worldwide(including Netflix, Robb Report, Architectural Digest, Washington Post, People, Daily Mail, Dezeen, and Maxim), this sleek 5, 500 sq.ft.minimalist retreat is set on 90 breathtaking acres comprising the largest privately- owned parcel of land abutting Joshua Tree National Park.An exploration in contrasts, the mirrored 22 - story horizontal skyscraper features an entirely reflective facade that absorbs its surroundings and vanishes into the desert landscape.The juxtaposition of sleek minimalism and ancient desert terrain makes Invisible House a singularly definitive structure in blending modern architecture with the natural world.",
+         price: 2973
+       },
   ])
   },
 
