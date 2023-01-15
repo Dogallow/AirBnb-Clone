@@ -126,8 +126,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate:{
         len: {
-          args: [1,50],
-          msg: "Name must be less than 50 characters"
+          args: [1,100],
+          msg: "Name must be less than 100 characters"
         },
         notEmpty:{
           args:true,
@@ -143,8 +143,8 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Description is required"
         },
         stringCount(value){
-          if (value.length > 240){
-            throw new Error('Description cannot be greater than 240 characters')
+          if (value.length > 500){
+            throw new Error('Description cannot be greater than 500 characters')
           }
         }
       }
