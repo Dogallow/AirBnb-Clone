@@ -37,7 +37,7 @@ const SingleSpot = () => {
     let reviews = Object.values(stateReviews)
 
     console.log('selector user', user)
-    // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!! selector spot !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', spot)
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!! selector spot !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', spot)
     // console.log('%%%%%%%%%%%%%%%%%%%%%%%%% Bookings %%%%%%%%%%%%%%%%%%%%%%%%%%', bookings)
     console.log('%%%%%%%%%%%%%%%%%%%%%%%%% reviews %%%%%%%%%%%%%%%%%%%%%%%%%%', reviews)
 
@@ -123,6 +123,7 @@ const SingleSpot = () => {
     
 
     const deleteReview = async (id) => {
+        
     dispatch(reviewsActions.deleteSingleReview(id)).then(()=> {
         dispatch(spotsActions.getOneSpot(spotId)).catch(async data => {
             const error = await data.json()
@@ -203,7 +204,18 @@ const SingleSpot = () => {
         }
 
 
-    
+    const deleteImage = async (e, spotImageId) => {
+        e.preventDefault()
+        console.log('In component',spotImageId)
+        await dispatch(spotsActions.deleteSpotImageThunk(spotImageId)).then(() => {
+            dispatch(spotsActions.getOneSpot(spotId)).catch(async data => {
+                const error = await data.json()
+                // console.log(error.message)
+
+
+            })
+        })
+    }
 
 
     console.log(reviewBool)
@@ -236,10 +248,12 @@ const SingleSpot = () => {
                             if (index === 0) {
                                 return (
                                     
-                                    <div className={`${variant}`} key={index} onClick={(e) => console.log(spotImage.id)}>
+                                    <div className={`${variant}`} key={index} >
                                         <img src={spotImage.url} alt="No Image" />
-                                        <div  className='delete-logo-container'>
-                                            <div className='position-logo-container'>
+                                        <div  className={user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                            <div className= 'position-logo-container' onClick={(e) =>{
+                                                console.log(spotImage.id)
+                                                deleteImage(e, spotImage.id)}}>
                                                 <i style={{ color: '#E61E4D'}} class="fa-solid fa-trash fa-lg"></i>
                                             </div>
                                         </div>

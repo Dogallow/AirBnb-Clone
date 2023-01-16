@@ -7,6 +7,7 @@ const EDIT_SPOT = 'spots/EDIT_SPOT'
 const DELETE_SPOT = 'spots/DELETE_SPOT'
 const ADD_IMAGE = 'spots/ADD_IMAGE'
 const MY_SPOTS = 'spots/MY_SPOTS'
+const SPOT_IMAGE = 'spots/SPOT_IMAGE'
 const CLEAR = 'spots/CLEAR'
 
 export const clear = () => {
@@ -25,6 +26,13 @@ const allSpots = (spots) => {
     return {
         type: ALL_SPOTS,
         spots
+    }
+}
+
+const deleteSpotImageActionCreator = (imageId) => {
+    return {
+        type: SPOT_IMAGE,
+        payload: imageId
     }
 }
 
@@ -60,6 +68,19 @@ const mySpots = (spots) => {
     return {
         type: MY_SPOTS,
         spots
+    }
+}
+
+export const deleteSpotImageThunk = (spotImageId) => async dispatch => {
+    console.log('in thunk',spotImageId)
+    const response = await csrfFetch(`/api/spot-images/${spotImageId}`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+    const res = await response.json()
+    console.log('RETURNED FROM DELET SPOT IMAGE', res)
+    dispatch(deleteSpotImageActionCreator(spotImageId))
     }
 }
 
@@ -192,6 +213,10 @@ const initialState = {
 const spotsReducer = (state=initialState, action) => {
     let newState
     switch (action.type){
+        case SPOT_IMAGE:
+            newState = {...state}
+            console.log(newState)
+            return state
         case CLEAR:
             return initialState
         case ALL_SPOTS: 
