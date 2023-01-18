@@ -572,3 +572,14 @@ p {
     justify-content: center;
     cursor: pointer;
 }
+
+.bookings-container:hover .bookings-delete-icon{
+    visibility: visible;
+}
+
+.bookings-delete-icon{
+    visibility: hidden;
+    padding-left: 15px;
+    cursor: pointer;
+    color: red;
+}

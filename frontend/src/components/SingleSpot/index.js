@@ -38,7 +38,7 @@ const SingleSpot = () => {
 
     console.log('selector user', user)
     console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!! selector spot !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', spot)
-    // console.log('%%%%%%%%%%%%%%%%%%%%%%%%% Bookings %%%%%%%%%%%%%%%%%%%%%%%%%%', bookings)
+    console.log('%%%%%%%%%%%%%%%%%%%%%%%%% Bookings %%%%%%%%%%%%%%%%%%%%%%%%%%', bookings)
     console.log('%%%%%%%%%%%%%%%%%%%%%%%%% reviews %%%%%%%%%%%%%%%%%%%%%%%%%%', reviews)
 
     let arrOfBookings = Object.values(bookings)
@@ -74,6 +74,7 @@ const SingleSpot = () => {
             let formattedEndDate = [endMonth, ' ', endDay, ', ', endYear].join('')
             // console.log(formattedEndDate)
             return {
+                id: booking.id,
                 startDate: formattedStartDate,
                 endDate: formattedEndDate
             }
@@ -97,12 +98,16 @@ const SingleSpot = () => {
             errors.push(error)
 
         })
-        dispatch(bookingsActions.thunk_spotBookings(spotId)).catch(async data => {
-            const error = await data.json()
-            // console.log(error)
-            errors.push(error)
+        if (user){
+            console.log('THIS IS RUNNING *************************************************************************************************************************************')
 
-        })
+            dispatch(bookingsActions.thunk_spotBookings(spotId)).catch(async data => {
+                const error = await data.json()
+                // console.log(error)
+                errors.push(error)
+    
+            })
+        }
 
        
         
@@ -217,7 +222,9 @@ const SingleSpot = () => {
         })
     }
 
-
+    const handleDeleteBooking = async (id) => {
+        await dispatch(bookingsActions.deleteBookingThunk(id))
+    }
     console.log(reviewBool)
     return (
         <div className='single-spot-outer-container' style={{marginBottom:'30px'}}>
@@ -250,7 +257,7 @@ const SingleSpot = () => {
                                     
                                     <div className={`${variant}`} key={index} >
                                         <img src={spotImage.url} alt="No Image" />
-                                        <div  className={user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                        <div  className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
                                             <div className= 'position-logo-container' onClick={(e) =>{
                                                 console.log(spotImage.id)
                                                 deleteImage(e, spotImage.id)}}>
@@ -267,8 +274,11 @@ const SingleSpot = () => {
                             return (
                                 <div className={`${variant2} index${index}`} key={index}>
                                     <img src={spotImage.url} alt="No Image" />
-                                    <div style={{ marginLeft: '-8px',paddingLeft:'8px'}} className='delete-logo-container'>
-                                        <div className='position-logo-container'>
+                                    <div style={{ marginLeft: '-8px', paddingLeft: '8px' }} className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                        <div className='position-logo-container' onClick={(e) => {
+                                            console.log(spotImage.id)
+                                            deleteImage(e, spotImage.id)
+                                        }}>
                                             <i style={{ color: '#E61E4D' }} class="fa-solid fa-trash fa-lg"></i>
                                         </div>
                                     </div>
@@ -281,7 +291,14 @@ const SingleSpot = () => {
                                 return (
                                     <div className={`${variant}`} key={index}>
                                         <img src={spotImage.url} alt="Main Image" />
-
+                                        <div  className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                            <div className='position-logo-container' onClick={(e) => {
+                                                console.log(spotImage.id)
+                                                deleteImage(e, spotImage.id)
+                                            }}>
+                                                <i style={{ color: '#E61E4D' }} class="fa-solid fa-trash fa-lg"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 )
                             }
@@ -290,6 +307,14 @@ const SingleSpot = () => {
                                 return (
                                     <div className={`${variant2}`} key={index}>
                                         <img src={spotImage.url} alt='Side Image' />
+                                        <div style={{ marginLeft: '-8px', paddingLeft: '8px' }} className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                            <div className='position-logo-container' onClick={(e) => {
+                                                console.log(spotImage.id)
+                                                deleteImage(e, spotImage.id)
+                                            }}>
+                                                <i style={{ color: '#E61E4D' }} class="fa-solid fa-trash fa-lg"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 )
                             }
@@ -297,7 +322,14 @@ const SingleSpot = () => {
                             return (
                                 <div className={`${variant3}`} key={index}>
                                     <img src={spotImage.url} alt="Side Image" />
-
+                                    <div style={{ marginLeft: '-8px', paddingLeft: '8px' }} className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                        <div className='position-logo-container' onClick={(e) => {
+                                            console.log(spotImage.id)
+                                            deleteImage(e, spotImage.id)
+                                        }}>
+                                            <i style={{ color: '#E61E4D' }} class="fa-solid fa-trash fa-lg"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             )
 
@@ -307,7 +339,14 @@ const SingleSpot = () => {
                                 return (
                                     <div className={`${variant}`} key={index}>
                                         <img src={spotImage.url} alt="Main Image" />
-
+                                        <div  className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                            <div className='position-logo-container' onClick={(e) => {
+                                                console.log(spotImage.id)
+                                                deleteImage(e, spotImage.id)
+                                            }}>
+                                                <i style={{ color: '#E61E4D' }} class="fa-solid fa-trash fa-lg"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 )
                             }
@@ -316,6 +355,14 @@ const SingleSpot = () => {
                                 return (
                                     <div className={`${variant2}`} key={index}>
                                         <img src={spotImage.url} alt='Side Image' />
+                                        <div style={{ marginLeft: '-8px', paddingLeft: '8px' }} className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                            <div className='position-logo-container' onClick={(e) => {
+                                                console.log(spotImage.id)
+                                                deleteImage(e, spotImage.id)
+                                            }}>
+                                                <i style={{ color: '#E61E4D' }} class="fa-solid fa-trash fa-lg"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 )
                             }
@@ -324,6 +371,14 @@ const SingleSpot = () => {
                                 return (
                                     <div className={`${variant3}`} key={index}>
                                         <img src={spotImage.url} alt='Side Image' />
+                                        <div style={{ marginLeft: '-8px', paddingLeft: '8px' }} className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                            <div className='position-logo-container' onClick={(e) => {
+                                                console.log(spotImage.id)
+                                                deleteImage(e, spotImage.id)
+                                            }}>
+                                                <i style={{ color: '#E61E4D' }} class="fa-solid fa-trash fa-lg"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 )
                             }
@@ -331,7 +386,14 @@ const SingleSpot = () => {
                             return (
                                 <div className={`${variant4}`} key={index}>
                                     <img src={spotImage.url} alt="Side Image" />
-
+                                    <div style={{ marginLeft: '-8px', paddingLeft: '8px' }} className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                        <div className='position-logo-container' onClick={(e) => {
+                                            console.log(spotImage.id)
+                                            deleteImage(e, spotImage.id)
+                                        }}>
+                                            <i style={{ color: '#E61E4D' }} class="fa-solid fa-trash fa-lg"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             )
 
@@ -340,7 +402,14 @@ const SingleSpot = () => {
                             return (
                                 <div className={`${variant}`} key={index}>
                                     <img src={spotImage.url} alt="No Image" />
-
+                                    <div style={{ marginLeft: '-8px', paddingLeft: '8px' }} className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                        <div className='position-logo-container' onClick={(e) => {
+                                            console.log(spotImage.id)
+                                            deleteImage(e, spotImage.id)
+                                        }}>
+                                            <i style={{ color: '#E61E4D' }} class="fa-solid fa-trash fa-lg"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             )
                         }
@@ -356,14 +425,17 @@ const SingleSpot = () => {
                     })
                 )}
             </div>
-            <div>
-                {!!formattedBookings.length && formattedBookings.map(booking => (
-                        
-                    <p>{booking.startDate} - {booking.endDate}</p>
-                            
+            {user && !!formattedBookings.length && formattedBookings.map(booking => (
+                
+                <div className='bookings-container'>
+                    <p>{booking.startDate} - {booking.endDate}<span onClick={() =>{
+                        console.log(booking.id)
+                        handleDeleteBooking(booking.id)
+                    }} className='bookings-delete-icon'><i class="fa-solid fa-x"></i></span></p>
+                
+                </div>
                     
                         ))}
-            </div>
             <div className='main-details-container'>
                 <div className='left-details-container'>
                     <div className='details-header'>

@@ -45,8 +45,9 @@ const Bookings = ({spotId}) => {
 
         
 
-        
+    
     }
+    console.log(Date(startDate) > Date(endDate))
     return(
         <form onSubmit={handleSubmit}>
             <label>Start Date</label>
