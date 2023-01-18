@@ -48,7 +48,7 @@ const SingleSpot = () => {
     let formattedBookings = arrOfBookings.map(booking => {
         const months = ["January", "February", "March", "April", "May", "June", "July",
             "August", "September", "October", "November", "December"]
-
+        console.log(booking)
         if (booking.startDate.includes('T') || booking.endDate.includes('T')){
             booking.startDate = booking.startDate.split('T').join(' ')
             booking.endDate = booking.endDate.split('T').join(' ')
@@ -75,6 +75,7 @@ const SingleSpot = () => {
             // console.log(formattedEndDate)
             return {
                 id: booking.id,
+                userId: booking.userId,
                 startDate: formattedStartDate,
                 endDate: formattedEndDate
             }
@@ -102,9 +103,10 @@ const SingleSpot = () => {
             console.log('THIS IS RUNNING *************************************************************************************************************************************')
 
             dispatch(bookingsActions.thunk_spotBookings(spotId)).catch(async data => {
-                const error = await data.json()
+                console.log(data)
+                // const error = await data.json()
                 // console.log(error)
-                errors.push(error)
+                // errors.push(error)
     
             })
         }
@@ -424,18 +426,23 @@ const SingleSpot = () => {
                         )
                     })
                 )}
-            </div>
-            {user && !!formattedBookings.length && formattedBookings.map(booking => (
-                
+                </div>
+                {user && formattedBookings.length > 0 && <h3>Reserved Dates:</h3>}
                 <div className='bookings-container'>
-                    <p>{booking.startDate} - {booking.endDate}<span onClick={() =>{
+            {user && !!formattedBookings.length && formattedBookings.map(booking => {
+                console.log('booking Id',booking)
+                console.log('user Id', user.id)
+                return (
+                
+                    <p className={user.id == booking.userId ? 'reserved-booking core-booking' : 'default-booking core-booking'}>{booking.startDate.slice(0, 3)} {booking.startDate.split(' ')[1]} {booking.startDate.slice(-4)}  - {booking.endDate.slice(0, 3)} {booking.endDate.split(' ')[1]} {booking.endDate.slice(-4)}{user.id == booking.userId && <span onClick={() =>{
                         console.log(booking.id)
                         handleDeleteBooking(booking.id)
-                    }} className='bookings-delete-icon'><i class="fa-solid fa-x"></i></span></p>
+                    }} className='bookings-delete-icon'><i class="fa-solid fa-x"></i></span>}
+                    </p>
                 
-                </div>
                     
-                        ))}
+                    )})}
+                    </div>
             <div className='main-details-container'>
                 <div className='left-details-container'>
                     <div className='details-header'>

@@ -645,6 +645,11 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
     })
 
+    console.log('HERE ARE THE BOOKINGS ------->',bookings)
+    if (!bookings){
+        return []
+    }
+
     const spot = await Spot.findOne({
         where: {
             id: spotId
@@ -667,13 +672,15 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
     const result = []
     if (req.user.id !== spot.ownerId) {
         for (let booking of bookings) {
-
+            
             const obj = {}
             
             obj.id = booking.id
             obj.spotId = booking.spotId
             obj.startDate = booking.startDate
             obj.endDate = booking.endDate
+            obj.userId = booking.userId
+            
 
             result.push(obj)
         }
@@ -725,6 +732,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         })
 
         next(err)
+        return
     }
     if (req.user.id === spot.ownerId) {
         const err = new Error("Cannot book, if you are the owner of the property")
@@ -736,6 +744,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         })
 
         next(err)
+        return
     }
 
 
