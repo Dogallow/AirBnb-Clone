@@ -10,7 +10,7 @@ import image from '../../image/logo.png'
 import DefaultProfileButton from "./DefaultProfileButton"
 
 
-const Navigation = ({ isLoaded }) => {
+const Navigation = ({ isLoaded, setSearchResults, searchResults, searchFilter, setSearchFilter }) => {
     const userSession = useSelector(state => state.session.user)
     const dispatch = useDispatch()
     const location = useLocation()
@@ -36,7 +36,7 @@ const Navigation = ({ isLoaded }) => {
         return isLoaded && (
             <>
 
-                <ProfileButton navBarWidth={navBarWidth} user={userSession} />
+                <ProfileButton setSearchResults={setSearchResults} searchResults={searchResults} navBarWidth={navBarWidth} user={userSession} searchFilter={searchFilter} setSearchFilter={setSearchFilter} />
             </>
         )
     }
@@ -74,7 +74,22 @@ const Navigation = ({ isLoaded }) => {
                         </div>
                     </div>
                 </NavLink>
-
+                {window.location.href[window.location.href.length - 1] === '/' && <div>
+                    <select value={searchFilter} onChange={(e) => {
+                        setSearchResults('')
+                        setSearchFilter(e.target.value)}
+                    }>
+                        <option value={'address'}>Address</option>
+                        <option value={'city'}>City</option>
+                        <option value={'state'}>State</option>
+                        <option value={'country'}>Country</option>
+                        <option value={'price'}>Price</option>
+                    </select>
+                    {searchFilter === 'price' ? <input step={250} min={250} max={2000} placeholder='Price' type='range' onChange={(e) => setSearchResults(e.target.value)} value={searchResults} /> 
+                    :
+                    <input type={searchFilter !== 'price' ? 'text' : 'number'} value={searchResults} onChange={(e) => setSearchResults(e.target.value)} />
+                }
+                </div>}
                 <div className="navbar-menu-links">
                     <div className="link-container">
                         <ul>
