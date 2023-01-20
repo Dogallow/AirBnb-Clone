@@ -259,7 +259,7 @@ module.exports = {
          lat: 0,
          lng: 0,
          name: "Historic Stone Schoolhouse in Tom Miner",
-         description: "Located in Tom Miner Basin, MT, a 30 minute drive to the North Entrance of Yellowstone Park. Wake up to incredible views, wildlife, hiking, fishing, soak in the hot springs, cross-country skiing in winter, all minutes away."
+         description: "Located in Tom Miner Basin, MT, a 30 minute drive to the North Entrance of Yellowstone Park. Wake up to incredible views, wildlife, hiking, fishing, soak in the hot springs, cross-country skiing in winter, all minutes away.",
          price: 175
        },
        {
