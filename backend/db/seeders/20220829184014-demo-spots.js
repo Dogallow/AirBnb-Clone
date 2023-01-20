@@ -29,7 +29,7 @@ module.exports = {
     lat: 0,
     lng: 0,
        name: "OnTheRocks•Architectural•Estate•Dramatic Ocean VUs",
-       description: "OnTheRocks is a Frank Lloyd Wright inspired modern California Ranch w/ subtle Prairie & & International architectural design; perched on a promontory overlooking cove w/ jaw dropping ocean views and mesmerizing - audible crashing white water waves. Complete with spa, BBQ, dry/wet sauna, chefs kitchen, lux bedding and linens, Le Creuset crockery, Mauviel stainless steel cookware, Viking appliances, Wolf small kitchen appliances, Jura Espresso Machine with frother, WIFI, streaming Roku & Alexa.",
+       description: "OnTheRocks is a Frank Lloyd Wright inspired modern California Ranch w/ subtle Prairie & & International architectural design.",
     price: 1499
    },
   {
@@ -54,7 +54,7 @@ module.exports = {
    lat: 0,
    lng: 0,
     name: "Sunset House - Panoramic Ocean Views, Pool, Hot Tub, BBQs, Rooftop Deck",
-    description: "This condo features floor-to-ceiling windows in the living room to maximize the breathtaking views of the ocean. You will love your stay in this conveniently located condo in the heart of Pacific Beach with restaurants and shops within easy walking distance and just minutes to having your toes in the sand. You will never miss a sunset here! ",
+    description: "This condo features floor-to-ceiling windows in the living room to maximize the breathtaking views of the ocean.",
    price: 280
   },
   {
@@ -67,7 +67,7 @@ module.exports = {
    lat: 0,
    lng: 0,
     name: "Oceanfront home with private hot tub, views, & close beach access",
-    description: "Breathtaking views of the ocean await at this incredible oceanfront home. With a private hot tub overlooking the water a spacious deck and grill, the view can be enjoyed at every turn. You will have a wood-burning fireplace, binoculars to get a closer look at the ocean, and a full kitchen. Privately situated on the cliffs of Gualala, you will instantly feel at peace and at home.",
+    description: "Breathtaking views of the ocean await at this incredible oceanfront home. With a private hot tub overlooking the water a spacious deck and grill, the view can be enjoyed at every turn.",
    price: 457
   },
   {
@@ -80,7 +80,7 @@ module.exports = {
    lat: 0,
    lng: 0,
     name: "Full-Floor Penthouse ★ Ocean Front ★ A/C",
-    description: "Stunning 3 br + 2 ba full-floor Penthouse located on the Ocean in the heart of Mission Beach.  Featured highlights include a spacious open floorplan, expansive wrap around ocean front deck, fold up accordion patio doors, floor to ceiling windows, wrap around patio, sleeps 10 (8 adults max) & views galore!",
+    description: "Stunning 3 br + 2 ba full-floor Penthouse located on the Ocean in the heart of Mission Beach.",
    price: 1050
   }, {
     
@@ -92,7 +92,7 @@ module.exports = {
     lat: 0,
     lng: 0,
     name: "SPECTACULAR OCEAN-FRONT HOME IN MONTEREY BAY",
-    description: "California is known for some of the most beautiful beaches in the world and Pajaro Dunes is no exception. Positioned on the oceanfront, this 3,000+ sq. ft home has one of the most spectacular views along the coastline and is situated on one of the most private stretches of beach in Monterey Bay. Just like us, you will be captivated by the daily views of birds, dolphins, whales, sea otters and other wildlife and your breath taken away by the incredibly beautiful evening sunsets.",
+    description: "California is known for some of the most beautiful beaches in the world and Pajaro Dunes is no exception. This 3,000+ sq. ft home has one of the most spectacular views along the coastline.",
     price: 886
        }, 
        {
@@ -105,7 +105,7 @@ module.exports = {
          lat: 0,
          lng: 0,
          name: "Walk to the Beach from this Ocean Front Home",
-         description: "Your beachfront escape awaits you.Come immerse yourself in the serenity of this Pacific Ocean retreat gracefully set in a secluded beach just 25 mins south of San Francisco. This 2 bed / 2 bath home features breathtaking ocean views and direct beach access just a few steps down.The hot tub overlooking the ocean, fire pits and a putting green complete this idyllic space.",
+         description: "Your beachfront escape awaits you.Come immerse yourself in the serenity of this Pacific Ocean retreat gracefully set in a secluded beach just 25 mins south of San Francisco.",
          price: 800
        },
        {
@@ -117,7 +117,7 @@ module.exports = {
          lat: 0,
          lng: 0,
          name: "Invisible House Joshua Tree | Modern Masterpiece",
-         description: "We invite guests to experience the most unique desert home on the planet, and one of the best-known homes in the world: the Invisible House.This one of a kind masterpiece was designed by veteran film producer Chris Hanley.Featured in countless music videos, television shows and dozens of publications worldwide(including Netflix, Robb Report, Architectural Digest, Washington Post, People, Daily Mail, Dezeen, and Maxim).",
+         description: "We invite guests to experience the most unique desert home on the planet, and one of the best-known homes in the world: the Invisible House.",
          price: 2973
        },
        {
@@ -129,7 +129,7 @@ module.exports = {
          lat: 0,
          lng: 0,
          name: "NEW 6400 SQFT BEACH MANSION, OCEAN VIEWS, SLEEP 25",
-         description: "Reserve now for your luxury year round gathering at IBB Beach Mansion, possibly the largest house available for rent on the Oregon Coast with incredible panoramic ocean views from every room and a 2500 sq ft deck. Gather with your large family at this newly remodeled house with new furniture, new mattresses, fully stocked kitchen and many updates. After a day at the beach, relax in the new hot tub on the deck, grill your fav meal or enjoy movie night in the theater room. 3 mins drive to beach.",
+         description: "Reserve now for your luxury year round gathering at IBB Beach Mansion, possibly the largest house available for rent on the Oregon Coast with incredible panoramic ocean views from every room and a 2500 sq ft deck.",
          price: 979
        },
        {
@@ -142,7 +142,7 @@ module.exports = {
          lat: 0,
          lng: 0,
          name: "Bavarian Castle nestled in the Texas Hill Country",
-         description: "Just minutes from several Highland Lakes and conveniently located 45 minutes NW of Austin, TX, resides a ​14,000 square foot Bavarian inspired castle where you can be a King or a Queen for the night.Whether it's the majestic scenic view of 3 counties from the balcony, the oversized living areas, or the 113 acres of State Park worthy hiking on site.We look forward to hosting you.",
+         description: "Just minutes from several Highland Lakes and conveniently located 45 minutes NW of Austin, TX, resides a ​14,000 square foot Bavarian inspired castle where you can be a King or a Queen for the night.",
          price: 1518
        },
        {
@@ -168,7 +168,7 @@ module.exports = {
          lat: 0,
          lng: 0,
          name: "EcoFriendly Cabin! Zion without the crowds.",
-         description: "This extraordinary A-frame cabin has everything glampers will need to have an unforgettable adventure in the stunning canyons of Utah. It has a unique feature that will surely amaze and delight guests; its wall is designed to open and close at will, offering a breathtaking view of the southern side of the Zion Mountains. The cabin is solar-powered with provisions for lighting and charging small devices. Just feet away is a gorgeous hike! Take a vacation into nature in this adorable cabin.",
+         description: "This extraordinary A-frame cabin has everything glampers will need to have an unforgettable adventure in the stunning canyons of Utah. It has a unique feature that will surely amaze and delight guests.",
          price: 175
        },
        {
@@ -181,7 +181,7 @@ module.exports = {
          lat: 0,
          lng: 0,
          name: "Stargazing Grand Canyon Modern Tiny Home Cabin",
-         description: "Coming to the Grand Canyon? Looking for the perfect spot to see every star in the Milky Way? We are the Stargazing 180sq ft Tiny Home.Our off- grid cabin is located just 30mins from Grand Canyon National Park.With the absence of light and sound pollution you’ll have the most tranquil experience.Yes, you will be camping but that doesn’t mean you have to settle for mediocrity.Our modern, bougie aesthetic is the perfect glamping experience.",
+         description: "Coming to the Grand Canyon? Looking for the perfect spot to see every star in the Milky Way? We are the Stargazing 180sq ft Tiny Home.Our off- grid cabin is located just 30mins from Grand Canyon National Park.",
          price: 236
        },
        {
@@ -220,7 +220,7 @@ module.exports = {
          lat: 0,
          lng: 0,
          name: "The Alley at North Beach - Private Bowling Alley and Heated Pool!",
-         description: "Historic 5 Cedarwood Ave was originally constructed in 1910 as a library/bowling alley for Fort Screven on Tybee Island. The 2022 restoration of the building included 6 bedrooms (2 master suites), 4 full bathrooms, new modern bowling lane with automatic ball return and pin setter in the middle of the rental space, bright white kitchen with Carrara marble counters and island, separate mini bar, in-unit laundry, a heated pool, and private yard.",
+         description: "Historic 5 Cedarwood Ave was originally constructed in 1910 as a library/bowling alley for Fort Screven on Tybee Island. The 2022 restoration of the building included 6 bedrooms (2 master suites), 4 full bathrooms, new modern bowling lane and more.",
          price: 917
        },
        {
@@ -233,7 +233,7 @@ module.exports = {
          lat: 0,
          lng: 0,
          name: "Playhouse",
-         description: "We are proud to present “The Playhouse Retreat”. This is the #1 home in Scottsdale for families with kids of all ages.Everything is brand- new inside and out.Over $1 million was recently invested into renovating this property to create a one of a kind showpiece",
+         description: "This is the #1 home in Scottsdale for families with kids of all ages.Everything is brand- new inside and out.Over $1 million was recently invested into renovating this property to create a one of a kind showpiece.",
          price: 1900
        },
        {
@@ -246,7 +246,7 @@ module.exports = {
          lat: 0,
          lng: 0,
          name: "Phoenix East Wing - Experience off-grid luxury",
-         description: "The Phoenix official Earthship cannot be compared to any other rental in this world. This home’s jungle greenhouse creates its own microclimate in the high mountain desert and is completely off-the-grid, exquisitely detailed and outfitted with modern amenities. The outer greenhouse features towering banana trees, grape vines, birds, turtles and even a fish pond. The inner living spaces are cozy and quiet. The Phoenix Earthship was featured in 2014 as one of Lonely Planet’s Top Ten Eco-Stays.",
+         description: "The Phoenix official Earthship cannot be compared to any other rental in this world. This home’s jungle greenhouse creates its own microclimate in the high mountain desert and is completely off-the-grid.",
          price: 270
        },
        {
@@ -259,7 +259,7 @@ module.exports = {
          lat: 0,
          lng: 0,
          name: "Historic Stone Schoolhouse in Tom Miner",
-         description: "Located in Tom Miner Basin, MT, a 30 minute drive to the North Entrance of Yellowstone Park. Wake up to incredible views, wildlife, hiking, fishing, soak in the hot springs, cross-country skiing in winter, all minutes away. You do have to travel 5.5 miles up a dirt road, so expect to drive on a nicely maintained dirt road for 10-15 minutes.",
+         description: "Located in Tom Miner Basin, MT, a 30 minute drive to the North Entrance of Yellowstone Park. Wake up to incredible views, wildlife, hiking, fishing, soak in the hot springs, cross-country skiing in winter, all minutes away."
          price: 175
        },
        {
@@ -272,7 +272,7 @@ module.exports = {
          lat: 0,
          lng: 0,
          name: "Casa Del Barranco",
-         description: "Casa Del Barranco (House on a Cliff) is the quintessential description of this Santa Fe-style home. Located on 10+ private acres, it sits on a small bluff overlooking a scenic, rocky ravine w/ seasonal creek meandering thru the walls of the ravine. The 2200 sq ft home is situated to take advantage of unparalleled views of the Sangre de Cristo Mtns. We purchased this home & plan to reno one day...we are excited for guests to use as-is for now. It’s an artist haven & has many unique features.",
+         description: "Casa Del Barranco (House on a Cliff) is the quintessential description of this Santa Fe-style home. Located on 10+ private acres, it sits on a small bluff overlooking a scenic, rocky ravine w/ seasonal creek meandering thru the walls of the ravine.",
          price: 165
        }
   ])
