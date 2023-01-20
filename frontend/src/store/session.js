@@ -32,7 +32,7 @@ export const getLoggedIn = (user) => async dispatch => {
 
     if(res.ok){
         const currentUser = await res.json()
-        
+        console.log('USER DATA RETURNED FROM THE BACKEND', currentUser)
         dispatch(useLogin(currentUser))
         return currentUser
     }
@@ -97,10 +97,10 @@ const sessionReducer = (state = initialState, action) => {
     let newState
     switch(action.type){
         case LOGIN:
-            newState = {...state, user: {...state.user}}
+            newState = {...state, user: action.user}
             
             
-            newState.user = action.user
+            // newState.user = action.user
             return newState
         case LOGOUT:
             newState = {...state}

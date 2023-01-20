@@ -5,7 +5,7 @@ import './Navigation.css';
 import { NavLink, Redirect, useHistory } from 'react-router-dom'
 import image from '../../image/logo.png'
 
-const ProfileButton = ({ user, navBarWidth }) => {
+const ProfileButton = ({ user, navBarWidth, setSearchResults, searchResults, searchFilter, setSearchFilter }) => {
     const [showMenu, setShowMenu] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory()
@@ -16,7 +16,7 @@ const ProfileButton = ({ user, navBarWidth }) => {
     }
     let currentUser = user.user || user
  
-    
+    console.log(window.location.href[window.location.href.length - 1])
     // console.log('current User',currentUser.user)
     
     
@@ -52,7 +52,7 @@ const ProfileButton = ({ user, navBarWidth }) => {
     return (
         <div className="outer-nav-container">
         <div className={`navbar-main-container ${navBarWidth}`}>
-                <NavLink style={{textDecoration: 'none'}} exact to="/" className="navbar-icon-container">
+                <NavLink style={{textDecoration: 'none'}} exact to="/" className="navbar-icon-container" onClick={() => setSearchResults('')}>
             <div className="navbar-icon-container">
                 
                     <img src={image} alt="spaceship"/>
@@ -62,10 +62,26 @@ const ProfileButton = ({ user, navBarWidth }) => {
                 </div>
             </div>
                 </NavLink>
-
+                {window.location.href[window.location.href.length - 1] === '/' && <div>
+                    <select value={searchFilter} onChange={(e) => {
+                        setSearchResults('')
+                        setSearchFilter(e.target.value)
+                    }
+                    }>
+                        <option value={'address'}>Address</option>
+                        <option value={'city'}>City</option>
+                        <option value={'state'}>State</option>
+                        <option value={'country'}>Country</option>
+                        <option value={'price'}>Price</option>
+                    </select>
+                    {searchFilter === 'price' ? (<input step={250} min={250} max={2000} placeholder='Price' type='range' onChange={(e) => setSearchResults(e.target.value)} value={searchResults} />)
+                        :
+                        <input type={searchFilter !== 'price' ? 'text' : 'number'} value={searchResults} onChange={(e) => setSearchResults(e.target.value)} />
+                    }
+                </div>}
             <div className='navbar-menu-container'>
                 <span>
-                    <NavLink className={"navbar-menu-links"} style={{ textDecoration: "none" }} exact to='/'>Home</NavLink>
+                        <NavLink className={"navbar-menu-links"} style={{ textDecoration: "none" }} exact to='/' onClick={() => setSearchResults('')}>Home</NavLink>
                 </span>
                 <span>
                     <NavLink className={"navbar-menu-links"} to="/newSpot">Create New Spot</NavLink>

@@ -4,12 +4,14 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import * as bookingsActions from '../../store/bookings'
 
-const Bookings = ({spotId}) => {
+const 
+
+Bookings = ({spotId}) => {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
 
     const dispatch = useDispatch()
-
+    console.log(spotId)
     useEffect(()=> {
         dispatch(bookingsActions.thunk_spotBookings(parseInt(spotId)))
     },[])
@@ -45,14 +47,31 @@ const Bookings = ({spotId}) => {
 
         
 
-        
+    
     }
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    
+    console.log(Date(startDate) > Date(endDate))
     return(
-        <form onSubmit={handleSubmit}>
+        <form className="bookings-form" onSubmit={handleSubmit}>
             <label>Start Date</label>
-            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
+            <input min={today} type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
             <label>End Date</label>
-            <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+            <input min={today} type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
             <button type="submit">Submit</button>
         </form>
     )

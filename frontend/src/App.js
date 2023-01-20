@@ -16,20 +16,22 @@ import Footer from "./Footer";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [searchResults, setSearchResults] = useState('')
+  const [searchFilter, setSearchFilter] = useState('address')
     const dispatch = useDispatch()
 
     useEffect(() => {
       dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
     }, [dispatch])
-    
+    console.log(searchResults)
     return (
       <>
-      <Navigation isLoaded={isLoaded}/>
+      <Navigation isLoaded={isLoaded} searchFilter={searchFilter} setSearchFilter={setSearchFilter} setSearchResults={setSearchResults} searchResults={searchResults}/>
       
       {isLoaded && (
         <Switch>
             <Route exact path="/">
-              <Home />
+              <Home searchResults={searchResults} searchFilter={searchFilter}/>
             </Route>
             <Route path="/newSpot">
               <NewSpot />

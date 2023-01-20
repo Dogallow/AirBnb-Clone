@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf"
 
 const GET_SPOT_BOOKINGS = 'bookings/GET_SPOT_BOOKINGS'
 const CREATE_BOOKING = 'bookings/CREATE_BOOKING'
+const DELETE_BOOKING = 'bookings/DELETE_BOOKING'
 
  const spotBookings = (payload) => {
     return {
@@ -14,6 +15,13 @@ const createBooking = ( payload ) => {
     return {
         type: CREATE_BOOKING,
         payload
+    }
+}
+
+const deleteBookingActionCreator = (id) => {
+    return {
+        type: DELETE_BOOKING,
+        payload: id
     }
 }
 
@@ -42,6 +50,18 @@ export const thunkCreateBookings = ({spotId, startDate, endDate}) => async dispa
         result.endDate = result.endDate.split('T').join(' ')
         // console.log('$$$$$$$$$$$$$$$$ backend bookings result $$$$$$$$$$$$$$',result)
         dispatch(createBooking(result))
+    }
+}
+
+export const deleteBookingThunk = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/bookings/${id}`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok){
+        let message = await response.json()
+        console.log(message)
+        dispatch(deleteBookingActionCreator(id))
     }
 }
 
@@ -77,17 +97,26 @@ const initialState = {
     },
 }
 const bookingsReducer = (state = initialState, action) => {
-    let newState = {...state}
+    let newState = {}
     switch(action.type){
         case GET_SPOT_BOOKINGS:
+            newState = {...state}
             let obj = {}
             action.payload.Bookings.forEach(booking => {
+                
                 obj[booking.id] = booking
             })
             newState.spot = obj
+            
             return newState
         case CREATE_BOOKING:
+            newState = {...state}
             newState.spot = {...newState.spot, [action.payload.id]: action.payload}
+            return newState
+        case DELETE_BOOKING:
+            newState = {...state}
+            console.log('BOOKINGS REDUCER',newState)
+            delete newState.spot[action.payload]
             return newState
         default:
             return state
