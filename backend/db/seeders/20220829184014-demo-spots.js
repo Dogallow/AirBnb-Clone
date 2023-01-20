@@ -29,7 +29,7 @@ module.exports = {
     lat: 0,
     lng: 0,
        name: "OnTheRocks•Architectural•Estate•Dramatic Ocean VUs",
-       description: "OnTheRocks is a Frank Lloyd Wright inspired modern California Ranch w/ subtle Prairie & & International architectural design; perched on a promontory overlooking cove w/ jaw dropping ocean views and mesmerizing - audible crashing white water waves. Complete with spa, BBQ, dry/wet sauna, chefs kitchen, lux bedding and linens, Le Creuset crockery, Mauviel stainless steel cookware, Viking appliances, Wolf small kitchen appliances, Jura Espresso Machine with frother, WIFI, streaming Roku & Alexa .",
+       description: "OnTheRocks is a Frank Lloyd Wright inspired modern California Ranch w/ subtle Prairie & & International architectural design; perched on a promontory overlooking cove w/ jaw dropping ocean views and mesmerizing - audible crashing white water waves. Complete with spa, BBQ, dry/wet sauna, chefs kitchen, lux bedding and linens, Le Creuset crockery, Mauviel stainless steel cookware, Viking appliances, Wolf small kitchen appliances, Jura Espresso Machine with frother, WIFI, streaming Roku & Alexa.",
     price: 1499
    },
   {
@@ -54,7 +54,7 @@ module.exports = {
    lat: 0,
    lng: 0,
     name: "Sunset House - Panoramic Ocean Views, Pool, Hot Tub, BBQs, Rooftop Deck",
-    description: "This condo features floor-to-ceiling windows in the living room to maximize the breathtaking views of the ocean. You will love your stay in this conveniently located condo in the heart of Pacific Beach with restaurants and shops within easy walking distance and just minutes to having your toes in the sand. You will never miss a sunset here! The open California-style kitchen is fully equipped for cooking and eating comfortably at home with granite countertops and stainless steel appliances.The condo sleeps a family of 5. The large bedroom features two queen size beds and a flat screen TV. The living room sofa easily converts into a queen sized bed for additional sleeping space.",
+    description: "This condo features floor-to-ceiling windows in the living room to maximize the breathtaking views of the ocean. You will love your stay in this conveniently located condo in the heart of Pacific Beach with restaurants and shops within easy walking distance and just minutes to having your toes in the sand. You will never miss a sunset here! ",
    price: 280
   },
   {
@@ -117,7 +117,7 @@ module.exports = {
          lat: 0,
          lng: 0,
          name: "Invisible House Joshua Tree | Modern Masterpiece",
-         description: "We invite guests to experience the most unique desert home on the planet, and one of the best-known homes in the world: the Invisible House.This one of a kind masterpiece was designed by veteran film producer Chris Hanley.Featured in countless music videos, television shows and dozens of publications worldwide(including Netflix, Robb Report, Architectural Digest, Washington Post, People, Daily Mail, Dezeen, and Maxim), this sleek 5, 500 sq.ft.minimalist retreat is set on 90 breathtaking acres comprising the largest privately- owned parcel of land abutting Joshua Tree National Park.An exploration in contrasts, the mirrored 22 - story horizontal skyscraper features an entirely reflective facade that absorbs its surroundings and vanishes into the desert landscape.The juxtaposition of sleek minimalism and ancient desert terrain makes Invisible House a singularly definitive structure in blending modern architecture with the natural world.",
+         description: "We invite guests to experience the most unique desert home on the planet, and one of the best-known homes in the world: the Invisible House.This one of a kind masterpiece was designed by veteran film producer Chris Hanley.Featured in countless music videos, television shows and dozens of publications worldwide(including Netflix, Robb Report, Architectural Digest, Washington Post, People, Daily Mail, Dezeen, and Maxim).",
          price: 2973
        },
        {

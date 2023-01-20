@@ -143,7 +143,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Description is required"
         },
         stringCount(value){
-          if (value.length > 500){
+          if (value.length > 650){
             throw new Error('Description cannot be greater than 500 characters')
           }
         }

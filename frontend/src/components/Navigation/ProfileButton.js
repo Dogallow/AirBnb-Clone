@@ -74,7 +74,12 @@ const ProfileButton = ({ user, navBarWidth, setSearchResults, searchResults, sea
                         <option value={'country'}>Country</option>
                         <option value={'price'}>Price</option>
                     </select>
-                    {searchFilter === 'price' ? (<input step={250} min={250} max={2000} placeholder='Price' type='range' onChange={(e) => setSearchResults(e.target.value)} value={searchResults} />)
+                    {searchFilter === 'price' ? (
+                        <>
+                            <p>{searchResults || 'Select a price'}</p>
+                            <input defaultValue={250} step={250} min={250} max={2000} placeholder='Price' type='range' onChange={(e) => setSearchResults(e.target.value)} value={searchResults} />
+                        </>
+                    )
                         :
                         <input type={searchFilter !== 'price' ? 'text' : 'number'} value={searchResults} onChange={(e) => setSearchResults(e.target.value)} />
                     }
