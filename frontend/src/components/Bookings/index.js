@@ -6,9 +6,10 @@ import * as bookingsActions from '../../store/bookings'
 
 const 
 
-Bookings = ({spotId}) => {
+Bookings = ({spotId, spot}) => {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
+    const user = useSelector(state => state.session.user)
 
     const dispatch = useDispatch()
     console.log(spotId)
@@ -49,7 +50,7 @@ Bookings = ({spotId}) => {
 
     
     }
-
+    console.log(user, spot)
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
@@ -72,7 +73,7 @@ Bookings = ({spotId}) => {
             <input min={today} type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
             <label>End Date</label>
             <input min={today} type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-            <button type="submit">Submit</button>
+            <button disabled={user && user.id === spot.ownerId} type="submit">Submit</button>
         </form>
     )
 }

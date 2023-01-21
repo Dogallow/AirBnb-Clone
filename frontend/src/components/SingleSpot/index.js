@@ -491,7 +491,7 @@ const SingleSpot = () => {
                                 </div>
                             </div>
                             <div className='form-body'>
-                                <Bookings spotId={spot.id}/>
+                                <Bookings spot={spot} spotId={spot.id}/>
                             </div>
                         </div>
 

@@ -65,7 +65,7 @@ const Navigation = ({ isLoaded, setSearchResults, searchResults, searchFilter, s
     return isLoaded && (
         <div className="outer-nav-container">
             <div className={`navbar-main-container ${navBarWidth}`}>
-                <NavLink className="navbar-icon-container" style={{ textDecoration: "none" }} exact to="/">
+                <NavLink className="navbar-icon-container-default" style={{ textDecoration: "none" }} exact to="/">
                     <div className="navbar-icon-container">
                         <img src={image} alt="spaceship" />
 
