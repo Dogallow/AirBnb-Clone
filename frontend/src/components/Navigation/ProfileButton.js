@@ -98,7 +98,7 @@ const ProfileButton = ({ user, navBarWidth, setSearchResults, searchResults, sea
                 </span>
                 
                     <div className="navbar-menu-button">
-                <button onClick={openMenu} >
+                        <button onClick={openMenu} className="navbar-menu-button-component">
                     <span>
                         <i className="fa-solid fa-bars"></i>
                     </span>
