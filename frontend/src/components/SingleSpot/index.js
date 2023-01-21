@@ -259,7 +259,7 @@ const SingleSpot = () => {
                                     
                                     <div className={`${variant}`} key={index} >
                                         <img src={spotImage.url} alt="No Image" />
-                                        <div  className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                        <div  className={user && user.id === spot.ownerId && imageCount !== 1 ? 'delete-logo-container' : ''}>
                                             <div className= 'position-logo-container' onClick={(e) =>{
                                                 console.log(spotImage.id)
                                                 deleteImage(e, spotImage.id)}}>
@@ -491,7 +491,7 @@ const SingleSpot = () => {
                                 </div>
                             </div>
                             <div className='form-body'>
-                                <Bookings spotId={spot.id}/>
+                                <Bookings spot={spot} spotId={spot.id}/>
                             </div>
                         </div>
 

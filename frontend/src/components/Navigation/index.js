@@ -65,7 +65,7 @@ const Navigation = ({ isLoaded, setSearchResults, searchResults, searchFilter, s
     return isLoaded && (
         <div className="outer-nav-container">
             <div className={`navbar-main-container ${navBarWidth}`}>
-                <NavLink className="navbar-icon-container" style={{ textDecoration: "none" }} exact to="/">
+                <NavLink className="navbar-icon-container-default" style={{ textDecoration: "none" }} exact to="/">
                     <div className="navbar-icon-container">
                         <img src={image} alt="spaceship" />
 
@@ -74,21 +74,32 @@ const Navigation = ({ isLoaded, setSearchResults, searchResults, searchFilter, s
                         </div>
                     </div>
                 </NavLink>
-                {window.location.href[window.location.href.length - 1] === '/' && <div>
-                    <select value={searchFilter} onChange={(e) => {
-                        setSearchResults('')
-                        setSearchFilter(e.target.value)}
-                    }>
-                        <option value={'address'}>Address</option>
-                        <option value={'city'}>City</option>
-                        <option value={'state'}>State</option>
-                        <option value={'country'}>Country</option>
-                        <option value={'price'}>Price</option>
-                    </select>
-                    {searchFilter === 'price' ? <input step={250} min={250} max={2000} placeholder='Price' type='range' onChange={(e) => setSearchResults(e.target.value)} value={searchResults} /> 
-                    :
-                    <input type={searchFilter !== 'price' ? 'text' : 'number'} value={searchResults} onChange={(e) => setSearchResults(e.target.value)} />
-                }
+                {window.location.href[window.location.href.length - 1] === '/' && <div className="search-input-container">
+                    <div className="search-select-input-section">
+                        <select className={searchFilter === 'price' ? "search-select-component-price" : "search-select-component"} value={searchFilter} onChange={(e) => {
+                            setSearchResults('')
+                            setSearchFilter(e.target.value)
+                        }
+                        }>
+                            <option value={'address'}>Address</option>
+                            <option value={'city'}>City</option>
+                            <option value={'state'}>State</option>
+                            <option value={'country'}>Country</option>
+                            <option value={'price'}>Price</option>
+                        </select>
+                    </div>
+                    <div className="search-seperator"><span>|</span></div>
+                    <div className="search-input-section">
+                        {searchFilter === 'price' ? (
+                            <>
+                                <p>{searchResults ? `$${searchResults}` : ''}</p>
+                                <input className="search-input-component" defaultValue={250} step={250} min={250} max={2000} placeholder='Price' type='range' onChange={(e) => setSearchResults(e.target.value)} value={searchResults} />
+                            </>
+                        )
+                            :
+                            <input className='search-input-price-section' type={searchFilter !== 'price' ? 'text' : 'number'} value={searchResults} onChange={(e) => setSearchResults(e.target.value)} />
+                        }
+                    </div>
                 </div>}
                 <div className="navbar-menu-links">
                     <div className="link-container">

@@ -49,7 +49,7 @@ const DefaultProfileButton = ( { changeSignupModal, changeLoginModal} ) => {
        
 
                     <div className="navbar-menu-button">
-                        <button onClick={openMenu} >
+                        <button className="navbar-menu-button-component" onClick={openMenu} >
                             <span>
                                 <i className="fa-solid fa-bars"></i>
                             </span>

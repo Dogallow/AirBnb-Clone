@@ -487,6 +487,11 @@ p {
     margin-top: 5px;
 }
 
+.bookngs-form button:disabled,button:disabled{
+    background-color: #DDDDDD;
+    cursor: default;
+}
+
 .form-body p {
     margin: 5px 0px 5px;
 }
