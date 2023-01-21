@@ -58,10 +58,50 @@ const NewSpot = () => {
             price: parseFloat(price)
         }
         
-        
-        
+        if (!address){
+            validate = [...validate, 'Spot must have a valid address']
+        }
+
+        if (!city){
+            validate = [...validate, 'Spot must have a valid city']
+        }
+
+        if (!state){
+            validate = [...validate, 'Spot must have a valid state']
+        }
+
+        if (!country){
+            validate = [...validate, 'Spot must have a valid country']
+        }
+
+        if (!name) {
+            validate = [...validate, 'Spot must have a valid name']
+        }
+
+        if (!price) {
+            validate = [...validate, 'Spot must have a valid price']
+        }
         let imgObj = {}
 
+        imgObj = {
+
+            url: imgUrl,
+            preview: Boolean(preview)
+        }
+        if (!imgObj.url){
+            validate = [...validate, 'Must have an Image Url']
+            setErrors(validate)
+            
+        } else
+        if (!imgObj.url.endsWith('.png') || !imgObj.url.endsWith('.jpg') || !imgObj.url.endsWith('.jpeg') || !imgObj.url.endsWith('.webp')){
+            validate = [...validate, 'Image address must end with .png, .jpg, .jpeg, .webp']
+            setErrors(validate)
+            
+        }
+        if (validate.length > 0){
+            setErrors(validate)
+            return
+        }
         const success = await dispatch(spotsActions.createNewSpot(newSpot)).catch(async err => {
             const error = await err.json()
             // console.log(error.errors)
@@ -73,11 +113,6 @@ const NewSpot = () => {
         })
         
 
-        imgObj = {
-
-            url: imgUrl,
-            preview: Boolean(preview)
-        }
         if (imgObj.url) {
             await dispatch(spotsActions.addSingleImage(success.id, imgObj)).catch(async err => {
                 const error = await err.json()
