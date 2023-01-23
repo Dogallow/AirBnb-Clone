@@ -1,4 +1,4 @@
-#  <img src="https://user-images.githubusercontent.com/95613961/192190997-f1a3b9fd-6eac-49de-b5f7-c836d008d2e4.png" alt="Logo" height=50px /> Aerobnb
+#  <img src="favicon.ico" alt="Logo" height=50px /> Aerobnb
 
 Aerobnb is a fun web application inspired by Airbnb. This application is a creative way to interact with the universe and spur your curiosity for things outside of our own planet.
 Click here to view [Aerobnb Live Site](https://aerobnb.onrender.com).
@@ -90,11 +90,14 @@ Able to add Images to your own reviews.
 
 - [x] Create CRUD features for Spots
 - [x] CRD features for reviews
-- [ ] Create Update feature for reviews
-- [ ] Finish the styling for the mySpots and myReviews routes
-- [ ] Align my data set more accurately with space metrics and terminology
-- [ ] Improve my responsive design for adding images
-- [ ] Integrate NASA API for a more educational experience
+- [x] Create Update feature for reviews
+- [x] Finish the styling for the mySpots and myReviews routes
+- [x] Align my data set with accurate homes
+- [x] Improve my responsive design for adding images
+- [x] Implement Bookings Feature
+- [x] Implement Search Feature
+- [ ] Integrate AWS
+- [ ] Integrate Google Maps API
 
 ## Contact
 

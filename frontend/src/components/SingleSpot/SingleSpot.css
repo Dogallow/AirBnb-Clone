@@ -1,11 +1,26 @@
+body{
+    height: 100%;
+}
+
+#root{
+    overflow-y: scroll;
+}
+
 .single-spot-outer-container {
     /* background-color: red; */
     width: 45%;
     display: flex;
     flex-direction: column;
-    height: 100dvh;
+    height: 100%;
     min-width: 700px;
+    /* overflow-y:scroll; */
+    min-height:790px;
 }
+
+#root::-webkit-scrollbar {
+    display: none;
+}
+
 
 /* --------------------- Header Container ----------------------------------------- */
 .main-header-container {
@@ -603,7 +618,7 @@ p {
     justify-content: center;
     cursor: pointer;
 }
-
+/* ------------------- Bookings --------------------- */
 .bookings-container{
     display: flex;
     flex-direction: row;
@@ -621,6 +636,11 @@ p {
     /* visibility: visible; */
     display: block;
 }
+
+.bookings-form input{
+    border-color: #DDDDDD;
+    border-radius: 5px;
+    }
 
 .bookings-delete-icon{
     /* visibility: hidden; */

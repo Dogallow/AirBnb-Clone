@@ -131,7 +131,7 @@ const NewSpot = () => {
 
 
     return (
-        <div className='signup-component-container' style={{height: '100%'}}>
+        <div className='signup-component-container' >
 
             <div className="signup-form-container">
             <div className='header-text'>

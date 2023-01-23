@@ -51,7 +51,7 @@ const SignUpForm = ({ signupSetter }) => {
     }
 
     return (
-        <div className='signup-component-container'>
+        <div className='signup-component-container-modal'>
         
         <div className="signup-form-container">
             <div className='header-text'>

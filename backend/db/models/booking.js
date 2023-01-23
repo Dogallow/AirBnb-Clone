@@ -36,15 +36,11 @@ module.exports = (sequelize, DataTypes) => {
     startDate: {
       type: DataTypes.DATE,
       allowNull: false,
-      unique: true
+      
     },
     endDate: {
       type: DataTypes.DATE,
       allowNull: false,
-      unique: {
-        args:true,
-        msg: "Booking cannot overlap an already scheduled booking."
-      },
       validate:{
         checkDate(value){
           const endDate = new Date(value)
