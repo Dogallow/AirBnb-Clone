@@ -94,11 +94,15 @@ Bookings can be created, read, and deleted.
 
 - [x] Create CRUD features for Spots
 - [x] CRD features for reviews
-- [ ] Create Update feature for reviews
-- [ ] Finish the styling for the mySpots and myReviews routes
-- [ ] Align my data set more accurately with space metrics and terminology
-- [ ] Improve my responsive design for adding images
-- [ ] Integrate NASA API for a more educational experience
+- [x] Create Update feature for reviews
+- [x] Finish the styling for the mySpots and myReviews routes
+- [x] Align my data set with accurate homes
+- [x] Improve my responsive design for adding images
+- [x] Implement Bookings Feature
+- [x] Implement Search Feature
+- [ ] Integrate AWS
+- [ ] Integrate Google Maps API
+
 
 ## Contact
 
