@@ -1,6 +1,7 @@
 #  <img src="favicon.ico" alt="Logo" height=50px /> Aerobnb
 
-Aerobnb is a fun web application inspired by Airbnb. This application is a creative way to interact with the universe and spur your curiosity for things outside of our own planet.
+Aerobnb is a web application inspired by Airbnb. This application is a creative way to Interact with homes around the world.
+
 Click here to view [Aerobnb Live Site](https://aerobnb.onrender.com).
 
 Links to project Wiki:
@@ -46,7 +47,7 @@ To get a local copy up and running follow these simple example steps.
 # Usage:
 
 ## Home Page Demo User:
-You will be able to test the features without sign up by clicking on the "Demo User" button in the dropdown menu on the upper right corner of the page.
+You will be able to test the features without sign up by clicking on the "Demo Login" button in the dropdown menu on the upper right corner of the page.
 ![Splash Page](https://user-images.githubusercontent.com/95613961/192171360-a389d742-ca8c-4b49-9504-175d7a38e1b1.jpg)
 
 ## Single Spot Details

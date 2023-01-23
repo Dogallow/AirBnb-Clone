@@ -26,12 +26,16 @@ const EditSpot = () => {
     const history = useHistory()
 
    
-
+    console.log('Edit spot page, current spot', spot)
+    console.log(spot.address)
   
     
-    useEffect(() => {
-        
-        return () => dispatch(spotsActions.clear())
+    useEffect( () => {
+        const anon = async () => {
+            await dispatch(spotsActions.getOneSpot(spotId))
+        }
+        anon()
+        // return () => dispatch(spotsActions.clear())
     },[dispatch])
 
     const handleSubmit = async (e) => {
@@ -90,8 +94,14 @@ const EditSpot = () => {
 
         setErrorValidation(validate)
     }
-    
-    
+    let bool = true
+    if (spot){
+        if (spot.SpotImages?.length >= 5){
+            bool = false
+        }
+        console.log(spot.SpotImages?.length)
+    }
+
     return (
         <div className='edit-spot-component-container' style={{height: '100%'}}>
             <div className='edit-form-container'>
@@ -137,7 +147,7 @@ const EditSpot = () => {
                     <div className='edit-spot-middle-input-field'>
                         <input placeholder='Price' onChange={(e) => setPrice(e.target.value)} value={price} />
                     </div>
-                <div className='add-image-component-container'>
+                    {spot && bool && <div className='add-image-component-container'>
                     Add Image Here:
                     <div className='add-image-beginning-input-field'>
                         <input placeholder='Image Url' onChange={(e) => setImgUrl(e.target.value)} value={imgUrl} />
@@ -149,7 +159,7 @@ const EditSpot = () => {
                             <option value='true'>True</option>
                         </select>
                     </div>
-                </div>
+                </div>}
                 <div className='edit-spot-button'>
                     <button type='submit'  >Submit</button>
                 </div>

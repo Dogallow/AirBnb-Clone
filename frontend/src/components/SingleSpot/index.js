@@ -199,6 +199,8 @@ const SingleSpot = () => {
 
         }
 
+        console.log('Image Count  ^^^^^^^',imageCount)
+
     let reviewBool = false
         
         if (user){
@@ -357,7 +359,7 @@ const SingleSpot = () => {
                                 return (
                                     <div className={`${variant2}`} key={index}>
                                         <img src={spotImage.url} alt='Side Image' />
-                                        <div style={{ marginLeft: '-8px', paddingLeft: '8px' }} className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                        <div style={{ marginLeft: '-8px', paddingLeft: '8px'}} className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
                                             <div className='position-logo-container' onClick={(e) => {
                                                 console.log(spotImage.id)
                                                 deleteImage(e, spotImage.id)
@@ -400,11 +402,13 @@ const SingleSpot = () => {
                             )
 
                         }
+
+                        
                         if (index === 0) {
                             return (
                                 <div className={`${variant}`} key={index}>
                                     <img src={spotImage.url} alt="No Image" />
-                                    <div style={{ marginLeft: '-8px', paddingLeft: '8px' }} className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                    <div style={{ }} className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
                                         <div className='position-logo-container' onClick={(e) => {
                                             console.log(spotImage.id)
                                             deleteImage(e, spotImage.id)
@@ -419,9 +423,17 @@ const SingleSpot = () => {
 
 
                         return (
-                            <div className={`${variant2} index${index}`} key={index}>
+                            <div className={`${variant2} index${index}`} key={index} >
+                            
                                 <img src={spotImage.url} alt="No Image" />
-
+                                <div style={{ marginLeft: '-8px', paddingLeft: '8px' }} className={user && user.id === spot.ownerId ? 'delete-logo-container' : ''}>
+                                    <div className='position-logo-container' onClick={(e) => {
+                                        console.log(spotImage.id)
+                                        deleteImage(e, spotImage.id)
+                                    }}>
+                                        <i style={{ color: '#E61E4D' }} class="fa-solid fa-trash fa-lg"></i>
+                                    </div>
+                                </div>
                             </div>
                         )
                     })
