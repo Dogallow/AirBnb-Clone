@@ -1,4 +1,24 @@
+body {
+    height: 100%;
+}
+
+#root {
+    overflow-y: scroll;
+}
+
+#root::-webkit-scrollbar {
+    display: none;
+}
+
 .signup-component-container{
+        height: auto;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 1100px;
+}
+.signup-component-container-modal{
         height: auto;
         width: 100%;
         display: flex;

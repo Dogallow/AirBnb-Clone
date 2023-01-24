@@ -60,7 +60,8 @@ export const deleteBookingThunk = (id) => async dispatch => {
 
     if (response.ok){
         let message = await response.json()
-        console.log(message)
+        console.log('BOOKING DELETED',message)
+        console.log('Booking Id', id)
         dispatch(deleteBookingActionCreator(id))
     }
 }
@@ -98,6 +99,7 @@ const initialState = {
 }
 const bookingsReducer = (state = initialState, action) => {
     let newState = {}
+    console.log(state)
     switch(action.type){
         case GET_SPOT_BOOKINGS:
             newState = {...state}
@@ -117,6 +119,8 @@ const bookingsReducer = (state = initialState, action) => {
             newState = {...state}
             console.log('BOOKINGS REDUCER',newState)
             delete newState.spot[action.payload]
+            console.log('Bookings reducer after "deletion"', newState)
+            newState.spot = {...state.spot}
             return newState
         default:
             return state

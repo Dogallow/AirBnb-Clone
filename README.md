@@ -1,6 +1,9 @@
-#  <img src="https://user-images.githubusercontent.com/95613961/212533505-d385ce55-6790-4a46-82ac-a4aa9d810542.png" alt="Logo" height=75px width=100px /> Aerobnb
+
+
+#  <img src="favicon.ico" alt="Logo" height=50px /> Aerobnb
 
 Aerobnb is a web application inspired by Airbnb. This application is a creative way to Interact with homes around the world.
+
 
 Click here to view [Aerobnb Live Site](https://aerobnb.onrender.com).
 
@@ -47,8 +50,10 @@ To get a local copy up and running follow these simple example steps.
 # Usage:
 
 ## Home Page Demo User:
-You will be able to test the features without sign up by clicking on the "Demo User" button in the dropdown menu on the upper right corner of the page.
-![Splash Page](https://user-images.githubusercontent.com/95613961/214157477-56df1787-623c-4a73-810e-3e9122268c1a.jpg)
+
+You will be able to test the features without sign up by clicking on the "Demo Login" button in the dropdown menu on the upper right corner of the page.
+![Splash Page](https://user-images.githubusercontent.com/95613961/192171360-a389d742-ca8c-4b49-9504-175d7a38e1b1.jpg)
+
 
 ## Single Spot Details
 The majority of the functionality can be found inside a specific spot.
