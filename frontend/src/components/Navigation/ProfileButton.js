@@ -47,6 +47,10 @@ const ProfileButton = ({ user, navBarWidth, setSearchResults, searchResults, sea
     const goToMyReviews = () => {
         return  history.push('/myReviews') 
     }
+
+    const goToCreateSpot = () => {
+        return history.push('/newSpot')
+    }
     
     
     return (
@@ -112,6 +116,9 @@ const ProfileButton = ({ user, navBarWidth, setSearchResults, searchResults, sea
                                 <ul className='profile-button-list'>
                                     <li className='profile-button-list-item'>{currentUser.username}</li>
                                     <li className='profile-button-list-item'>{currentUser.email}</li>
+                                        <li className='profile-button-list-item special' onClick={goToCreateSpot}>
+                                        Create New Listing
+                                    </li>
                                     <li className='profile-button-list-item special' onClick={goToMySpots}>
                                     MySpots
                                     </li>
