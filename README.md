@@ -52,7 +52,7 @@ To get a local copy up and running follow these simple example steps.
 ## Home Page Demo User:
 
 You will be able to test the features without sign up by clicking on the "Demo Login" button in the dropdown menu on the upper right corner of the page.
-![Splash Page](https://user-images.githubusercontent.com/95613961/192171360-a389d742-ca8c-4b49-9504-175d7a38e1b1.jpg)
+![Splash Page](https://user-images.githubusercontent.com/95613961/214416206-2e8608ff-1f26-4cba-b249-d4fc45d2aafc.jpg)
 
 
 ## Single Spot Details
@@ -67,6 +67,7 @@ Here is where you can:
 
 
 ![single spot details](https://user-images.githubusercontent.com/95613961/214157720-ed14ab9e-98ad-47c4-a2bc-bc25727c11de.jpg)
+
 
 
 ## Spots
