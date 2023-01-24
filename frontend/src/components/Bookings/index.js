@@ -73,7 +73,7 @@ Bookings = ({spotId, spot}) => {
             <input min={today} type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
             <label>End Date</label>
             <input min={today} type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-            <button disabled={user && user.id === spot.ownerId} type="submit">Submit</button>
+            <button disabled={user && user.id === spot.ownerId} type="submit">Reserve Booking</button>
         </form>
     )
 }

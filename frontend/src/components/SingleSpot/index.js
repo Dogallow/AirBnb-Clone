@@ -439,7 +439,7 @@ const SingleSpot = () => {
                     })
                 )}
                 </div>
-                {user && formattedBookings.length > 0 && <h3>Reserved Dates:</h3>}
+                {user && formattedBookings.length > 0 && <h3>Reserved Dates Unavailable:</h3>}
                 <div className='bookings-container'>
             {user && !!formattedBookings.length && formattedBookings.map(booking => {
                 console.log('booking Id',booking)
