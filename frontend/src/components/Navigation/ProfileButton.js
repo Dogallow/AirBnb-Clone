@@ -120,7 +120,7 @@ const ProfileButton = ({ user, navBarWidth, setSearchResults, searchResults, sea
                                         Create New Listing
                                     </li>
                                     <li className='profile-button-list-item special' onClick={goToMySpots}>
-                                    MySpots
+                                    MyListings
                                     </li>
                                     <li className='profile-button-list-item special' onClick={goToMyReviews}>
                                     MyReviews
