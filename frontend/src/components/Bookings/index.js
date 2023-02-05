@@ -10,6 +10,7 @@ Bookings = ({spotId, spot}) => {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const user = useSelector(state => state.session.user)
+    const [errors, setErrors] = useState([])
 
     const dispatch = useDispatch()
     console.log(spotId)
@@ -44,10 +45,15 @@ Bookings = ({spotId, spot}) => {
             endDate: new Date(formattedEndDate)
         }
 
-        await dispatch(bookingsActions.thunkCreateBookings(obj)).then(() => bookingsActions.thunk_spotBookings(spotId))
+        const result = await dispatch(bookingsActions.thunkCreateBookings(obj))
+        console.log('FRONTEND RESULT %%%%%%%%', result)
+        if (result.message){
+                setErrors([result.message])
+        } else {
 
-        
-
+            await dispatch(bookingsActions.thunk_spotBookings(spotId))
+        }
+            
     
     }
     console.log(user, spot)
@@ -67,14 +73,19 @@ Bookings = ({spotId, spot}) => {
     today = yyyy + '-' + mm + '-' + dd;
     
     console.log(Date(startDate) > Date(endDate))
+    console.log('ERRORS########', errors)
     return(
+        <>
+        <ul>{errors?.map(error => <li>{error}</li>)}</ul>
         <form className="bookings-form" onSubmit={handleSubmit}>
+
             <label>Start Date</label>
             <input min={today} type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
             <label>End Date</label>
             <input min={today} type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
             <button disabled={user && user.id === spot.ownerId} type="submit">Reserve Booking</button>
         </form>
+        </>
     )
 }
 

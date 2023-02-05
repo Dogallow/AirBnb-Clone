@@ -114,6 +114,30 @@ export const addSingleImage = (id, dataObj) => async dispatch =>{
     }
 }
 
+export const addSingleImageAWS = (id, dataObj) => async dispatch => {
+    const {spotId, url, preview} = dataObj
+    console.log('AWS THUNK', url)
+    const formData = new FormData()
+    if (url) {
+        formData.append('spotId', spotId)
+        formData.append('url', url)
+        formData.append('preview', preview)
+    }
+    const res = await csrfFetch(`/api/spots/${id}/images`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "multipart/form-data"
+        },
+        body: formData
+    })
+
+    if (res.ok){
+        const data = await res.json()
+        console.log('AWS DATA RETURNED FROM THE BACKEND', data)
+    }
+
+}
+
 export const deleteSingleSpot = (id) => async dispatch => {
     const res = await csrfFetch(`/api/spots/${id}`, {
         method: 'DELETE'
@@ -169,7 +193,7 @@ export const getAllSpots= () => async dispatch => {
 
     if(res.ok){
         const spots = await res.json()
-        
+        console.log('ALL THE SPOTS FROM THE DATABASE', spots)
         dispatch(allSpots(spots.Spots))
         
         
