@@ -440,11 +440,14 @@ p {
 }
 
 .card-container {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     margin-top: 48px;
     width: 80%;
+    /* height: 300px; */
     min-height: 250px;
-    max-height: 275px;
+    /* max-height: calc(300px +310.28px); */
+    max-height: 300px;
+    /* overflow-y: auto; */
     min-width: 175px;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
     background-color: #FFFFFF;
@@ -487,17 +490,28 @@ p {
 }
 
 .form-body{
-    height: 100%;
+    height: 260px;
     width: 100%;
     display: flex;
     justify-content: center;
     padding-bottom: 20px;
+    box-sizing: border-box;
 }
 
 .bookings-form{
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    
+}
+
+.bookings-form ul{
+    max-height: 50px;
+    overflow-y: scroll;
+}
+.bookings-form ul::-webkit-scrollbar {
+    display: none;
 }
 
 .bookings-form input{

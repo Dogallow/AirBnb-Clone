@@ -30,7 +30,7 @@ export const thunk_spotBookings = (spotId) => async (dispatch) => {
 
     if (res.ok) {
         const payload = await res.json()
-        // console.log('^^^^^^^^^^^ payload from backend ^^^^^^^^^^^^',payload)
+        console.log('^^^^^^^^^^^ payload from backend ^^^^^^^^^^^^',payload)
         dispatch(spotBookings(payload))
     }
 }

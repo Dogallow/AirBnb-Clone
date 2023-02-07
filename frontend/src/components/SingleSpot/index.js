@@ -42,7 +42,8 @@ const SingleSpot = () => {
     console.log('%%%%%%%%%%%%%%%%%%%%%%%%% reviews %%%%%%%%%%%%%%%%%%%%%%%%%%', reviews)
 
     let arrOfBookings = Object.values(bookings)
-
+    console.log('Array of Bookings, ',arrOfBookings)
+    
 
     
     let formattedBookings = arrOfBookings.map(booking => {
@@ -99,16 +100,17 @@ const SingleSpot = () => {
             errors.push(error)
 
         })
+        dispatch(bookingsActions.thunk_spotBookings(spotId)).catch(async data => {
+            console.log(data)
+            // const error = await data.json()
+            // console.log(error)
+            // errors.push(error)
+
+        })
         if (user){
             console.log('THIS IS RUNNING *************************************************************************************************************************************')
 
-            dispatch(bookingsActions.thunk_spotBookings(spotId)).catch(async data => {
-                console.log(data)
-                // const error = await data.json()
-                // console.log(error)
-                // errors.push(error)
-    
-            })
+            
         }
 
        
