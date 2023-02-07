@@ -91,3 +91,22 @@ body{
     color: #717171;
     font-weight: 100;
 }
+
+.page-button-wrapper{
+    width: 65%;
+    display: flex;
+    justify-content: center;
+}
+
+.page-button-container{
+    max-width: 50%;
+    min-width: 100px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.page-button{
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 2px;
+}

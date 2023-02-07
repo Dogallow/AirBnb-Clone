@@ -19,7 +19,7 @@ const NewSpot = () => {
     const history = useHistory()
     const spots = useSelector(state => state.spots.allSpots)
 
-    const [imgUrl, setImgUrl] = useState('')
+    const [imgUrl, setImgUrl] = useState(null)
     const [preview, setPreview] = useState(true)
 
     // console.log(spots)
@@ -82,7 +82,7 @@ const NewSpot = () => {
             validate = [...validate, 'Spot must have a valid price']
         }
         let imgObj = {}
-
+        console.log('HANDLE SUBMIT FUNCTION',imgUrl)
         imgObj = {
 
             url: imgUrl,
@@ -92,12 +92,13 @@ const NewSpot = () => {
             validate = [...validate, 'Must have an Image Url']
             setErrors(validate)
             
-        } else
-        if (!imgObj.url.endsWith('.png') || !imgObj.url.endsWith('.jpg') || !imgObj.url.endsWith('.jpeg') || !imgObj.url.endsWith('.webp')){
-            validate = [...validate, 'Image address must end with .png, .jpg, .jpeg, .webp']
-            setErrors(validate)
-            
         }
+        //  else
+        // if (!imgObj.url.endsWith('.png') || !imgObj.url.endsWith('.jpg') || !imgObj.url.endsWith('.jpeg') || !imgObj.url.endsWith('.webp')){
+        //     validate = [...validate, 'Image address must end with .png, .jpg, .jpeg, .webp']
+        //     setErrors(validate)
+            
+        // }
         if (validate.length > 0){
             setErrors(validate)
             return
@@ -113,8 +114,9 @@ const NewSpot = () => {
         })
         
 
-        if (imgObj.url) {
-            await dispatch(spotsActions.addSingleImage(success.id, imgObj)).catch(async err => {
+        if (imgObj.url && success) {
+            console.log(success)
+            await dispatch(spotsActions.addSingleImageAWS(success.id, imgObj)).catch(async err => {
                 const error = await err.json()
                 // console.log('', error)
                 validate = [...validate, ...error.errors]
@@ -129,6 +131,10 @@ const NewSpot = () => {
         setErrors(validate)
     }
 
+    const updateFile = (e) => {
+        const file = e.target.files[0];
+        if (file) setImgUrl(file);
+    };
 
     return (
         <div className='signup-component-container' >
@@ -184,7 +190,7 @@ const NewSpot = () => {
                     <div className='add-image-component-container'>
                         Add Image Here:
                         <div className='add-image-beginning-input-field'>
-                            <input placeholder='Image Url' onChange={(e) => setImgUrl(e.target.value)} value={imgUrl} />
+                            <input type='file' placeholder='Image Url' onChange={updateFile} />
                         </div>
 
                     </div>

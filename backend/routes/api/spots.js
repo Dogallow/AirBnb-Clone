@@ -6,6 +6,7 @@ const { handleValidationErrors, } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 const review = require('../../db/models/review');
 const { Op } = require("sequelize");
+const {singleMulterUpload, singlePublicFileUpload} = require('../../awsS3')
 
 const router = express.Router()
 
@@ -203,6 +204,13 @@ router.get('/', async (req, res, next) => {
         raw: true
     })
 
+    const spotCount = await Spot.findAll({
+        raw: true
+    })
+    console.log('HOW MANY TOTAL SPOTS ARE THERE ============================>',spotCount.length)
+
+    console.log('Spots ==================>', Spots)
+
    
 
     // Declare a new var equal to []
@@ -285,7 +293,8 @@ router.get('/', async (req, res, next) => {
     return res.json({
         Spots: result,
         page,
-        size
+        size,
+        spotCount: spotCount.length
     })
 })
 
@@ -447,10 +456,11 @@ router.post('/', requireAuth, async (req, res, next) => {
     return res.status(201).json({ ...spotJson })
 })
 
-router.post('/:spotId/images', requireAuth, async (req, res, next) => {
+router.post('/:spotId/images',singleMulterUpload("url"), requireAuth, async (req, res, next) => {
     const { spotId } = req.params
     const { url, preview } = req.body
-
+    console.log('WHAT DATA IS REQ.FILE --------->', req.file)
+    const spotImageUrl = await singlePublicFileUpload(req.file)
     const spot = await Spot.findOne({
         where: {
             id: spotId
@@ -484,7 +494,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
     const image = await SpotImage.create({
         spotId,
-        url,
+        'url': spotImageUrl,
         preview
     })
 
@@ -758,47 +768,69 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
 
 
 
-    for (let booking of bookings) {
-        let bookedEndTime = new Date(booking.endDate)
-        let bookedEndTimeMs = bookedEndTime.getTime()
+    // for (let booking of bookings) {
+    //     let bookedEndTime = new Date(booking.endDate)
+    //     let bookedEndTimeMs = bookedEndTime.getTime()
 
-        let bookedStartTime = new Date(booking.startDate)
-        let bookedStartTimeMs = bookedStartTime.getTime()
+    //     let bookedStartTime = new Date(booking.startDate)
+    //     let bookedStartTimeMs = bookedStartTime.getTime()
 
-        let startTime = new Date(startDate)
-        let startTimeMs = startTime.getTime()
+    //     let startTime = new Date(startDate)
+    //     let startTimeMs = startTime.getTime()
 
-        let endTime = new Date(endDate)
-        let endTimeMs = endTime.getTime()
+    //     let endTime = new Date(endDate)
+    //     let endTimeMs = endTime.getTime()
 
-        const err = new Error("Sorry, this spot is already booked for the specified dates")
-        err.status = 403
-        if (startTimeMs <= bookedEndTimeMs && startTimeMs >= bookedStartTimeMs) {
-            err.errors = {
-                "startDate": "Start date conflicts with an existing booking"
-            }
-            res.status(403).json({
-                "message": err.message,
-                "statusCode": err.status,
-                "errors": err.errors
-            })
-            next(err)
-        }
+    //     const err = new Error("Sorry, this spot is already booked for the specified dates")
+    //     err.status = 403
+    //     // if (startTimeMs <= bookedEndTimeMs && startTimeMs >= bookedStartTimeMs) {
+    //     //     err.errors = {
+    //     //         "startDate": "Start date conflicts with an existing booking"
+    //     //     }
+    //     //      return res.status(403).json({
+    //     //         "message": err.message,
+    //     //         "statusCode": err.status,
+    //     //         "errors": err.errors
+    //     //     })
+            
+    //     // }
+    //     if (startTimeMs <= bookedEndTimeMs && startTimeMs >= bookedStartTimeMs) {
+    //         err.errors = {
+    //             "startDate": "Start date conflicts with an existing booking"
+    //         }
+    //          return res.json({
+    //             "message": err.message,
+    //             "statusCode": err.status,
+    //             "errors": err.errors
+    //         })
+            
+    //     }
 
-        if (endTimeMs >= bookedStartTimeMs && endTimeMs <= bookedEndTimeMs) {
-            err.errors = {
-                "endDate": "End date conflicts with an existing booking"
-            }
-            res.status(403).json({
-                "message": err.message,
-                "statusCode": err.status,
-                "errors": err.errors
-            })
-            next(err)
-        }
+        // if (endTimeMs >= bookedStartTimeMs && endTimeMs <= bookedEndTimeMs) {
+        //     err.errors = {
+        //         "endDate": "End date conflicts with an existing booking"
+        //     }
+        //     return res.status(403).json({
+        //         "message": err.message,
+        //         "statusCode": err.status,
+        //         "errors": err.errors
+        //     })
+        //     next(err)
+        // }
+        // if (endTimeMs >= bookedStartTimeMs && endTimeMs <= bookedEndTimeMs) {
+        //     err.errors = {
+        //         "endDate": "End date conflicts with an existing booking"
+        //     }
+        //     return res.json({
+        //         "message": err.message,
+        //         "statusCode": err.status,
+        //         "errors": err.errors
+        //     })
+        //     next(err)
+        // }
 
 
-    }
+    // }
 
     const booking = await Booking.create({
         spotId,

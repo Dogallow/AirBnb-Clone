@@ -20,7 +20,7 @@ const EditSpot = () => {
     const [goHome, setGoHome] = useState(false)
     const [errorValidation, setErrorValidation] = useState([])
 
-    const [imgUrl, setImgUrl] = useState('')
+    const [imgUrl, setImgUrl] = useState(null)
     const [preview, setPreview] = useState(false)
 
     const history = useHistory()
@@ -77,7 +77,7 @@ const EditSpot = () => {
         
         let fetch2
         if (imgObj.url && preview.toString()) {
-        fetch2 = await  dispatch(spotsActions.addSingleImage(spotId, imgObj)).catch(async err => {
+        fetch2 = await  dispatch(spotsActions.addSingleImageAWS(spotId, imgObj)).catch(async err => {
                 const error = await err.json()
                 
                 validate = [...error.errors]
@@ -102,6 +102,11 @@ const EditSpot = () => {
         console.log(spot.SpotImages?.length)
     }
 
+    const updateFile = (e) => {
+        const file = e.target.files[0];
+        if (file) setImgUrl(file);
+    };
+    
     return (
         <div className='edit-spot-component-container' style={{height: '100%'}}>
             <div className='edit-form-container'>
@@ -150,7 +155,7 @@ const EditSpot = () => {
                     {spot && bool && <div className='add-image-component-container'>
                     Add Image Here:
                     <div className='add-image-beginning-input-field'>
-                        <input placeholder='Image Url' onChange={(e) => setImgUrl(e.target.value)} value={imgUrl} />
+                        <input type='file' onChange={updateFile} />
                     </div>
                     <div className='add-image-ending-select-field'>
                         <label>Preview:</label>

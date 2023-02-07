@@ -114,6 +114,30 @@ export const addSingleImage = (id, dataObj) => async dispatch =>{
     }
 }
 
+export const addSingleImageAWS = (id, dataObj) => async dispatch => {
+    const {spotId, url, preview} = dataObj
+    console.log('AWS THUNK', url)
+    const formData = new FormData()
+    if (url) {
+        formData.append('spotId', spotId)
+        formData.append('url', url)
+        formData.append('preview', preview)
+    }
+    const res = await csrfFetch(`/api/spots/${id}/images`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "multipart/form-data"
+        },
+        body: formData
+    })
+
+    if (res.ok){
+        const data = await res.json()
+        console.log('AWS DATA RETURNED FROM THE BACKEND', data)
+    }
+
+}
+
 export const deleteSingleSpot = (id) => async dispatch => {
     const res = await csrfFetch(`/api/spots/${id}`, {
         method: 'DELETE'
@@ -164,13 +188,14 @@ export const getOneSpot = (id) => async dispatch => {
     }
 }
 
-export const getAllSpots= () => async dispatch => {
-    const res = await csrfFetch('/api/spots')
+export const getAllSpots= (page) => async dispatch => {
+    if (!page) {page = 1}
+    const res = await csrfFetch(`/api/spots/?page=${page}`)
 
     if(res.ok){
         const spots = await res.json()
-        
-        dispatch(allSpots(spots.Spots))
+        console.log('ALL THE SPOTS FROM THE DATABASE', spots)
+        dispatch(allSpots(spots))
         
         
     }
@@ -208,7 +233,10 @@ const initialState = {
     allSpots: {},
     singleSpot: {
         
-    }
+    },
+    spotCount: null,
+    size: null,
+    page: null
 }
 const spotsReducer = (state=initialState, action) => {
     let newState
@@ -220,14 +248,17 @@ const spotsReducer = (state=initialState, action) => {
         case CLEAR:
             return initialState
         case ALL_SPOTS: 
-            newState = {...state, allSpots:{...state.allSpots}}
-            action.spots.forEach((spot) => {
+            newState = {...state, allSpots:{}}
+            action.spots.Spots.forEach((spot) => {
                 if(spot.avgRating){
                spot.avgRating = spot.avgRating.toFixed(2)
             }
                 newState.allSpots[spot.id] = spot
             })
-            
+            console.log('spot count in the reducer', action.spots.spotCount)
+            newState.spotCount = action.spots.spotCount
+            newState.size = action.spots.size
+            newState.page = action.spots.page
             return newState
         case MY_SPOTS:
             newState = {...state, allSpots:{}}

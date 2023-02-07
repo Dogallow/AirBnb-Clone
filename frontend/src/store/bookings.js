@@ -30,7 +30,7 @@ export const thunk_spotBookings = (spotId) => async (dispatch) => {
 
     if (res.ok) {
         const payload = await res.json()
-        // console.log('^^^^^^^^^^^ payload from backend ^^^^^^^^^^^^',payload)
+        console.log('^^^^^^^^^^^ payload from backend ^^^^^^^^^^^^',payload)
         dispatch(spotBookings(payload))
     }
 }
@@ -46,10 +46,17 @@ export const thunkCreateBookings = ({spotId, startDate, endDate}) => async dispa
 
     if (res.ok){
         let result = await res.json()
-        result.startDate = result.startDate.split('T').join(' ')
-        result.endDate = result.endDate.split('T').join(' ')
-        // console.log('$$$$$$$$$$$$$$$$ backend bookings result $$$$$$$$$$$$$$',result)
-        dispatch(createBooking(result))
+        console.log('RESULT@@@@@@@@@@@', result.message)
+        if (result.message){
+
+            return result
+        }else{
+
+            result.startDate = result?.startDate.split('T').join(' ')
+            result.endDate = result?.endDate.split('T').join(' ')
+            // console.log('$$$$$$$$$$$$$$$$ backend bookings result $$$$$$$$$$$$$$',result)
+            dispatch(createBooking(result))
+        }
     }
 }
 
