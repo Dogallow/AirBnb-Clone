@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
     if (!page) {page = 1}
-    if (!size) {size = 30}
+    if (!size) {size = 20}
 
     page = parseInt(page);
     size = parseInt(size);
@@ -154,7 +154,7 @@ router.get('/', async (req, res, next) => {
     }
    
     
-    if (size >= 0 && size <= 30) {
+    if (size >= 0 && size <= 20) {
         pagination.limit = size
     } else {
         const err = new Error("Size must be greater than or equal to 20");
@@ -203,6 +203,13 @@ router.get('/', async (req, res, next) => {
         ...pagination,
         raw: true
     })
+
+    const spotCount = await Spot.findAll({
+        raw: true
+    })
+    console.log('HOW MANY TOTAL SPOTS ARE THERE ============================>',spotCount.length)
+
+    console.log('Spots ==================>', Spots)
 
    
 
@@ -286,7 +293,8 @@ router.get('/', async (req, res, next) => {
     return res.json({
         Spots: result,
         page,
-        size
+        size,
+        spotCount: spotCount.length
     })
 })
 
