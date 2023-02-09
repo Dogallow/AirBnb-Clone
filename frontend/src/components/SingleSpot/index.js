@@ -10,6 +10,7 @@ import { useState } from 'react'
 import './SingleSpot.css'
 import Bookings from '../Bookings'
 import EditReview from '../EditReview'
+import MapContainer from "../Maps";
 
 const SingleSpot = () => {
     const { spotId } = useParams()
@@ -491,6 +492,7 @@ const SingleSpot = () => {
                         </div>
                     </div>
                     <h4></h4>
+                    <MapContainer lat={spot.lat} lng={spot.lng}/>
                 </div>
                 <div className='right-details-container'>
                     <div style={{ padding: '32px 0 24px' }}> </div>

@@ -14,6 +14,7 @@ import UserReviews from "./components/UserReviews";
 import Bookings from './components/Bookings'
 import Footer from "./Footer";
 
+
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [searchResults, setSearchResults] = useState('')
@@ -47,9 +48,11 @@ function App() {
             </Route>
             <Route path="/:spotId">
               <SingleSpot />
+              
+              
             </Route>
-        </Switch>
-      )}
+            </Switch>
+            )}
         
       </>
     );
