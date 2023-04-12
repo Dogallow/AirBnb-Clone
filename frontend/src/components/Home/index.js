@@ -30,9 +30,11 @@ const Home = ({searchResults, searchFilter}) => {
     
     console.log('CURRENT PAGE NUMBER WITHIN THE COMPONENT', pageNumber)
     useEffect(() => {
-        dispatch(spotsActions.getAllSpots(pageNumber))
+        async function getPage(){
+            await dispatch(spotsActions.getAllSpots(pageNumber))
+        }
         
-        
+        getPage()
     }, [dispatch, pageNumber])
 
     console.log(searchResults.length)
@@ -153,7 +155,10 @@ const Home = ({searchResults, searchFilter}) => {
         
             <div className='page-button-wrapper'>
                 <div className='page-button-container'>
-                    {pageCount.map(page => <span onClick={changePage} className='page-button'>{page}</span>)}
+                    {pageCount.map((page, index) => {
+                        console.log(pageNumber == page)
+                        return <span key={index} style={pageNumber == page ?{backgroundColor: "#E61E4D"} : {backgroundColor: "#DDDDDD"}} onClick={changePage} className='page-button'>{page}</span>
+                    })}
                 </div>
             </div>
             <Footer />

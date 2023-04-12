@@ -47,6 +47,10 @@ width: 100%;
     flex-wrap: wrap; */
 }
 
+.images-main-container::-webkit-scrollbar {
+  display: none;
+}
+
 .image-container {
     height: 100%;
     width: 100%;
@@ -106,7 +110,7 @@ width: 100%;
     width: 65%;
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     margin-top: 5px;
 }
 
@@ -118,12 +122,13 @@ width: 100%;
 }
 
 .page-button{
-    border: 1px solid black;
+    background-color: #E61E4D;
     border-radius: 8px;
-    padding: 3px;
+    padding: 4px;
     cursor: pointer;
+    color: white;
 }
 
 .page-button:hover{
-    background-color: rgba(241, 89, 89, 0.5);
+    background-color: #E61E4D;
 }
