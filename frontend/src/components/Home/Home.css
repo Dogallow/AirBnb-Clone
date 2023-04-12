@@ -15,9 +15,17 @@ body{
     height: 100%;
 }
 
+/* .splashpage-wrapper{
+display: flex;
+justify-content: space-between;
+height: 100%;
+width: 100%;
+} */
+
 .images-main-container{
     display: grid;
-    grid-template-columns: repeat(5,20%);
+    grid-template-columns: repeat(auto-fill,20%);
+    justify-content: space-between;
     /* grid-template-columns: minmax(200px, 330px) repeat(5, min-content); */
     /* grid-auto-rows: 25%; */
     grid-auto-rows: minmax(360px, 400px);
@@ -25,10 +33,12 @@ body{
     grid-auto-flow: row dense;
     height: 100%;
     width: 65%;
-    min-width: 950px;
+    min-width: 65%;
     gap: 40px 24px;
     margin-top: 16px;
     margin-bottom: 37px;
+    margin: 0 auto;
+    overflow-x: hidden;
     /* display: flex;
     justify-content: center;
     height:100%;
@@ -96,6 +106,8 @@ body{
     width: 65%;
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 5px;
 }
 
 .page-button-container{
@@ -108,5 +120,10 @@ body{
 .page-button{
     border: 1px solid black;
     border-radius: 8px;
-    padding: 2px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+.page-button:hover{
+    background-color: rgba(241, 89, 89, 0.5);
 }

@@ -46,7 +46,6 @@ const Home = ({searchResults, searchFilter}) => {
                 if (searchFilter === 'price'){
                     return spot.price <= searchResults
                 }else{
-                    
                     return spot[searchFilter].slice(0,length).toLowerCase() === searchResults.toLowerCase()
                 }
             
@@ -109,53 +108,54 @@ const Home = ({searchResults, searchFilter}) => {
     
     return (
         <>
-        {spotsObj.page && <PageNumber setPageNumber={setPageNumber} page={pageNumber}/>}
-        <div className='page-button-wrapper'>
-            <div className='page-button-container'>
-                {pageCount.map(page => <span onClick={changePage} className='page-button'>{page}</span>)}
-            </div>
-        </div>
-        <div className="images-main-container">
-            
-            {querySpots ? querySpots : 
-            
-                spotValues.map((spot, index) => {
-                    return (
-                        <div className='image-container' key={index} >
-    
-                         {(spot.previewImage === "No Image provided") 
-                            ? (<div className="preview-image-container egg">
+        
+        
+            <div className="images-main-container">
+                
+                {querySpots ? querySpots : 
+                
+                    spotValues.map((spot, index) => {
+                        return (
+                            <div className='image-container' key={index} >
+        
+                            {(spot.previewImage === "No Image provided") 
+                                ? (<div className="preview-image-container egg">
+                                        <NavLink to={`/${spot.id}`}>
+                                            <img src='https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80' alt={spot.description} />
+                                        </NavLink>
+                                    </div>)
+                                : (
+                                    <div className="preview-image-container">
+                                        <NavLink to={`/${spot.id}`}>
+                                            <img src={spot.previewImage} alt={spot.description} />
+                                        </NavLink>
+                                    </div>
+                                    )}
+                                <div className="spot-details-container">
                                     <NavLink to={`/${spot.id}`}>
-                                        <img src='https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80' alt={spot.description} />
-                                    </NavLink>
-                                </div>)
-                            : (
-                                <div className="preview-image-container">
-                                    <NavLink to={`/${spot.id}`}>
-                                        <img src={spot.previewImage} alt={spot.description} />
+                                        <div className="spot-details-address-rating">
+                                        <h4>{spot.city}, {spot.state}</h4>
+                                            <h4><i className="fa-solid fa-star"></i>{spot.avgRating ? spot.avgRating : 'New'}</h4>
+                                        </div>
+                                        <div className='spot-details'>
+                                        
+                                            <h4 className='spot-details-inner-text'>Available</h4>
+                                        <h4>${spot.price} night</h4>
+                                        </div>
                                     </NavLink>
                                 </div>
-                                )}
-                            <div className="spot-details-container">
-                                <NavLink to={`/${spot.id}`}>
-                                    <div className="spot-details-address-rating">
-                                    <h4>{spot.city}, {spot.state}</h4>
-                                        <h4><i className="fa-solid fa-star"></i>{spot.avgRating ? spot.avgRating : 'New'}</h4>
-                                    </div>
-                                    <div className='spot-details'>
-                                    
-                                        <h4 className='spot-details-inner-text'>Available</h4>
-                                    <h4>${spot.price} night</h4>
-                                    </div>
-                                </NavLink>
-                            </div>
-                            
-                    </div>
-                    )
-                })
-            }
+                                
+                        </div>
+                        )
+                    })
+                }
+                </div>
+        
+            <div className='page-button-wrapper'>
+                <div className='page-button-container'>
+                    {pageCount.map(page => <span onClick={changePage} className='page-button'>{page}</span>)}
+                </div>
             </div>
-            
             <Footer />
         </>
     )
