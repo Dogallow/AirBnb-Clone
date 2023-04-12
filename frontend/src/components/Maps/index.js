@@ -17,7 +17,7 @@ const MapContainer = ({lat, lng}) => {
     if (!key) {
         return null;
     }
-    console.log(key)
+
     return (
         <Maps apiKey={key} lat={lat} lng={lng}/>
     );

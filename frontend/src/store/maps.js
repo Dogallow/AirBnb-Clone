@@ -9,13 +9,11 @@ const loadApiKey = (key) => ({
 });
 
 export const getKey = () => async (dispatch) => {
-    console.log('we get here')
+
     const res = await csrfFetch('/api/maps/key', {
         method: 'POST',
     });
-    console.log('we returned from the route', res)
     const data = await res.json();
-    console.log('this is the data returned from the response', data)
     dispatch(loadApiKey(data.googleMapsAPIKey));
 };
 

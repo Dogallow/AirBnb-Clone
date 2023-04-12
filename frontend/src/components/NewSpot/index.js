@@ -4,48 +4,34 @@ import { useHistory } from 'react-router-dom'
 import * as spotsActions from '../../store/spots'
 
 const NewSpot = () => {
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [country, setCountry] = useState('')
-    const [lat, setLat] = useState('')
-    const [lng, setLng] = useState('')
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [price, setPrice] = useState('')
-    const [errors, setErrors] = useState([])
-    const [isSubmitted, setIsSubmitted] = useState(false)
-    const dispatch = useDispatch()
-    const history = useHistory()
-    const spots = useSelector(state => state.spots.allSpots)
-
-    const [imgUrl, setImgUrl] = useState(null)
-    const [preview, setPreview] = useState(true)
-
-    // console.log(spots)
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [country, setCountry] = useState('');
+    const [lat, setLat] = useState('');
+    const [lng, setLng] = useState('');
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
+    const [errors, setErrors] = useState([]);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const spots = useSelector(state => state.spots.allSpots);
+    const [imgUrl, setImgUrl] = useState(null);
+    const [preview, setPreview] = useState(true);
 
     if (isSubmitted) {
-        setIsSubmitted(false)
-        history.push('/')
-    }
+        setIsSubmitted(false);
+        history.push('/');
+    };
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        setErrors([])
+        e.preventDefault();
+        setErrors([]);
 
-        let validate = []
-        // if (password === confirmPassword) {
-        //     const newUser = {
-        //         firstName,
-        //         lastName,
-        //         email,
-        //         username,
-        //         password
-        //     }
+        let validate = [];
 
-
-      
-        
         const newSpot = {
             address,
             city,
@@ -56,80 +42,70 @@ const NewSpot = () => {
             name,
             description,
             price: parseFloat(price)
-        }
+        };
         
         if (!address){
-            validate = [...validate, 'Spot must have a valid address']
-        }
+            validate = [...validate, 'Spot must have a valid address'];
+        };
 
         if (!city){
-            validate = [...validate, 'Spot must have a valid city']
-        }
+            validate = [...validate, 'Spot must have a valid city'];
+        };
 
         if (!state){
-            validate = [...validate, 'Spot must have a valid state']
-        }
+            validate = [...validate, 'Spot must have a valid state'];
+        };
 
         if (!country){
-            validate = [...validate, 'Spot must have a valid country']
-        }
+            validate = [...validate, 'Spot must have a valid country'];
+        };
 
         if (!name) {
-            validate = [...validate, 'Spot must have a valid name']
-        }
+            validate = [...validate, 'Spot must have a valid name'];
+        };
 
         if (!price) {
-            validate = [...validate, 'Spot must have a valid price']
-        }
-        let imgObj = {}
-        console.log('HANDLE SUBMIT FUNCTION',imgUrl)
-        imgObj = {
+            validate = [...validate, 'Spot must have a valid price'];
+        };
 
+        let imgObj = {};
+
+        imgObj = {
             url: imgUrl,
             preview: Boolean(preview)
-        }
-        if (!imgObj.url){
-            validate = [...validate, 'Must have an Image Url']
-            setErrors(validate)
-            
-        }
-        //  else
-        // if (!imgObj.url.endsWith('.png') || !imgObj.url.endsWith('.jpg') || !imgObj.url.endsWith('.jpeg') || !imgObj.url.endsWith('.webp')){
-        //     validate = [...validate, 'Image address must end with .png, .jpg, .jpeg, .webp']
-        //     setErrors(validate)
-            
-        // }
-        if (validate.length > 0){
-            setErrors(validate)
-            return
-        }
-        const success = await dispatch(spotsActions.createNewSpot(newSpot)).catch(async err => {
-            const error = await err.json()
-            // console.log(error.errors)
-            if (error && error.errors) {
-                
-                validate = [...validate, ...error.errors]
-            }
+        };
 
-        })
+        if (!imgObj.url){
+            validate = [...validate, 'Must have an Image Url'];
+            setErrors(validate);
+        };
+
+        if (validate.length > 0){
+            setErrors(validate);
+            return;
+        };
+
+        const success = await dispatch(spotsActions.createNewSpot(newSpot)).catch(async err => {
+            const error = await err.json();
+            if (error && error.errors) {
+                validate = [...validate, ...error.errors];
+            };
+        });
         
 
         if (imgObj.url && success) {
-            console.log(success)
             await dispatch(spotsActions.addSingleImageAWS(success.id, imgObj)).catch(async err => {
-                const error = await err.json()
-                // console.log('', error)
-                validate = [...validate, ...error.errors]
-
-            })
-        }
+                const error = await err.json();
+                validate = [...validate, ...error.errors];
+            });
+        };
 
         if (success && validate.length === 0) {
-            setIsSubmitted(true)
-        }
+            setIsSubmitted(true);
+        };
 
-        setErrors(validate)
-    }
+        setErrors(validate);
+    };
 
     const updateFile = (e) => {
         const file = e.target.files[0];
@@ -199,7 +175,7 @@ const NewSpot = () => {
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default NewSpot
+export default NewSpot;

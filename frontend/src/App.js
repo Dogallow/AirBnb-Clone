@@ -24,7 +24,6 @@ function App() {
     useEffect(() => {
       dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
     }, [dispatch])
-    console.log(searchResults)
     return (
       <>
       <Navigation isLoaded={isLoaded} searchFilter={searchFilter} setSearchFilter={setSearchFilter} setSearchResults={setSearchResults} searchResults={searchResults}/>
