@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import * as spotsActions from '../../store/spots'
+import { csrfFetch } from '../../store/csrf';
+
+
 
 const NewSpot = () => {
     const [address, setAddress] = useState('');
@@ -32,13 +35,31 @@ const NewSpot = () => {
 
         let validate = [];
 
+        let data = await csrfFetch('/api/spots/getCoordinates', {
+            method: "POST",
+            body: JSON.stringify({address, city, state, country})
+        })
+        
+        let result = await data.json()
+        let latitude = null
+        let longitude = null
+        if (result.error){
+            console.log(result.error)
+            validate.push(result.error)
+        }else {
+
+            console.log(`THIS IS THE COORDINATES RETURNED TO THE FRONTEND: `, result.latitude, result.longitude)
+            latitude = result.latitude
+            longitude = result.longitude
+        }
+        
         const newSpot = {
             address,
             city,
             state,
             country,
-            lat: parseFloat(lat) || 0,
-            lng: parseFloat(lng) || 0,
+            lat: latitude || 0,
+            lng: longitude || 0,
             name,
             description,
             price: parseFloat(price)
@@ -144,14 +165,14 @@ const NewSpot = () => {
                         <label></label>
                         <input placeholder='Country' onChange={(e) => setCountry(e.target.value)} value={country} />
                     </div>
-                    <div className='additional-input-field'>
+                    {/*<div className='additional-input-field'>
                         <label></label>
                         <input type={'number'} placeholder='Latitude' onChange={(e) => setLat(e.target.value)} value={lat} />
                     </div>
                     <div className='additional-input-field'>
                         <label></label>
                         <input type={'number'} placeholder='Longitude' onChange={(e) => setLng(e.target.value)} value={lng} />
-                    </div>
+                        </div>*/}
                     <div className='additional-input-field'>
                         <label></label>
                         <input placeholder='Name' onChange={(e) => setName(e.target.value)} value={name} />

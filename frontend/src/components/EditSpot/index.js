@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import * as spotsActions from '../../store/spots'
 import './EditSpot.css'
+import { csrfFetch } from '../../store/csrf';
 
 const EditSpot = () => {
     const { spotId } = useParams();
@@ -37,13 +38,32 @@ const EditSpot = () => {
         await setErrorValidation([]);
         let validate = [];
 
+        let latitude = null
+        let longitude = null
+        let data = await csrfFetch('/api/spots/getCoordinates', {
+                method: "POST",
+                body: JSON.stringify({address, city, state, country})
+            })
+        
+        let result = await data.json()
+
+        if (result.error){
+            console.log(result.error)
+            validate.push(result.error)
+        }else {
+
+            console.log(`THIS IS THE COORDINATES RETURNED TO THE FRONTEND: `, result.latitude, result.longitude)
+            latitude = result.latitude
+            longitude = result.longitude
+        }
+        
         const editObj = {
             address,
             city,
             state,
             country,
-            lat: parseFloat(lat) || 0,
-            lng: parseFloat(lng) || 0,
+            lat: latitude || 0,
+            lng: longitude || 0,
             name,
             description,
             price: parseFloat(price)
@@ -123,12 +143,12 @@ const EditSpot = () => {
                     <div className='edit-spot-middle-input-field'>
                         <input placeholder='Country' onChange={(e) => setCountry(e.target.value)} value={country} />
                     </div>
-                    <div className='edit-spot-middle-input-field'>
+                    {/*<div className='edit-spot-middle-input-field'>
                         <input placeholder='Latitude' onChange={(e) => setLat(e.target.value)} value={lat} />
                     </div>
                     <div  className='edit-spot-middle-input-field'>
                         <input placeholder='Longitude' onChange={(e) => setLng(e.target.value)} value={lng} />
-                    </div>
+                    </div>*/}
                     <div  className='edit-spot-middle-input-field'>
                         <input placeholder='Name' onChange={(e) => setName(e.target.value)} value={name} />
                     </div>

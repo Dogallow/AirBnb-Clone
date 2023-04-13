@@ -430,6 +430,7 @@ const SingleSpot = () => {
                         </div>
                     </div>
                     <h4></h4>
+
                     <MapContainer lat={spot.lat} lng={spot.lng}/>
                 </div>
                 <div className='right-details-container'>

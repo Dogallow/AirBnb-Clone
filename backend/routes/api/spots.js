@@ -1,4 +1,5 @@
 const express = require('express')
+const axios = require('axios')
 
 const { Spot, Review, sequelize, SpotImage, User, Booking, ReviewImage } = require('../../db/models')
 const { check } = require('express-validator')
@@ -9,6 +10,33 @@ const { Op } = require("sequelize");
 const {singleMulterUpload, singlePublicFileUpload} = require('../../awsS3')
 
 const router = express.Router()
+
+const MAP_API_KEY = process.env.MAPS_API_KEY
+
+router.post('/getCoordinates', async (req, res, next) => {
+    try {
+        const {address,city,state,country} = req.body
+        console.log(address)
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}${encodeURIComponent(city)}${encodeURIComponent(state)}${encodeURIComponent(country)}&key=${MAP_API_KEY}`
+        const response = await axios.get(url);
+        console.log(response.data.results)
+        if (response.data.results.length === 0){
+            res.json({error: "Location cannot be found"})
+        }
+        const result = response.data.results[0];
+        
+        const latitude = result.geometry.location.lat;
+        const longitude = result.geometry.location.lng;
+        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`)
+        res.json({
+            latitude,
+            longitude
+        });
+    } catch (error) {
+        console.error(error);
+        res.send("Error occurred while fetching location data.")
+    }
+})
 
 router.get('/', async (req, res, next) => {
     
@@ -354,6 +382,8 @@ router.get('/:spotId', async (req, res, next) => {
         ...spotJson
     })
 })
+
+
 
 router.post('/', requireAuth, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body

@@ -18,6 +18,8 @@ const Maps = ({ apiKey, lat, lng }) => {
         googleMapsApiKey: apiKey,
     });
 
+    if (lat === 0 || lng === 0) return null
+
     const center = {
         lat,
         lng
