@@ -430,8 +430,7 @@ const SingleSpot = () => {
                         </div>
                     </div>
                     <h4></h4>
-
-                    <MapContainer lat={spot.lat} lng={spot.lng}/>
+                    
                 </div>
                 <div className='right-details-container'>
                     <div style={{ padding: '32px 0 24px' }}> </div>
@@ -453,7 +452,9 @@ const SingleSpot = () => {
                     </div>
                 </div>
             </div>
-
+            <div className='map-wrapper'>
+                <MapContainer lat={spot.lat} lng={spot.lng}/>
+            </div>
             <div className='main-reviews-container'>
                 <div className='review-title'>
 
