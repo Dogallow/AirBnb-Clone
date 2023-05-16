@@ -12,22 +12,21 @@ function EditReview ({review, stars, id, setShowEditForm, spotId}){
 
     const editReview = async (e) => {
         e.preventDefault()
+
         const obj = {
             review: editReviewText,
             stars: Number(editStars)
         }
+
         await dispatch(editReviewThunk(id, obj)).then(() => {
             dispatch(spotsActions.getOneSpot(spotId)).catch(async data => {
                 const error = await data.json()
-                // console.log(error.message)
-
-
             })
         })
         setShowEditForm(false)
-    }
+    };
     
-    let starCount
+    let starCount;
     if (editStars == 1) {
         starCount = (
             <>
@@ -38,7 +37,7 @@ function EditReview ({review, stars, id, setShowEditForm, spotId}){
                 <i style={{ color: 'gray' }} class="fa-solid fa-star"></i>
                 <i style={{ color: 'gray' }} class="fa-solid fa-star"></i>
             </>
-        )
+        );
     } else if (editStars == 2) {
         starCount = (
             <>
@@ -49,7 +48,7 @@ function EditReview ({review, stars, id, setShowEditForm, spotId}){
                 <i style={{ color: 'gray' }} class="fa-solid fa-star"></i>
                 <i style={{ color: 'gray' }} class="fa-solid fa-star"></i>
             </>
-        )
+        );
     } else if (editStars == 3) {
         starCount = (
             <>
@@ -60,7 +59,7 @@ function EditReview ({review, stars, id, setShowEditForm, spotId}){
                 <i style={{ color: 'gray' }} class="fa-solid fa-star"></i>
                 <i style={{ color: 'gray' }} class="fa-solid fa-star"></i>
             </>
-        )
+        );
     } else if (editStars == 4) {
         starCount = (
             <>
@@ -71,7 +70,7 @@ function EditReview ({review, stars, id, setShowEditForm, spotId}){
                 <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
                 <i style={{ color: 'gray' }} class="fa-solid fa-star"></i>
             </>
-        )
+        );
     } else if (editStars == 5) {
         starCount = (
             <>
@@ -82,8 +81,8 @@ function EditReview ({review, stars, id, setShowEditForm, spotId}){
                 <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
                 <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
             </>
-        )
-    }
+        );
+    };
 
     return (
         <form className='create-review-form' onSubmit={editReview}>
@@ -101,7 +100,7 @@ function EditReview ({review, stars, id, setShowEditForm, spotId}){
             </div>
             <button className='create-review-button' type='submit'>Submit</button>
         </form>
-    )
-}
+    );
+};
 
-export default EditReview
+export default EditReview;

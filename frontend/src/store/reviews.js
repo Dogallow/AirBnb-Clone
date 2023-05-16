@@ -78,7 +78,6 @@ export const editReviewThunk = (reviewId, obj) => async dispatch => {
 
     if (res.ok){
         const newReview = await res.json()
-        console.log('NEW REVIEW FROM THE BACKEND', newReview)
         dispatch(editReviewActionCreator(newReview))
     }
 }

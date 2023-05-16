@@ -8,40 +8,37 @@ import * as spotsActions from '../../store/spots'
 import './CreateReview.css'
 
 const CreateReview = ({ spotId, setReviewModal, stars, setStars, review, setReview }) => {
-    const [showForm, setShowForm] = useState(false)
-    // const [review, setReview] = useState('')
-    // const [stars, setStars] = useState(1)
-    const [errors, setErrors] = useState([])
-    const dispatch = useDispatch()
+    const [showForm, setShowForm] = useState(false);
+    const [errors, setErrors] = useState([]);
+    const dispatch = useDispatch();
 
     const handleSubmit =async (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        setErrors([])
-        let validate = []
+        setErrors([]);
+        let validate = [];
 
         const obj = {
             review,
             stars: Number(stars)
-        }
+        };
+
         await dispatch(reviewsActions.createSingleReview(spotId, obj)).catch(async (data) => {
-            const error = await data.json()
-            validate.push(error.message)
+            const error = await data.json();
+            validate.push(error.message);
             
-            setErrors(validate)
-        }).then(() => dispatch(reviewsActions.getSpotReviews(spotId))).then(() => dispatch(spotsActions.getOneSpot(spotId)))
+            setErrors(validate);
+        }).then(() => dispatch(reviewsActions.getSpotReviews(spotId))).then(() => dispatch(spotsActions.getOneSpot(spotId)));
         
-        // console.log('validate array((((((((((())))))))))))))', validate)
         if(validate.length === 0){
-            setReviewModal(false)
-
-            setReview('')
-            setStars(1)
-        }
+            setReviewModal(false);
+            setReview('');
+            setStars(1);
+        };
         
-    }
+    };
 
-    let starCount
+    let starCount;
     if (stars == 1){
         starCount = (
             <>
@@ -52,7 +49,7 @@ const CreateReview = ({ spotId, setReviewModal, stars, setStars, review, setRevi
                 <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
                 <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
             </>
-        )
+        );
     } else if (stars == 2) {
         starCount = (
             <>
@@ -63,7 +60,7 @@ const CreateReview = ({ spotId, setReviewModal, stars, setStars, review, setRevi
                 <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
                 <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
             </>
-        )
+        );
     } else if (stars == 3) {
         starCount = (
             <>
@@ -74,7 +71,7 @@ const CreateReview = ({ spotId, setReviewModal, stars, setStars, review, setRevi
                 <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
                 <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
             </>
-        )
+        );
     } else if (stars == 4) {
         starCount = (
             <>
@@ -85,7 +82,7 @@ const CreateReview = ({ spotId, setReviewModal, stars, setStars, review, setRevi
                 <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
                 <i style={{ color: 'gray'}} class="fa-solid fa-star"></i>
             </>
-        )
+        );
     } else if (stars == 5) {
         starCount = (
             <>
@@ -96,8 +93,8 @@ const CreateReview = ({ spotId, setReviewModal, stars, setStars, review, setRevi
                 <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
                 <i style={{ color: 'red' }} class="fa-solid fa-star"></i>
             </>
-        )
-    }
+        );
+    };
 
     return (
         <div className="create-review-form-container" style={{ paddingBottom: '25px' }}>
@@ -130,13 +127,13 @@ const CreateReview = ({ spotId, setReviewModal, stars, setStars, review, setRevi
                 </form>
             }
         </div>
-    )
-}
+    );
+};
 
 
 
 export const CreateReviewModal = ({ spotId, reviewModal, setReviewModal, stars, setStars, review, setReview }) => {
-    const [showModal, setShowModal] = useState(false)
+    const [showModal, setShowModal] = useState(false);
     
     return (
         <>
@@ -146,8 +143,8 @@ export const CreateReviewModal = ({ spotId, reviewModal, setReviewModal, stars, 
             </Modal>
             )}
         </> 
-            )
-}
+            );
+};
 
-export default CreateReviewModal
+export default CreateReviewModal;
         

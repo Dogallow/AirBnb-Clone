@@ -374,6 +374,7 @@ p {
     /* background-color: orange; */
 }
 
+
 .details-header {
     border-bottom: 1px solid #DDDDDD;
     padding: 48px 0px 24px;
@@ -426,6 +427,11 @@ p {
     justify-content: center;
     cursor: pointer;
     margin-right: 5px;
+}
+
+.map-wrapper{
+    display: flex;
+    
 }
 
 /* --------------------------------------------------------- Card Container ------------------------- */

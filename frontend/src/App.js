@@ -14,6 +14,7 @@ import UserReviews from "./components/UserReviews";
 import Bookings from './components/Bookings'
 import Footer from "./Footer";
 
+
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [searchResults, setSearchResults] = useState('')
@@ -23,7 +24,6 @@ function App() {
     useEffect(() => {
       dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
     }, [dispatch])
-    console.log(searchResults)
     return (
       <>
       <Navigation isLoaded={isLoaded} searchFilter={searchFilter} setSearchFilter={setSearchFilter} setSearchResults={setSearchResults} searchResults={searchResults}/>
@@ -47,9 +47,11 @@ function App() {
             </Route>
             <Route path="/:spotId">
               <SingleSpot />
+              
+              
             </Route>
-        </Switch>
-      )}
+            </Switch>
+            )}
         
       </>
     );

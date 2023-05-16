@@ -2,134 +2,131 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import * as spotsActions from '../../store/spots'
+import { csrfFetch } from '../../store/csrf';
+
+
 
 const NewSpot = () => {
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [country, setCountry] = useState('')
-    const [lat, setLat] = useState('')
-    const [lng, setLng] = useState('')
-    const [name, setName] = useState('')
-    const [description, setDescription] = useState('')
-    const [price, setPrice] = useState('')
-    const [errors, setErrors] = useState([])
-    const [isSubmitted, setIsSubmitted] = useState(false)
-    const dispatch = useDispatch()
-    const history = useHistory()
-    const spots = useSelector(state => state.spots.allSpots)
-
-    const [imgUrl, setImgUrl] = useState(null)
-    const [preview, setPreview] = useState(true)
-
-    // console.log(spots)
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [country, setCountry] = useState('');
+    const [lat, setLat] = useState('');
+    const [lng, setLng] = useState('');
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
+    const [errors, setErrors] = useState([]);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const spots = useSelector(state => state.spots.allSpots);
+    const [imgUrl, setImgUrl] = useState(null);
+    const [preview, setPreview] = useState(true);
 
     if (isSubmitted) {
-        setIsSubmitted(false)
-        history.push('/')
-    }
+        setIsSubmitted(false);
+        history.push('/');
+    };
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        setErrors([])
+        e.preventDefault();
+        setErrors([]);
 
-        let validate = []
-        // if (password === confirmPassword) {
-        //     const newUser = {
-        //         firstName,
-        //         lastName,
-        //         email,
-        //         username,
-        //         password
-        //     }
+        let validate = [];
 
+        let data = await csrfFetch('/api/spots/getCoordinates', {
+            method: "POST",
+            body: JSON.stringify({address, city, state, country})
+        })
+        
+        let result = await data.json()
+        let latitude = null
+        let longitude = null
+        if (result.error){
+            console.log(result.error)
+            validate.push(result.error)
+        }else {
 
-      
+            console.log(`THIS IS THE COORDINATES RETURNED TO THE FRONTEND: `, result.latitude, result.longitude)
+            latitude = result.latitude
+            longitude = result.longitude
+        }
         
         const newSpot = {
             address,
             city,
             state,
             country,
-            lat: parseFloat(lat) || 0,
-            lng: parseFloat(lng) || 0,
+            lat: latitude || 0,
+            lng: longitude || 0,
             name,
             description,
             price: parseFloat(price)
-        }
+        };
         
         if (!address){
-            validate = [...validate, 'Spot must have a valid address']
-        }
+            validate = [...validate, 'Spot must have a valid address'];
+        };
 
         if (!city){
-            validate = [...validate, 'Spot must have a valid city']
-        }
+            validate = [...validate, 'Spot must have a valid city'];
+        };
 
         if (!state){
-            validate = [...validate, 'Spot must have a valid state']
-        }
+            validate = [...validate, 'Spot must have a valid state'];
+        };
 
         if (!country){
-            validate = [...validate, 'Spot must have a valid country']
-        }
+            validate = [...validate, 'Spot must have a valid country'];
+        };
 
         if (!name) {
-            validate = [...validate, 'Spot must have a valid name']
-        }
+            validate = [...validate, 'Spot must have a valid name'];
+        };
 
         if (!price) {
-            validate = [...validate, 'Spot must have a valid price']
-        }
-        let imgObj = {}
-        console.log('HANDLE SUBMIT FUNCTION',imgUrl)
-        imgObj = {
+            validate = [...validate, 'Spot must have a valid price'];
+        };
 
+        let imgObj = {};
+
+        imgObj = {
             url: imgUrl,
             preview: Boolean(preview)
-        }
-        if (!imgObj.url){
-            validate = [...validate, 'Must have an Image Url']
-            setErrors(validate)
-            
-        }
-        //  else
-        // if (!imgObj.url.endsWith('.png') || !imgObj.url.endsWith('.jpg') || !imgObj.url.endsWith('.jpeg') || !imgObj.url.endsWith('.webp')){
-        //     validate = [...validate, 'Image address must end with .png, .jpg, .jpeg, .webp']
-        //     setErrors(validate)
-            
-        // }
-        if (validate.length > 0){
-            setErrors(validate)
-            return
-        }
-        const success = await dispatch(spotsActions.createNewSpot(newSpot)).catch(async err => {
-            const error = await err.json()
-            // console.log(error.errors)
-            if (error && error.errors) {
-                
-                validate = [...validate, ...error.errors]
-            }
+        };
 
-        })
+        if (!imgObj.url){
+            validate = [...validate, 'Must have an Image Url'];
+            setErrors(validate);
+        };
+
+        if (validate.length > 0){
+            setErrors(validate);
+            return;
+        };
+
+        const success = await dispatch(spotsActions.createNewSpot(newSpot)).catch(async err => {
+            const error = await err.json();
+            if (error && error.errors) {
+                validate = [...validate, ...error.errors];
+            };
+        });
         
 
         if (imgObj.url && success) {
-            console.log(success)
             await dispatch(spotsActions.addSingleImageAWS(success.id, imgObj)).catch(async err => {
-                const error = await err.json()
-                // console.log('', error)
-                validate = [...validate, ...error.errors]
-
-            })
-        }
+                const error = await err.json();
+                validate = [...validate, ...error.errors];
+            });
+        };
 
         if (success && validate.length === 0) {
-            setIsSubmitted(true)
-        }
+            setIsSubmitted(true);
+        };
 
-        setErrors(validate)
-    }
+        setErrors(validate);
+    };
 
     const updateFile = (e) => {
         const file = e.target.files[0];
@@ -168,14 +165,14 @@ const NewSpot = () => {
                         <label></label>
                         <input placeholder='Country' onChange={(e) => setCountry(e.target.value)} value={country} />
                     </div>
-                    <div className='additional-input-field'>
+                    {/*<div className='additional-input-field'>
                         <label></label>
                         <input type={'number'} placeholder='Latitude' onChange={(e) => setLat(e.target.value)} value={lat} />
                     </div>
                     <div className='additional-input-field'>
                         <label></label>
                         <input type={'number'} placeholder='Longitude' onChange={(e) => setLng(e.target.value)} value={lng} />
-                    </div>
+                        </div>*/}
                     <div className='additional-input-field'>
                         <label></label>
                         <input placeholder='Name' onChange={(e) => setName(e.target.value)} value={name} />
@@ -199,7 +196,7 @@ const NewSpot = () => {
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default NewSpot
+export default NewSpot;

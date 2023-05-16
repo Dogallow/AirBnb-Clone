@@ -7,6 +7,7 @@ const bookingsRouter = require('./bookings.js')
 const reviewsRouter = require('./reviews.js');
 const spotImageRouter = require('./spotImages.js')
 const reviewImageRouter = require('./reviewImages.js')
+const mapsRouter = require('./maps')
 
 // GET /api/restore-user
 const { restoreUser } = require('../../utils/auth.js');
@@ -23,6 +24,7 @@ router.use('/bookings', bookingsRouter);
 router.use('/reviews', reviewsRouter);
 router.use('/spot-images', spotImageRouter);
 router.use('/review-images', reviewImageRouter);
+router.use('/maps', mapsRouter)
 
 router.post('/test', (req, res) => {
     res.json({ requestBody: req.body });

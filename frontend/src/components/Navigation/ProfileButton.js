@@ -6,51 +6,48 @@ import { NavLink, Redirect, useHistory } from 'react-router-dom'
 import image from '../../image/logo.png'
 
 const ProfileButton = ({ user, navBarWidth, setSearchResults, searchResults, searchFilter, setSearchFilter }) => {
-    const [showMenu, setShowMenu] = useState(false)
-    const dispatch = useDispatch()
-    const history = useHistory()
+
+    const [showMenu, setShowMenu] = useState(false);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const openMenu = () => {
         if (showMenu) return;
-        setShowMenu(true)
-    }
-    let currentUser = user.user || user
- 
-    console.log(window.location.href[window.location.href.length - 1])
-    // console.log('current User',currentUser.user)
-    
-    
+        setShowMenu(true);
+    };
+
+    let currentUser = user.user || user;
 
     useEffect(() => {
-        if(!showMenu) return
+        if(!showMenu) return;
 
         const closeMenu = () => {
-            setShowMenu(false)
-        }
+            setShowMenu(false);
+        };
 
         document.addEventListener('click', closeMenu);
 
         return () => document.removeEventListener("click", closeMenu);
 
-    },[showMenu])
+    },[showMenu]);
 
     const logout = (e) => {
-        e.preventDefault()
-        dispatch(sessionActions.getLoggedOut())
-        history.push('/')
-    }
+        e.preventDefault();
+        dispatch(sessionActions.getLoggedOut());
+        history.push('/');
+    };
 
     const goToMySpots = () => {
-        return  history.push('/mySpots') 
-    }
+        return  history.push('/mySpots') ;
+    };
 
     const goToMyReviews = () => {
-        return  history.push('/myReviews') 
-    }
+        return  history.push('/myReviews') ;
+    };
 
     const goToCreateSpot = () => {
-        return history.push('/newSpot')
-    }
+        return history.push('/newSpot');
+    };
     
     
     return (
@@ -128,7 +125,7 @@ const ProfileButton = ({ user, navBarWidth, setSearchResults, searchResults, sea
                                     <li className='profile-button-list-item special' onClick={logout}>
                                         Logout
                                     </li>
-                                   
+                                    
                                 </ul>
                             )}
                             
@@ -138,8 +135,8 @@ const ProfileButton = ({ user, navBarWidth, setSearchResults, searchResults, sea
                 </div>
             </div>
         </div>
-       
-    )
-}
+        
+    );
+};
 
-export default ProfileButton
+export default ProfileButton;

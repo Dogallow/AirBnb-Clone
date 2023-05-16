@@ -17,7 +17,7 @@ const AddReviewImage = ({ id, spotId, showInput, setShowInput }) => {
         }
         setValidateErrors([])
         const validate = []
-       
+        
             dispatch(reviewsActions.addSingleReviewImage(obj)).catch(async data => {
             const errors = await data.json()
             validate.push(errors.message)
@@ -26,13 +26,6 @@ const AddReviewImage = ({ id, spotId, showInput, setShowInput }) => {
         }).then(() => dispatch(reviewsActions.getSpotReviews(spotId)))
         setShowInput(!showInput)
         setUrl('')
-        // dispatch(reviewsActions.addSingleReviewImage(obj)).catch(async data => {
-        //     const errors = await data.json()
-        //     validate.push(errors.message)
-        //     setValidateErrors(validate)
-        //     console.log(validateErrors)
-        // })
-        // dispatch(reviewsActions.getSpotReviews(spotId))
     }
     
     return(

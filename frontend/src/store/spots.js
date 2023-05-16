@@ -72,14 +72,14 @@ const mySpots = (spots) => {
 }
 
 export const deleteSpotImageThunk = (spotImageId) => async dispatch => {
-    console.log('in thunk',spotImageId)
+
     const response = await csrfFetch(`/api/spot-images/${spotImageId}`, {
         method: 'DELETE'
     })
 
     if (response.ok) {
     const res = await response.json()
-    console.log('RETURNED FROM DELET SPOT IMAGE', res)
+
     dispatch(deleteSpotImageActionCreator(spotImageId))
     }
 }
@@ -116,7 +116,7 @@ export const addSingleImage = (id, dataObj) => async dispatch =>{
 
 export const addSingleImageAWS = (id, dataObj) => async dispatch => {
     const {spotId, url, preview} = dataObj
-    console.log('AWS THUNK', url)
+
     const formData = new FormData()
     if (url) {
         formData.append('spotId', spotId)
@@ -133,7 +133,7 @@ export const addSingleImageAWS = (id, dataObj) => async dispatch => {
 
     if (res.ok){
         const data = await res.json()
-        console.log('AWS DATA RETURNED FROM THE BACKEND', data)
+
     }
 
 }
@@ -194,7 +194,7 @@ export const getAllSpots= (page) => async dispatch => {
 
     if(res.ok){
         const spots = await res.json()
-        console.log('ALL THE SPOTS FROM THE DATABASE', spots)
+
         dispatch(allSpots(spots))
         
         
@@ -243,7 +243,7 @@ const spotsReducer = (state=initialState, action) => {
     switch (action.type){
         case SPOT_IMAGE:
             newState = {...state}
-            console.log(newState)
+
             return state
         case CLEAR:
             return initialState
@@ -251,11 +251,10 @@ const spotsReducer = (state=initialState, action) => {
             newState = {...state, allSpots:{}}
             action.spots.Spots.forEach((spot) => {
                 if(spot.avgRating){
-               spot.avgRating = spot.avgRating.toFixed(2)
+                spot.avgRating = spot.avgRating.toFixed(2)
             }
                 newState.allSpots[spot.id] = spot
             })
-            console.log('spot count in the reducer', action.spots.spotCount)
             newState.spotCount = action.spots.spotCount
             newState.size = action.spots.size
             newState.page = action.spots.page

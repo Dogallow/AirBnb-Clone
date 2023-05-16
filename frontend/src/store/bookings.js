@@ -30,7 +30,7 @@ export const thunk_spotBookings = (spotId) => async (dispatch) => {
 
     if (res.ok) {
         const payload = await res.json()
-        console.log('^^^^^^^^^^^ payload from backend ^^^^^^^^^^^^',payload)
+
         dispatch(spotBookings(payload))
     }
 }
@@ -46,7 +46,7 @@ export const thunkCreateBookings = ({spotId, startDate, endDate}) => async dispa
 
     if (res.ok){
         let result = await res.json()
-        console.log('RESULT@@@@@@@@@@@', result.message)
+
         if (result.message){
 
             return result
@@ -54,7 +54,7 @@ export const thunkCreateBookings = ({spotId, startDate, endDate}) => async dispa
 
             result.startDate = result?.startDate.split('T').join(' ')
             result.endDate = result?.endDate.split('T').join(' ')
-            // console.log('$$$$$$$$$$$$$$$$ backend bookings result $$$$$$$$$$$$$$',result)
+
             dispatch(createBooking(result))
         }
     }
@@ -67,8 +67,6 @@ export const deleteBookingThunk = (id) => async dispatch => {
 
     if (response.ok){
         let message = await response.json()
-        console.log('BOOKING DELETED',message)
-        console.log('Booking Id', id)
         dispatch(deleteBookingActionCreator(id))
     }
 }
@@ -106,7 +104,7 @@ const initialState = {
 }
 const bookingsReducer = (state = initialState, action) => {
     let newState = {}
-    console.log(state)
+
     switch(action.type){
         case GET_SPOT_BOOKINGS:
             newState = {...state}
@@ -124,9 +122,7 @@ const bookingsReducer = (state = initialState, action) => {
             return newState
         case DELETE_BOOKING:
             newState = {...state}
-            console.log('BOOKINGS REDUCER',newState)
             delete newState.spot[action.payload]
-            console.log('Bookings reducer after "deletion"', newState)
             newState.spot = {...state.spot}
             return newState
         default:
