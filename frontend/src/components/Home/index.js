@@ -92,7 +92,7 @@ const Home = ({searchResults, searchFilter}) => {
     const changePage = async (e) => {
         e.preventDefault();
         setPageNumber(Number(e.target.innerText));
-        await dispatch(spotsActions.getAllSpots(pageNumber));
+        // await dispatch(spotsActions.getAllSpots(pageNumber));
     };
     
     return (
